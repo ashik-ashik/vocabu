@@ -1,7 +1,10 @@
 import React from "react";
 import { FaCode, FaDatabase, FaUser } from "react-icons/fa";
+import usePageTitle from "../hooks/usePageTitle";
 
 export default function Info() {
+     // set page title
+      usePageTitle("Info | ASH Vocabulary Dictionary");
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 px-4 py-10">
       <div className="max-w-4xl mx-auto space-y-8">

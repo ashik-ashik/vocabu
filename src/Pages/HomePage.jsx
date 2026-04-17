@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useEffect } from "react";
 import useData from "../hooks/UseData";
 import WordCard from "./WordCard";
+import usePageTitle from "../hooks/usePageTitle";
 
 export default function Home() {
   const [search, setSearch] = useState("");
@@ -8,6 +9,9 @@ export default function Home() {
  const [voices, setVoices] = useState([]);
  const [currentPage, setCurrentPage] = useState(1);
   const { vocabularyWordList = [], loading, error } = useData();
+
+  // set page title
+  usePageTitle("ASH Vocabulary Dictionary | Learn Words, Meanings & Synonyms");
 
   // =========================
   // SAFE SEARCH FILTER

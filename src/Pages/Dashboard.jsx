@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
+import usePageTitle from "../hooks/usePageTitle";
 
 export default function DashboardLayout() {
   const [open, setOpen] = useState(false);
@@ -10,6 +11,9 @@ export default function DashboardLayout() {
         ? "bg-blue-600 text-white shadow"
         : "text-gray-700 hover:bg-gray-100"
     }`;
+
+     // set page title
+  usePageTitle("Dashboard | ASH Vocabulary Dictionary");
 
   const menuItems = (
     <div className="space-y-1">

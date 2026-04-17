@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import useData from "../hooks/UseData";
+import usePageTitle from "../hooks/usePageTitle";
 
 const SCRIPT_URL = import.meta.env.VITE_VOCABULARY_COLLECTION_SHEET_WRITE_URL;
 const PASSKEY = "YOUR_SECRET_PASSKEY"; // change this
@@ -19,6 +20,9 @@ export default function AddWord() {
     example: "",
     passkey: "",
   });
+
+   // set page title
+    usePageTitle("Add Word | ASH Vocabulary Dictionary");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -73,7 +77,6 @@ export default function AddWord() {
           .filter(Boolean),
         example: formData.example.trim(),
       };
-      console.log(payload);
       const res = await fetch(SCRIPT_URL, {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },

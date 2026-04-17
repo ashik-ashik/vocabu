@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import useData from "../hooks/UseData";
+import usePageTitle from "../hooks/usePageTitle";
 
 const SCRIPT_URL = import.meta.env.VITE_VOCABULARY_COLLECTION_SHEET_WRITE_URL;
 const PASSKEY = import.meta.env.VITE_SECRET_PASSKEY;
@@ -19,6 +20,9 @@ export default function EditWord() {
     synonyms: "",
     antonyms: "",
   });
+
+   // set page title
+    usePageTitle("Edit Word | ASH Vocabulary Dictionary");
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });

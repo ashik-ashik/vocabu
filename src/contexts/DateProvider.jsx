@@ -55,7 +55,6 @@ const DataProvider = ({ children }) => {
         setVocabularyWordList([]);
         return;
       }
-      console.log(rows)
       const data = rows.slice(1).map((row) => {
         const cols = parseCSVLine(row);
 
@@ -94,7 +93,6 @@ const DataProvider = ({ children }) => {
   fetchWords();
   }, []);
 
-  // console.log(vocabularyWordList);
 
   return (
     <DataContext.Provider value={{ vocabularyWordList, loading, error, setVocabularyWordList }}>

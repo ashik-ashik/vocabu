@@ -1,5 +1,6 @@
 import React, { useMemo } from "react";
 import useData from "../hooks/UseData";
+import usePageTitle from "../hooks/usePageTitle";
 
 // simple date hook
 const useDate = () => new Date();
@@ -8,6 +9,9 @@ export default function Overview() {
   const today = useDate();
 
   const { vocabularyWordList } = useData();
+
+   // set page title
+  usePageTitle("Overview | ASH Vocabulary Dictionary");
 
   // sort by inserted_date (old → new)
   const sortedWords = useMemo(() => {

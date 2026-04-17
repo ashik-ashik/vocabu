@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import useData from "../hooks/UseData";
+import usePageTitle from "../hooks/usePageTitle";
 
 const SCRIPT_URL = import.meta.env.VITE_VOCABULARY_COLLECTION_SHEET_WRITE_URL;
 const PASSKEY = import.meta.env.VITE_SECRET_PASSKEY;
@@ -12,6 +13,9 @@ export default function DeleteWord() {
 
   const [showModal, setShowModal] = useState(false);
   const {vocabularyWordList, setVocabularyWordList} = useData();
+
+   // set page title
+    usePageTitle("Delete Word | ASH Vocabulary Dictionary");
 
   const handleDelete = async () => {
     if (!id) return toast.error("Enter ID");
