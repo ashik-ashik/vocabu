@@ -1,16 +1,100 @@
-# React + Vite
+# 📚 My Vocabulary Dictionary Web App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, full-featured Vocabulary Dictionary Web Application built with **ReactJS, Tailwind CSS, Firebase Authentication, and Google Sheets API**.  
+This project allows users to explore vocabulary words while providing an admin panel for managing the entire dictionary dynamically.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🚀 Live Features
 
-## React Compiler
+### 👀 User Features
+- Browse vocabulary words
+- Search words by:
+  - English word
+  - Bangla meaning
+  - Synonyms
+- View detailed word information:
+  - Definition
+  - Bangla meaning
+  - Synonyms & Antonyms
+  - Example sentences
+- Responsive UI (Mobile, Tablet, Desktop)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+### 🔐 Admin Features (Protected)
+- Google Gmail Authentication
+- Private Admin Dashboard
+- Add new vocabulary words
+- Edit existing words
+- Delete words
+- Manage Google Sheets data
+- View total vocabulary count
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+- ReactJS (Vite)
+- Tailwind CSS
+- React Router DOM
+- React Icons
+
+### Backend (Serverless)
+- Google Sheets (Database)
+- Google Apps Script API
+
+### Authentication
+- Firebase Authentication (Google Sign-In)
+
+### State Management
+- Custom React Hooks (Context-based Data Provider)
+
+---
+
+## 📊 Database Structure (Google Sheets)
+
+Create a Google Sheet with the following structure:
+
+| id | word | definition | bangla | synonyms | antonyms | example |
+|----|------|------------|--------|----------|-----------|----------|
+
+### Example:
+
+| 1 | Abundant | Existing in large amounts | প্রচুর | Plenty, Ample | Scarce | Food was abundant |
+
+---
+
+## 🔌 Google Apps Script API
+
+### Required Endpoints
+
+#### 📥 Get All Words
+- Method: `GET`
+- Returns: JSON list of vocabulary
+
+#### ➕ Insert Word
+- Method: `POST`
+- Adds new vocabulary entry
+
+#### ✏️ Update Word
+- Method: `POST`
+- Updates existing word
+
+#### ❌ Delete Word
+- Method: `POST`
+- Deletes word from sheet
+
+---
+
+## 🔥 Firebase Authentication
+
+- Google Sign-In Only
+- Admin-only access control
+
+### Allowed Admin Emails:
+```js
+const adminEmails = [
+  "ashikali0204@gmail.com",
+];
