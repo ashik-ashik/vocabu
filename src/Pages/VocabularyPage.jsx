@@ -11,7 +11,7 @@ export default function Vocabulary() {
   const { vocabularyWordList = [], loading, error } = useData();
 
   // set page title
-  usePageTitle("ASH Vocabulary Dictionary | Learn Words, Meanings & Synonyms");
+  usePageTitle("ASH English Learning | Learn Words, Meanings & Synonyms");
 
   // =========================
   // SAFE SEARCH FILTER

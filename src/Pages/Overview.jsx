@@ -11,7 +11,7 @@ export default function Overview() {
   const { vocabularyWordList } = useData();
 
    // set page title
-  usePageTitle("Overview | ASH Vocabulary Dictionary");
+  usePageTitle("Overview | ASH English Learning");
 
   // sort by inserted_date (old → new)
   const sortedWords = useMemo(() => {

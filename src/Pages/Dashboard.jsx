@@ -13,7 +13,7 @@ export default function DashboardLayout() {
     }`;
 
      // set page title
-  usePageTitle("Dashboard | ASH Vocabulary Dictionary");
+  usePageTitle("Dashboard | ASH English Learning");
 
   const menuItems = (
     <div className="space-y-1">

@@ -11,6 +11,7 @@ import DeleteWord from './Pages/DeleteWord'
 import EditWord from './Pages/EditWords'
 import Settings from './Pages/Settings'
 import Info from './Pages/Info'
+import TenseComponent from './Pages/Tense'
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
           <HeaderMenu />
         <Routes>
           <Route path="/" element={<Vocabulary />} />
+          <Route path="/tense" element={<TenseComponent />} />
           {/* Dashboard Layout */}
         <Route path="/dashboard" element={<DashboardLayout />}>
           

@@ -28,6 +28,9 @@ export default function HeaderMenu() {
           <NavLink to="/" className={linkClass}>
             Vocabulary
           </NavLink>
+          <NavLink to="/tense" className={linkClass}>
+            Tense
+          </NavLink>
 
           <NavLink to="/dashboard" className={linkClass}>
             Dashboard

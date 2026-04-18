@@ -4,7 +4,7 @@ import usePageTitle from "../hooks/usePageTitle";
 
 export default function Info() {
      // set page title
-      usePageTitle("Info | ASH Vocabulary Dictionary");
+      usePageTitle("Info | ASH English Learning");
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 px-4 py-10">
       <div className="max-w-4xl mx-auto space-y-8">
@@ -12,7 +12,7 @@ export default function Info() {
         {/* Header */}
         <div className="text-center">
           <h1 className="text-3xl md:text-4xl font-bold text-blue-600">
-            Vocabulary Dictionary Web App
+            English Learning Web App
           </h1>
           <p className="text-gray-600 dark:text-gray-300 mt-2">
             A modern vocabulary learning platform built with React & Google Sheets
@@ -102,7 +102,7 @@ export default function Info() {
 
         {/* Footer */}
         <div className="text-center text-gray-500 text-sm pt-4">
-          © {new Date().getFullYear()} My Vocabulary Dictionary Web App. Built with React.
+          © {new Date().getFullYear()} My English Learning Web App. Built with React.
         </div>
 
       </div>

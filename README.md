@@ -1,6 +1,6 @@
-# 📚 My Vocabulary Dictionary Web App
+# 📚 My English Learning Web App
 
-A modern, full-featured Vocabulary Dictionary Web Application built with **ReactJS, Tailwind CSS, Firebase Authentication, and Google Sheets API**.  
+A modern, full-featured English Learning Web Application built with **ReactJS, Tailwind CSS, Firebase Authentication, and Google Sheets API**.  
 This project allows users to explore vocabulary words while providing an admin panel for managing the entire dictionary dynamically.
 
 ---

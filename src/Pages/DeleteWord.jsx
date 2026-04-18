@@ -15,7 +15,7 @@ export default function DeleteWord() {
   const {vocabularyWordList, setVocabularyWordList} = useData();
 
    // set page title
-    usePageTitle("Delete Word | ASH Vocabulary Dictionary");
+    usePageTitle("Delete Word | ASH English Learning");
 
   const handleDelete = async () => {
     if (!id) return toast.error("Enter Word ID");

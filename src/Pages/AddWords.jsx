@@ -23,7 +23,7 @@ export default function AddWord() {
   });
 
    // set page title
-    usePageTitle("Add Word | ASH Vocabulary Dictionary");
+    usePageTitle("Add Word | ASH English Learning");
 
   const handleChange = (e) => {
     const { name, value } = e.target;

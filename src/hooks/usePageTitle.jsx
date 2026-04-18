@@ -4,7 +4,7 @@ const usePageTitle = (title) => {
   useEffect(() => {
     document.title = title
       ? `${title}`
-      : "My Vocabulary Dictionary Web App";
+      : "My English Learning Web App";
   }, [title]);
 };
 

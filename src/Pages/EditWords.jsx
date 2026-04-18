@@ -24,7 +24,7 @@ export default function EditWord() {
   });
 
    // set page title
-    usePageTitle("Edit Word | ASH Vocabulary Dictionary");
+    usePageTitle("Edit Word | ASH English Learning");
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
