@@ -126,7 +126,7 @@ export default function AddWord() {
         
         {/* Word */}
         <div>
-          <label className="block font-medium mb-1">
+          <label className="block font-medium mb-1 text-sm">
             Word
           </label>
           <input
@@ -135,14 +135,14 @@ export default function AddWord() {
             value={formData.word}
             onChange={handleChange}
             required
-            className="w-full border p-2 rounded"
+            className="w-full border border-gray-500 p-2  rounded"
             placeholder="Enter vocabulary word"
           />
         </div>
 
         {/* Definition */}
         <div>
-          <label className="block font-medium mb-1">
+          <label className="block font-medium mb-1 text-sm">
             Definition
           </label>
           <textarea
@@ -150,14 +150,14 @@ export default function AddWord() {
             value={formData.definition}
             onChange={handleChange}
             required
-            className="w-full border p-2 rounded"
+            className="w-full border border-gray-500 p-2  rounded"
             placeholder="Write definition"
           />
         </div>
 
         {/* Bangla */}
         <div>
-          <label className="block font-medium mb-1">
+          <label className="block font-medium mb-1 text-sm">
             Bangla Meaning
           </label>
           <input
@@ -165,14 +165,14 @@ export default function AddWord() {
             name="bangla"
             value={formData.bangla}
             onChange={handleChange}
-            className="w-full border p-2 rounded"
+            className="w-full border border-gray-500 p-2  rounded"
             placeholder="বাংলা অর্থ"
           />
         </div>
 
         {/* Synonyms */}
         <div>
-          <label className="block font-medium mb-1">
+          <label className="block font-medium mb-1 text-sm">
             Synonyms
           </label>
           <input
@@ -180,7 +180,7 @@ export default function AddWord() {
             name="synonyms"
             value={formData.synonyms}
             onChange={handleChange}
-            className="w-full border p-2 rounded"
+            className="w-full border border-gray-500 p-2  rounded"
             placeholder="Example: Quick, Fast, Rapid"
           />
           <p className="text-xs text-gray-400 mt-1">
@@ -190,7 +190,7 @@ export default function AddWord() {
 
         {/* Antonyms */}
         <div>
-          <label className="block font-medium mb-1">
+          <label className="block font-medium mb-1 text-sm">
             Antonyms
           </label>
           <input
@@ -198,21 +198,21 @@ export default function AddWord() {
             name="antonyms"
             value={formData.antonyms}
             onChange={handleChange}
-            className="w-full border p-2 rounded"
+            className="w-full border border-gray-500 p-2  rounded"
             placeholder="Example: Slow, Lazy"
           />
         </div>
 
         {/* Example */}
         <div>
-          <label className="block font-medium mb-1">
+          <label className="block font-medium mb-1 text-sm">
             Example Sentence
           </label>
           <textarea
             name="example"
             value={formData.example}
             onChange={handleChange}
-            className="w-full border p-2 rounded"
+            className="w-full border border-gray-500 p-2  rounded"
             placeholder="Example sentence"
           />
         </div>
@@ -226,7 +226,7 @@ export default function AddWord() {
               name="other_part_speech"
               value={formData.other_part_speech}
               onChange={handleChange}
-              className="w-full border p-2 rounded mt-1"
+              className="w-full border border-gray-500 p-2  rounded mt-1"
               placeholder="example: noun: large, adjective: big, verb: huge, etc"
             />
             <p className="text-xs text-gray-500 mt-1">
@@ -236,7 +236,7 @@ export default function AddWord() {
 
         {/* Passkey */}
         <div>
-          <label className="block font-medium mb-1">
+          <label className="block font-medium mb-1 text-sm">
             Passkey
           </label>
           <input
@@ -245,7 +245,7 @@ export default function AddWord() {
             value={formData.passkey}
             onChange={handleChange}
             required
-            className="w-full border p-2 rounded"
+            className="w-full border border-gray-500 p-2  rounded"
             placeholder="Enter admin passkey"
           />
         </div>

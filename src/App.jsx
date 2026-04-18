@@ -17,7 +17,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
-          <Toaster position="top-right" />
+          <Toaster position="bottom-right" />
           <HeaderMenu />
         <Routes>
           <Route path="/" element={<Vocabulary />} />
