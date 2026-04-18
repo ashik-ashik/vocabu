@@ -18,7 +18,7 @@ export default function DeleteWord() {
     usePageTitle("Delete Word | ASH Vocabulary Dictionary");
 
   const handleDelete = async () => {
-    if (!id) return toast.error("Enter ID");
+    if (!id) return toast.error("Enter Word ID");
 
     if (passkey !== PASSKEY) {
       return toast.error("Invalid Passkey");

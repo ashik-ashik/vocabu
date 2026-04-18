@@ -32,13 +32,13 @@ export default function EditWord() {
 
   // ✅ LOAD FROM STATE (NO API)
   const handleLoad = () => {
-    if (!id) return toast.error("Enter ID");
+    if (!id) return toast.error("Enter Word ID");
     if (passkey !== PASSKEY) return toast.error("Invalid Passkey");
 
     const found = vocabularyWordList.find((item) => String(item.id) === String(id));
 
     if (!found) {
-      return toast.error("Word not found in local state");
+      return toast.error("Word not found");
     }
 
     setForm({
