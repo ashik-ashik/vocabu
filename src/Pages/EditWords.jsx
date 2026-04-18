@@ -19,6 +19,8 @@ export default function EditWord() {
     definition: "",
     synonyms: "",
     antonyms: "",
+    example: "",
+    other_part_speech: "",
   });
 
    // set page title
@@ -45,9 +47,11 @@ export default function EditWord() {
       definition: found.definition || "",
       synonyms: found.synonyms || "",
       antonyms: found.antonyms || "",
+      example: found.example || "",
+      other_part_speech: found?.other_part_speech || "",
     });
 
-    toast.success("Loaded from local data");
+    toast.success("Loaded Word data!");
   };
 
   // ✅ UPDATE SHEET + STATE SYNC
@@ -80,6 +84,9 @@ export default function EditWord() {
         word: form.word,
         bangla: form.bangla,
         definition: form.definition,
+        example: form.example,
+        other_part_speech: form.other_part_speech,
+
 
         // ✅ KEEP ARRAY FORMAT SAFE
         synonyms: Array.isArray(form.synonyms)
@@ -100,6 +107,18 @@ export default function EditWord() {
 );
 
 setVocabularyWordList(updatedList);
+setId("");
+setPasskey("");
+
+setForm({
+  word: "",
+  bangla: "",
+  definition: "",
+  synonyms: "",
+  antonyms: "",
+  example: "",
+  other_part_speech: "",
+});
       } else {
         toast.error(data.message || "Update failed", { id: toastId });
       }
@@ -117,82 +136,169 @@ setVocabularyWordList(updatedList);
         Load from local state, update instantly sync UI.
       </p>
 
-      {/* ID + Passkey */}
-      <div className="bg-white p-4 rounded-xl shadow space-y-3 mb-4">
-        <input
-          type="number"
-          placeholder="Word ID"
-          value={id}
-          onChange={(e) => setId(e.target.value)}
-          className="w-full border p-2 rounded"
-        />
+      {/* Load Word Form */}
+        <div className="bg-white p-5 rounded-xl shadow space-y-4 mb-5">
+          
+          {/* Form Title */}
+          <div>
+            <h2 className="text-lg font-semibold text-gray-800">
+              Load Word for Editing
+            </h2>
+            <p className="text-sm text-gray-500">
+              Enter Word ID and passkey to load vocabulary data for editing.
+            </p>
+          </div>
 
-        <input
-          type="password"
-          placeholder="Passkey"
-          value={passkey}
-          onChange={(e) => setPasskey(e.target.value)}
-          className="w-full border p-2 rounded"
-        />
+          {/* Word ID */}
+          <div>
+            <label className="text-xs text-gray-500">Word ID</label>
+            <input
+              type="number"
+              placeholder="Enter Word ID"
+              value={id}
+              onChange={(e) => setId(e.target.value)}
+              className="w-full border p-2 rounded mt-1"
+            />
+          </div>
 
-        <button
-          onClick={handleLoad}
-          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
-        >
-          Load Word
-        </button>
-      </div>
+          {/* Passkey */}
+          <div>
+            <label className="text-xs text-gray-500">Passkey</label>
+            <input
+              type="password"
+              placeholder="Enter Passkey"
+              value={passkey}
+              onChange={(e) => setPasskey(e.target.value)}
+              className="w-full border p-2 rounded mt-1"
+            />
+          </div>
 
-      {/* Edit Form */}
-      <div className="bg-white p-6 rounded-xl shadow space-y-3">
-        <input
-          name="word"
-          value={form.word}
-          onChange={handleChange}
-          className="w-full border p-2 rounded"
-          placeholder="Word"
-        />
+          {/* Button */}
+          <button
+            onClick={handleLoad}
+            className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+          >
+            Load Word
+          </button>
+        </div>
 
-        <input
-          name="bangla"
-          value={form.bangla}
-          onChange={handleChange}
-          className="w-full border p-2 rounded"
-          placeholder="Bangla Meaning"
-        />
 
-        <textarea
-          name="definition"
-          value={form.definition}
-          onChange={handleChange}
-          className="w-full border p-2 rounded"
-          placeholder="Definition"
-        />
+        {/* Edit Form */}
+        <div className="bg-white p-6 rounded-xl shadow space-y-4">
+          
+          {/* Form Title */}
+          <div>
+            <h2 className="text-lg font-semibold text-gray-800">
+              Edit Vocabulary Word
+            </h2>
+            <p className="text-sm text-gray-500">
+              Update vocabulary details and click update to save changes.
+            </p>
+          </div>
 
-        <input
-          name="synonyms"
-          value={form.synonyms}
-          onChange={handleChange}
-          className="w-full border p-2 rounded"
-          placeholder="Synonyms"
-        />
+          {/* Word */}
+          <div>
+            <label className="text-xs text-gray-500">Word</label>
+            <input
+              name="word"
+              value={form.word}
+              onChange={handleChange}
+              className="w-full border p-2 rounded mt-1"
+              placeholder="Enter word"
+            />
+          </div>
 
-        <input
-          name="antonyms"
-          value={form.antonyms}
-          onChange={handleChange}
-          className="w-full border p-2 rounded"
-          placeholder="Antonyms"
-        />
+          {/* Bangla Meaning */}
+          <div>
+            <label className="text-xs text-gray-500">Bangla Meaning</label>
+            <input
+              name="bangla"
+              value={form.bangla}
+              onChange={handleChange}
+              className="w-full border p-2 text-xs rounded mt-1"
+              placeholder="বাংলা অর্থ"
+            />
+          </div>
 
-        <button
-          onClick={handleUpdate}
-          disabled={loading}
-          className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 disabled:opacity-50"
-        >
-          {loading ? "Updating..." : "Update Word"}
-        </button>
-      </div>
+          {/* Definition */}
+          <div>
+            <label className="text-xs text-gray-500">Definition</label>
+            <textarea
+              name="definition"
+              value={form.definition}
+              onChange={handleChange}
+              className="w-full border p-2 rounded mt-1"
+              placeholder="Enter definition"
+            />
+          </div>
+
+          {/* Synonyms */}
+          <div>
+            <label className="text-xs text-gray-500">
+              Synonyms (Comma separated)
+            </label>
+            <input
+              name="synonyms"
+              value={form.synonyms}
+              onChange={handleChange}
+              className="w-full border p-2 rounded mt-1"
+              placeholder="example: large, big, huge"
+            />
+          </div>
+
+          {/* Antonyms */}
+          <div>
+            <label className="text-xs text-gray-500">
+              Antonyms (Comma separated)
+            </label>
+            <input
+              name="antonyms"
+              value={form.antonyms}
+              onChange={handleChange}
+              className="w-full border p-2 rounded mt-1"
+              placeholder="example: small, tiny"
+            />
+          </div>
+
+          {/* Other Part of Speech */}
+          <div>
+            <label className="text-xs text-gray-500">
+              Other part of Speech (Comma separated)
+            </label>
+            <input
+              name="other_part_speech"
+              value={form.other_part_speech}
+              onChange={handleChange}
+              className="w-full border p-2 rounded mt-1"
+              placeholder="example: noun: large, adjective: big, verb: huge, etc"
+            />
+            <p className="text-xs text-gray-500 mt-1">
+              Format: noun: large, adjective: big, verb: huge, etc...
+            </p>
+          </div>
+
+          {/* Example */}
+          <div>
+            <label className="text-xs text-gray-500">Example Sentence</label>
+            <textarea
+              name="example"
+              value={form.example}
+              onChange={handleChange}
+              className="w-full border p-2 rounded mt-1"
+              placeholder="Enter example sentence"
+            />
+          </div>
+
+          {/* Button */}
+          <button
+            onClick={handleUpdate}
+            disabled={loading}
+            className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 disabled:opacity-50"
+          >
+            {loading ? "Updating..." : "Update Word"}
+          </button>
+
+        </div>
     </div>
   );
 }

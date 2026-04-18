@@ -18,6 +18,7 @@ export default function AddWord() {
     synonyms: "",
     antonyms: "",
     example: "",
+    other_part_speech: "",
     passkey: "",
   });
 
@@ -40,6 +41,7 @@ export default function AddWord() {
       synonyms: "",
       antonyms: "",
       example: "",
+      other_part_speech: "",
       passkey: "",
     });
   };
@@ -76,6 +78,7 @@ export default function AddWord() {
           .map((s) => s.trim())
           .filter(Boolean),
         example: formData.example.trim(),
+        other_part_speech: formData.other_part_speech.trim(),
       };
       const res = await fetch(SCRIPT_URL, {
         method: "POST",
@@ -213,6 +216,23 @@ export default function AddWord() {
             placeholder="Example sentence"
           />
         </div>
+
+        {/* Other Part of Speech */}
+          <div>
+            <label className="text-sm font-medium">
+              Other part of Speech (Comma separated)
+            </label>
+            <input
+              name="other_part_speech"
+              value={formData.other_part_speech}
+              onChange={handleChange}
+              className="w-full border p-2 rounded mt-1"
+              placeholder="example: noun: large, adjective: big, verb: huge, etc"
+            />
+            <p className="text-xs text-gray-500 mt-1">
+              Format: noun: large, adjective: big, verb: huge, etc...
+            </p>
+          </div>
 
         {/* Passkey */}
         <div>

@@ -1,7 +1,7 @@
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.css'
-import Home from './Pages/HomePage'
+import Vocabulary from './Pages/VocabularyPage'
 import HeaderMenu from './Pages/HeaderMenu'
 import DashboardLayout from './Pages/Dashboard'
 import Overview from './Pages/Overview'
@@ -17,10 +17,10 @@ function App() {
   return (
     <>
       <BrowserRouter>
-      <HeaderMenu />
-      <Toaster position="top-right" />
+          <Toaster position="top-right" />
+          <HeaderMenu />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Vocabulary />} />
           {/* Dashboard Layout */}
         <Route path="/dashboard" element={<DashboardLayout />}>
           

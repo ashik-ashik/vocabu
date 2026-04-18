@@ -24,23 +24,45 @@ export default function WordCard({ item,  speakWord }) {
       <p className="text-xs text-gray-400 mb-2">
         Added: {item.inserted_date || item.date}
       </p>
+      
+      <div className="text-xs text-gray-400 mb-2 flex flex-wrap gap-2">
+        {item.other_part_speech ? (
+          item.other_part_speech.split(",").map((part, index) => {
+            const cleaned = part.trim().split(":");
+
+            return (
+              <span
+                key={index}
+                className="px-2 py-1 bg-gray-100 rounded-md text-gray-600 capitalize"
+              >
+                {cleaned[0]?.trim() + ": " }
+                <span className="cursor-pointer" onClick={() => speakWord(cleaned[1]?.trim())}>
+                  {cleaned[1]?.trim()}
+                </span>
+              </span>
+            );
+          })
+        ) : (
+          <span>N/A</span>
+        )}
+      </div>
 
       <hr className="my-2" />
 
       {/* CONTENT */}
-      <p className="text-gray-700 text-sm">
+      <p className="text-gray-700 text-sm italic">
         <span className="font-semibold">Definition:</span>{" "}
-        {item.definition}
+        <span className="normal-case body-font">{item.definition}</span>
       </p>
 
       <p className="text-gray-700 mt-1 text-sm">
         <span className="font-semibold">Bangla:</span>{" "}
-        {item.bangla}
+        <span className="text-xs body-font">{item.bangla}</span>
       </p>
 
       {/* SYNONYMS */}
-      <div className="mt-2">
-        <span className="text-sm font-semibold text-gray-700">
+      <div className="mt-2 border-t pt-2 border-gray-200 border-b pb-4">
+        <span className="text-sm font-semibold text-gray-700 title-font tracking-wide">
           Synonyms:
         </span>
 
@@ -62,7 +84,7 @@ export default function WordCard({ item,  speakWord }) {
 
       {/* ANTONYMS */}
       <div className="mt-2">
-        <span className="text-sm font-semibold text-gray-700">
+        <span className="text-sm font-semibold text-gray-700 title-font tracking-wide">
           Antonyms:
         </span>
 

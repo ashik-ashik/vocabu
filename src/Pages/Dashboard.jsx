@@ -84,7 +84,7 @@ export default function DashboardLayout() {
               <button onClick={() => setOpen(false)}>✕</button>
             </div>
             <NavLink to="/" className={menuClass}>
-              🏚 Home
+              🏚 Vocabulary
             </NavLink>
             {menuItems}
           </div>

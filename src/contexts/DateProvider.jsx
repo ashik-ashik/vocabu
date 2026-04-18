@@ -79,6 +79,7 @@ const DataProvider = ({ children }) => {
 
           example: cols[6] || "",
           inserted_date: cols[7] || "",
+            other_part_speech: cols[8] || "",
         };
       });
 

@@ -18,13 +18,15 @@ export default function HeaderMenu() {
 
         {/* LOGO */}
         <div className="text-lg font-bold tracking-tight relative">
-          <img src="https://i.postimg.cc/jS2nMzNq/ASH-Dictionary.png" alt="" className="logo" />
+          <a href="/">
+            <img src="https://i.postimg.cc/jS2nMzNq/ASH-Dictionary.png" alt="Logo" className="logo" />
+          </a>
         </div>
 
         {/* DESKTOP MENU */}
         <div className="hidden md:flex items-center text-sm gap-1">
           <NavLink to="/" className={linkClass}>
-            Home
+            Vocabulary
           </NavLink>
 
           <NavLink to="/dashboard" className={linkClass}>
@@ -49,7 +51,7 @@ export default function HeaderMenu() {
             className={linkClass}
             onClick={() => setOpen(false)}
           >
-            Home
+            Vocabulary
           </NavLink>
 
           <NavLink

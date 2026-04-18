@@ -3,7 +3,7 @@ import useData from "../hooks/UseData";
 import WordCard from "./WordCard";
 import usePageTitle from "../hooks/usePageTitle";
 
-export default function Home() {
+export default function Vocabulary() {
   const [search, setSearch] = useState("");
  const [selectedVoiceIndex, setSelectedVoiceIndex] = useState(0);
  const [voices, setVoices] = useState([]);
@@ -296,7 +296,7 @@ const pagination = getPagination(currentPage, totalPages);
 
 
       {/* ========================================================================= */}
-              <div className="flex items-center justify-center gap-1 mt-6 flex-wrap">
+          <div className="py-4 flex items-center justify-center gap-1 mt-6 flex-wrap">
 
           {/* Prev */}
           <button

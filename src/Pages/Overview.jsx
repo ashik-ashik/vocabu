@@ -147,7 +147,7 @@ export default function Overview() {
 
         <div className="bg-white p-5 rounded-xl shadow">
           <h2 className="text-sm text-gray-500">Status</h2>
-          <p className={`text-lg font-bold ${analytics.color}`}>
+          <p className={`text-lg font-bold capitalize ${analytics.color}`}>
             {analytics.status}
           </p>
         </div>

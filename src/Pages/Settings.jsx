@@ -1,6 +1,9 @@
 import React from "react";
+import usePageTitle from "../hooks/usePageTitle";
 
 export default function Settings() {
+     // set page title
+  usePageTitle("Settings | ASH Vocabulary Dictionary");
   return (
     <div className="max-w-3xl mx-auto p-6 text-center">
       <div className="bg-white shadow rounded-2xl p-10">
