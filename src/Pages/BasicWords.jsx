@@ -3,12 +3,12 @@ import useData from "../hooks/UseData";
 import WordCard from "./WordCard";
 import usePageTitle from "../hooks/usePageTitle";
 
-export default function Vocabulary() {
+export default function BasicWords() {
   const [search, setSearch] = useState("");
  const [selectedVoiceIndex, setSelectedVoiceIndex] = useState(0);
  const [voices, setVoices] = useState([]);
  const [currentPage, setCurrentPage] = useState(1);
-  const { vocabularyWordList = [], loading, error } = useData();
+  const { basicWordList = [], loading, error } = useData();
 
   // set page title
   usePageTitle("ASH English Learning | Learn Words, Meanings & Synonyms");
@@ -17,13 +17,13 @@ export default function Vocabulary() {
   // SAFE SEARCH FILTER
   // =========================
   const filteredWords = useMemo(() => {
-  if (!Array.isArray(vocabularyWordList)) return [];
+  if (!Array.isArray(basicWordList)) return [];
 
   const query = search.toLowerCase().trim();
 
-  if (!query) return [...vocabularyWordList].reverse()
+  if (!query) return [...basicWordList].reverse()
 
-  return vocabularyWordList.filter((item) => {
+  return basicWordList.filter((item) => {
     if (!item) return false;
 
     const wordMatch = item.word?.toLowerCase().includes(query);
@@ -50,7 +50,7 @@ export default function Vocabulary() {
       antonymMatch
     );
   });
-}, [search, vocabularyWordList]);
+}, [search, basicWordList]);
 
 
 
@@ -177,7 +177,7 @@ const pagination = getPagination(currentPage, totalPages);
         {/* TOP SECTION (Brand + Description) */}
         <div className="text-center mb-8">
         <h1 className="text-3xl md:text-5xl font-bold tracking-tight">
-            📘 Advance Vocabulary Master
+            📘 Vocabulary Master
         </h1>
 
         <p className="text-blue-100 mt-3 text-sm md:text-lg max-w-2xl mx-auto">
@@ -260,7 +260,7 @@ const pagination = getPagination(currentPage, totalPages);
       {/* HERO */}
       <section className="max-w-6xl mx-auto px-4 py-8 text-center">
         <h2 className="text-2xl md:text-3xl font-bold text-gray-800">
-          Learn Words, Meanings & Improve Vocabulary in Advance
+          Learn Basic Words
         </h2>
         <p className="text-gray-600 mt-2">
           Search, explore and learn English vocabulary with Bangla meaning, synonyms and examples.
@@ -281,14 +281,14 @@ const pagination = getPagination(currentPage, totalPages);
       </main>
 
       {/* EMPTY STATE (ONLY WHEN NO DATA AFTER SEARCH) */}
-      {filteredWords.length === 0 && vocabularyWordList.length > 0 && (
+      {filteredWords.length === 0 && basicWordList.length > 0 && (
         <p className="text-center text-gray-500 pb-10">
           No vocabulary found.
         </p>
       )}
 
       {/* NO DATA STATE */}
-      {vocabularyWordList.length === 0 && !loading && (
+      {basicWordList.length === 0 && !loading && (
         <p className="text-center text-gray-500 pb-10">
           No vocabulary data available.
         </p>

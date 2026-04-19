@@ -2,12 +2,14 @@ import { useEffect, useState } from 'react';
 import { DataContext } from './CreateContext';
 
 const VOCAB_SHEET_READ_URL = import.meta.env.VITE_VOCABULARY_COLLECTION_SHEET_READ_URL;
+const BASIC_VOCAB_SHEET_READ_URL = import.meta.env.VITE_BASIC_VOCABULARY_SHEET_READ_URL;
 const TENSE_SHEET_READ_URL = import.meta.env.VITE_TENSE_SHEET_READ_URL;
 
 const DataProvider = ({ children }) => {
 
   // States
   const [vocabularyWordList, setVocabularyWordList] = useState([]);
+  const [basicWordList, setBasicWordList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [tenseList, setTenseList] = useState([]);
@@ -64,12 +66,12 @@ const DataProvider = ({ children }) => {
 
 
       // Load vocabulary words from Google Sheet
-    const fetchWords = async () => {
+    const fetchWords = async (sheet, dataSetter) => {
     try {
       setLoading(true);
       setError(null);
 
-      const res = await fetch(VOCAB_SHEET_READ_URL);
+      const res = await fetch(sheet);
 
       if (!res.ok) {
         throw new Error("Failed to fetch vocabulary data");
@@ -112,10 +114,10 @@ const DataProvider = ({ children }) => {
         };
       });
 
-      setVocabularyWordList(data);
+      dataSetter(data);
     } catch (err) {
       setError(err.message || "Something went wrong");
-      setVocabularyWordList([]); // ✅ fallback safe state
+      dataSetter([]); // ✅ fallback safe state
     } finally {
       setLoading(false);
     }
@@ -159,13 +161,14 @@ const DataProvider = ({ children }) => {
     };
 
 
-  fetchWords();
+  fetchWords(VOCAB_SHEET_READ_URL, setVocabularyWordList);
+  fetchWords(BASIC_VOCAB_SHEET_READ_URL, setBasicWordList);
   loadTenseData();
   }, []);
 
 console.log(tenseList);
   return (
-    <DataContext.Provider value={{ vocabularyWordList, loading, error, setVocabularyWordList, tenseList }}>
+    <DataContext.Provider value={{ vocabularyWordList, basicWordList, loading, error, setVocabularyWordList, setBasicWordList, tenseList }}>
       {children}
     </DataContext.Provider>
   );

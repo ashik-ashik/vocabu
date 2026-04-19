@@ -10,6 +10,7 @@ export default function DeleteWord() {
   const [id, setId] = useState("");
   const [loading, setLoading] = useState(false);
   const [passkey, setPasskey] = useState("");
+  const [category, setCategory] = useState("");
 
   const [showModal, setShowModal] = useState(false);
   const {vocabularyWordList, setVocabularyWordList} = useData();
@@ -19,6 +20,7 @@ export default function DeleteWord() {
 
   const handleDelete = async () => {
     if (!id) return toast.error("Enter Word ID");
+    if (!category) return toast.error("Please select a category");
 
     if (passkey !== PASSKEY) {
       return toast.error("Invalid Passkey");
@@ -40,6 +42,7 @@ export default function DeleteWord() {
         body: new URLSearchParams({
           action: "delete",
           id: id,
+          category: category,
         }),
       });
 
@@ -79,6 +82,19 @@ export default function DeleteWord() {
             placeholder="Enter word ID"
           />
         </div>
+
+        {/* set Category */}
+          <div className="my-4">
+            <label className="block font-medium mb-1 text-sm">
+              Select the category of the word
+            </label>
+            <select onChange={(e) => setCategory(e.target.value)} name="category" className="w-full border border-gray-500 p-2  rounded"
+              required>
+              <option value="">Select Category</option>
+              <option value="advance">Advanced Word</option>
+              <option value="basic">Basic Word</option> 
+            </select>
+          </div>
 
         <div>
           <label className="block font-medium mb-1">Passkey</label>

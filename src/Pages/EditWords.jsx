@@ -7,10 +7,11 @@ const SCRIPT_URL = import.meta.env.VITE_VOCABULARY_COLLECTION_SHEET_WRITE_URL;
 const PASSKEY = import.meta.env.VITE_SECRET_PASSKEY;
 
 export default function EditWord() {
-  const { vocabularyWordList, setVocabularyWordList } = useData();
+  const { vocabularyWordList, setVocabularyWordList, basicWordList } = useData();
 
   const [id, setId] = useState("");
   const [passkey, setPasskey] = useState("");
+  const [category, setCategory] = useState("");
   const [loading, setLoading] = useState(false);
 
   const [form, setForm] = useState({
@@ -21,6 +22,7 @@ export default function EditWord() {
     antonyms: "",
     example: "",
     other_part_speech: "",
+    category: "",
   });
 
    // set page title
@@ -34,11 +36,12 @@ export default function EditWord() {
   const handleLoad = () => {
     if (!id) return toast.error("Enter Word ID");
     if (passkey !== PASSKEY) return toast.error("Invalid Passkey");
+    if (!category) return toast.error("Please select a category");
 
-    const found = vocabularyWordList.find((item) => String(item.id) === String(id));
+    const found = category === "advance" ? vocabularyWordList.find((item) => String(item.id) === String(id)) : basicWordList.find((item) => String(item.id) === String(id)) ;
 
     if (!found) {
-      return toast.error("Word not found");
+      return toast.error("Word not found in the " + category?.toUpperCase() + " category");
     }
 
     setForm({
@@ -49,6 +52,7 @@ export default function EditWord() {
       antonyms: found.antonyms || "",
       example: found.example || "",
       other_part_speech: found?.other_part_speech || "",
+      category: category || "",
     });
 
     toast.success("Loaded Word data!");
@@ -60,6 +64,7 @@ export default function EditWord() {
 
     const toastId = toast.loading("Updating word...");
     setLoading(true);
+
 
     try {
       const res = await fetch(SCRIPT_URL, {
@@ -86,6 +91,7 @@ export default function EditWord() {
         definition: form.definition,
         example: form.example,
         other_part_speech: form.other_part_speech,
+        category: form.category,
 
 
         // ✅ KEEP ARRAY FORMAT SAFE
@@ -106,19 +112,20 @@ export default function EditWord() {
     : item
 );
 
-setVocabularyWordList(updatedList);
-setId("");
-setPasskey("");
+    setVocabularyWordList(updatedList);
+    setId("");
+    setPasskey("");
 
-setForm({
-  word: "",
-  bangla: "",
-  definition: "",
-  synonyms: "",
-  antonyms: "",
-  example: "",
-  other_part_speech: "",
-});
+    setForm({
+      word: "",
+      bangla: "",
+      definition: "",
+      synonyms: "",
+      antonyms: "",
+      example: "",
+      other_part_speech: "",
+      category: "",
+    });
       } else {
         toast.error(data.message || "Update failed", { id: toastId });
       }
@@ -159,6 +166,19 @@ setForm({
               onChange={(e) => setId(e.target.value)}
               className="w-full border border-gray-500 p-2  rounded mt-1"
             />
+          </div>
+
+          {/* set Category */}
+          <div className="my-4">
+            <label className="block font-medium mb-1 text-sm">
+              Select the category of the word
+            </label>
+            <select onChange={(e) => setCategory(e.target.value)} name="category" className="w-full border border-gray-500 p-2  rounded"
+              required>
+              <option value="">Select Category</option>
+              <option value="advance">Advanced Word</option>
+              <option value="basic">Basic Word</option> 
+            </select>
           </div>
 
           {/* Passkey */}

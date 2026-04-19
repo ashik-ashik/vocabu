@@ -20,6 +20,7 @@ export default function AddWord() {
     example: "",
     other_part_speech: "",
     passkey: "",
+    category: "",
   });
 
    // set page title
@@ -43,6 +44,7 @@ export default function AddWord() {
       example: "",
       other_part_speech: "",
       passkey: "",
+      category: "",
     });
   };
 
@@ -79,7 +81,9 @@ export default function AddWord() {
           .filter(Boolean),
         example: formData.example.trim(),
         other_part_speech: formData.other_part_speech.trim(),
+        category: formData.category.trim(),
       };
+      console.log("Payload to send:", payload);
       const res = await fetch(SCRIPT_URL, {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -248,6 +252,17 @@ export default function AddWord() {
             className="w-full border border-gray-500 p-2  rounded"
             placeholder="Enter admin passkey"
           />
+        </div>
+        <div className="my-4">
+          <label className="block font-medium mb-1 text-sm">
+            Select the category of the word
+          </label>
+          <select onChange={handleChange} name="category" value={formData.category} className="w-full border border-gray-500 p-2  rounded"
+            required>
+            <option value="">Select Category</option>
+            <option value="advance">Advanced Word</option>
+            <option value="basic">Basic Word</option> 
+          </select>
         </div>
 
         <button

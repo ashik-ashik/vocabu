@@ -12,6 +12,7 @@ import EditWord from './Pages/EditWords'
 import Settings from './Pages/Settings'
 import Info from './Pages/Info'
 import TenseComponent from './Pages/Tense'
+import BasicWords from './Pages/BasicWords'
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Vocabulary />} />
           <Route path="/tense" element={<TenseComponent />} />
+          <Route path="/basic-words" element={<BasicWords />} />
           {/* Dashboard Layout */}
         <Route path="/dashboard" element={<DashboardLayout />}>
           
