@@ -31,6 +31,9 @@ export default function HeaderMenu() {
           <NavLink to="/basic-words" className={linkClass}>
             Basic Words
           </NavLink>
+          <NavLink to="/phrases" className={linkClass}>
+            Phrases
+          </NavLink>
           <NavLink to="/tense" className={linkClass}>
             Tense
           </NavLink>
@@ -58,6 +61,15 @@ export default function HeaderMenu() {
             onClick={() => setOpen(false)}
           >
             Vocabulary
+          </NavLink>
+          <NavLink to="/basic-words" className={linkClass}>
+            Basic Words
+          </NavLink>
+          <NavLink to="/phrases" className={linkClass}>
+            Phrases
+          </NavLink>
+          <NavLink to="/tense" className={linkClass}>
+            Tense
           </NavLink>
 
           <NavLink

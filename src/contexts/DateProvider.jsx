@@ -4,6 +4,7 @@ import { DataContext } from './CreateContext';
 const VOCAB_SHEET_READ_URL = import.meta.env.VITE_VOCABULARY_COLLECTION_SHEET_READ_URL;
 const BASIC_VOCAB_SHEET_READ_URL = import.meta.env.VITE_BASIC_VOCABULARY_SHEET_READ_URL;
 const TENSE_SHEET_READ_URL = import.meta.env.VITE_TENSE_SHEET_READ_URL;
+const IDIOMS_PHRASES_SHEET_READ_URL = import.meta.env.VITE_IDIOMS_PHRASES_SHEET_READ_URL;
 
 const DataProvider = ({ children }) => {
 
@@ -13,7 +14,9 @@ const DataProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [tenseList, setTenseList] = useState([]);
+  const [idiomsPhrasesList, setIdiomsPhrasesList] = useState([]);
 
+  // Parse Words
   const parseCSVWords = (line) => {
       const result = [];
       let current = "";
@@ -36,6 +39,7 @@ const DataProvider = ({ children }) => {
       return result;
     };
 
+    // Parse Tense CSV
     const parseCSVTense = (csvText) => {
       const lines = csvText.trim().split("\n");
 
@@ -123,6 +127,34 @@ const DataProvider = ({ children }) => {
     }
   };
 
+
+  // Load IDIOMS and PHRASES from Google Sheet
+  const loadIdiomsPhrases = async () => {
+    try {
+      setLoading(true);
+      const res = await fetch(IDIOMS_PHRASES_SHEET_READ_URL);
+      const rawText = await res.text();
+      // const header = rawText.split("\n")[0].split(",").map(h => h.trim());
+      // console.log("Raw Idioms and Phrases Data:", rawText.split("\n").slice(1));
+      const data = rawText.split("\n").slice(1).map(line => {
+        const cols = parseCSVWords(line);
+        return {
+          id: cols[0] || "",
+          phrase: cols[1] || "",
+          meanings_en: cols[2] || "",
+          meanings_bn: cols[3] || "",
+          example: cols[4] || "",
+        };
+      });
+      setIdiomsPhrasesList(data);
+    } catch (error) {
+      console.error("Idioms and Phrases Load Error:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
   // Load Tense List from Google Sheet
   const loadTenseData = async () => {
       try {
@@ -131,7 +163,6 @@ const DataProvider = ({ children }) => {
         const res = await fetch(TENSE_SHEET_READ_URL);
         const rawText = await res.text();
 
-        console.log("Raw Tense Data:", rawText);
 
         // 🔥 Convert CSV → JSON
         const data = parseCSVTense(rawText);
@@ -164,11 +195,11 @@ const DataProvider = ({ children }) => {
   fetchWords(VOCAB_SHEET_READ_URL, setVocabularyWordList);
   fetchWords(BASIC_VOCAB_SHEET_READ_URL, setBasicWordList);
   loadTenseData();
+  loadIdiomsPhrases();
   }, []);
 
-console.log(tenseList);
   return (
-    <DataContext.Provider value={{ vocabularyWordList, basicWordList, loading, error, setVocabularyWordList, setBasicWordList, tenseList }}>
+    <DataContext.Provider value={{ vocabularyWordList, basicWordList, loading, error, setVocabularyWordList, setBasicWordList, tenseList, idiomsPhrasesList }}>
       {children}
     </DataContext.Provider>
   );
