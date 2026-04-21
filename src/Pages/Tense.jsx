@@ -118,6 +118,30 @@ export default function TenseComponent() {
                   </div>
                 </div>
               </div>
+              {/* Question Formation Examples */}
+              {item.question_structure && (
+              <div>
+                <h3 className="text-lg font-semibold text-orange-600 text-center mb-4">
+                  Question Examples
+                </h3>
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="bg-gray-50 p-4 rounded-xl border">
+                    <h4 className="font-bold mb-2 text-gray-800">
+                      Structure and Example
+                    </h4>
+                    <p className="border-l-4 border-orange-500 pl-3">
+                      {item.question_structure}
+                    </p>
+                    <p className="border-l-4 border-orange-500 pl-3 mt-2 text-gray-600">
+                      {item.question_example.split(`\\`).map((line, i) => (
+                        <p key={i} className={`${i !== 0 ? "mt-2 text-xs":""}`}>
+                          {line}
+                        </p>
+                      ))}
+                    </p>
+                  </div>
+                </div>
+              </div>)}
 
               {/* Long Examples */}
               <div>

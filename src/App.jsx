@@ -14,6 +14,7 @@ import Info from './Pages/Info'
 import TenseComponent from './Pages/Tense'
 import BasicWords from './Pages/BasicWords'
 import IdiomsPhrases from './Pages/IdiomsPhrases'
+import AddPhrase from './Pages/AddPhrase'
 
 function App() {
 
@@ -35,6 +36,7 @@ function App() {
 
           {/* other pages */}
           <Route path="add-word" element={<AddWord />} />
+          <Route path="add-phrase" element={<AddPhrase />} />
           <Route path="delete-word" element={<DeleteWord />} />
           <Route path="edit-word" element={<EditWord />} />
           <Route path="settings" element={<Settings />} />

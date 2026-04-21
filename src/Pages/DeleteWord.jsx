@@ -3,8 +3,7 @@ import toast from "react-hot-toast";
 import useData from "../hooks/UseData";
 import usePageTitle from "../hooks/usePageTitle";
 
-const SCRIPT_URL = import.meta.env.VITE_VOCABULARY_COLLECTION_SHEET_WRITE_URL;
-const PASSKEY = import.meta.env.VITE_SECRET_PASSKEY;
+const SCRIPT_URL = import.meta.env.VITE_COLLECTION_SHEET_WRITE_URL;
 
 export default function DeleteWord() {
   const [id, setId] = useState("");
@@ -22,9 +21,7 @@ export default function DeleteWord() {
     if (!id) return toast.error("Enter Word ID");
     if (!category) return toast.error("Please select a category");
 
-    if (passkey !== PASSKEY) {
-      return toast.error("Invalid Passkey");
-    }
+   
 
     setShowModal(true); // open modal instead of confirm
   };
@@ -43,6 +40,7 @@ export default function DeleteWord() {
           action: "delete",
           id: id,
           category: category,
+          passkey: passkey
         }),
       });
 
@@ -93,13 +91,14 @@ export default function DeleteWord() {
               <option value="">Select Category</option>
               <option value="advance">Advanced Word</option>
               <option value="basic">Basic Word</option> 
+              <option value="phrase">Phrase</option> 
             </select>
           </div>
 
         <div>
           <label className="block font-medium mb-1">Passkey</label>
           <input
-            type="password"
+            type="text"
             value={passkey}
             onChange={(e) => setPasskey(e.target.value)}
             className="w-full border p-2 rounded"

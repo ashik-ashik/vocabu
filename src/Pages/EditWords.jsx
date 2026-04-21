@@ -3,14 +3,12 @@ import toast from "react-hot-toast";
 import useData from "../hooks/UseData";
 import usePageTitle from "../hooks/usePageTitle";
 
-const SCRIPT_URL = import.meta.env.VITE_VOCABULARY_COLLECTION_SHEET_WRITE_URL;
-const PASSKEY = import.meta.env.VITE_SECRET_PASSKEY;
+const SCRIPT_URL = import.meta.env.VITE_COLLECTION_SHEET_WRITE_URL;
 
 export default function EditWord() {
   const { vocabularyWordList, setVocabularyWordList, basicWordList } = useData();
 
   const [id, setId] = useState("");
-  const [passkey, setPasskey] = useState("");
   const [category, setCategory] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -23,6 +21,7 @@ export default function EditWord() {
     example: "",
     other_part_speech: "",
     category: "",
+    passkey: ''
   });
 
    // set page title
@@ -35,7 +34,6 @@ export default function EditWord() {
   // ✅ LOAD FROM STATE (NO API)
   const handleLoad = () => {
     if (!id) return toast.error("Enter Word ID");
-    if (passkey !== PASSKEY) return toast.error("Invalid Passkey");
     if (!category) return toast.error("Please select a category");
 
     const found = category === "advance" ? vocabularyWordList.find((item) => String(item.id) === String(id)) : basicWordList.find((item) => String(item.id) === String(id)) ;
@@ -53,6 +51,7 @@ export default function EditWord() {
       example: found.example || "",
       other_part_speech: found?.other_part_speech || "",
       category: category || "",
+      passkey: form.passkey
     });
 
     toast.success("Loaded Word data!");
@@ -92,6 +91,7 @@ export default function EditWord() {
         example: form.example,
         other_part_speech: form.other_part_speech,
         category: form.category,
+        passkey: form.passkey,
 
 
         // ✅ KEEP ARRAY FORMAT SAFE
@@ -114,8 +114,6 @@ export default function EditWord() {
 
     setVocabularyWordList(updatedList);
     setId("");
-    setPasskey("");
-
     setForm({
       word: "",
       bangla: "",
@@ -125,6 +123,7 @@ export default function EditWord() {
       example: "",
       other_part_speech: "",
       category: "",
+      passkey: ""
     });
       } else {
         toast.error(data.message || "Update failed", { id: toastId });
@@ -181,17 +180,7 @@ export default function EditWord() {
             </select>
           </div>
 
-          {/* Passkey */}
-          <div>
-            <label className="text-xs text-gray-600 font-semibold">Passkey</label>
-            <input
-              type="password"
-              placeholder="Enter Passkey"
-              value={passkey}
-              onChange={(e) => setPasskey(e.target.value)}
-              className="w-full border p-2 border-gray-500 rounded mt-1"
-            />
-          </div>
+          
 
           {/* Button */}
           <button
@@ -309,6 +298,19 @@ export default function EditWord() {
                 placeholder="Enter example sentence"
               />
             </div>
+
+            {/* Passkey */}
+          <div>
+            <label className="text-xs text-gray-600 font-semibold">Passkey</label>
+            <input
+              type="text"
+              placeholder="Enter Passkey"
+              value={form.passkey}
+              onChange={handleChange}
+              name="passkey"
+              className="w-full border p-2 border-gray-500 rounded mt-1"
+            />
+          </div>
 
             {/* Button */}
             <button

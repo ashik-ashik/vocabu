@@ -8,7 +8,7 @@ const useDate = () => new Date();
 export default function Overview() {
   const today = useDate();
 
-  const { vocabularyWordList } = useData();
+  const { vocabularyWordList, basicWordList } = useData();
 
    // set page title
   usePageTitle("Overview | ASH English Learning");
@@ -17,13 +17,13 @@ export default function Overview() {
   const sortedWords = useMemo(() => {
     if (!Array.isArray(vocabularyWordList)) return [];
 
-    return [...vocabularyWordList]
+    return [...vocabularyWordList, ...basicWordList]
       .filter((w) => w?.inserted_date)
       .sort(
         (a, b) =>
           new Date(a.inserted_date) - new Date(b.inserted_date)
       );
-  }, [vocabularyWordList]);
+  }, [vocabularyWordList, basicWordList]);
 
   // analytics
   const analytics = useMemo(() => {

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
+import { Delete, Edit, InfoIcon, Plus } from "lucide-react";
 import usePageTitle from "../hooks/usePageTitle";
+
 
 export default function DashboardLayout() {
   const [open, setOpen] = useState(false);
@@ -22,22 +24,30 @@ export default function DashboardLayout() {
       </NavLink>
 
       <NavLink to="/dashboard/add-word" className={menuClass}>
-        ➕ Add Word
+        <span className="flex items-center gap-x-2"><Plus size={18} />
+        Add Words</span>
+      </NavLink>
+      <NavLink to="/dashboard/add-phrase" className={menuClass}>
+        <span className="flex items-center gap-x-2"><Plus size={18} />
+        Add Phrase</span>
       </NavLink>
 
       <NavLink to="/dashboard/delete-word" className={menuClass}>
-        📚 Delete Words
+       <span className="flex items-center gap-x-2"><Delete size={18} />
+        Delete</span>
       </NavLink>
 
       <NavLink to="/dashboard/edit-word" className={menuClass}>
-        ✏️ Edit Word
+        <span className="flex items-center gap-x-2"><Edit size={18} />
+        Edit Word</span>
       </NavLink>
 
       <NavLink to="/dashboard/settings" className={menuClass}>
         ⚙️ Settings
       </NavLink>
       <NavLink to="/dashboard/info" className={menuClass}>
-        ℹ️ Info
+        <span className="flex items-center gap-x-2"><InfoIcon size={18} />
+        Info</span>
       </NavLink>
     </div>
   );

@@ -3,8 +3,7 @@ import toast from "react-hot-toast";
 import useData from "../hooks/UseData";
 import usePageTitle from "../hooks/usePageTitle";
 
-const SCRIPT_URL = import.meta.env.VITE_VOCABULARY_COLLECTION_SHEET_WRITE_URL;
-const PASSKEY = "YOUR_SECRET_PASSKEY"; // change this
+const SCRIPT_URL = import.meta.env.VITE_COLLECTION_SHEET_WRITE_URL;
 
 export default function AddWord() {
   const [loading, setLoading] = useState(false);
@@ -56,10 +55,7 @@ export default function AddWord() {
       return;
     }
 
-    if (formData.passkey !== import.meta.env.VITE_SECRET_PASSKEY) {
-      toast.error("Invalid passkey");
-      return;
-    }
+    
 
     const toastId = toast.loading("Adding new word...");
 
@@ -67,7 +63,7 @@ export default function AddWord() {
       setLoading(true);
 
       const payload = {
-        action: "add",
+        action: "addWords",
         word: formData.word.trim(),
         definition: formData.definition.trim(),
         bangla: formData.bangla.trim(),
@@ -82,8 +78,8 @@ export default function AddWord() {
         example: formData.example.trim(),
         other_part_speech: formData.other_part_speech.trim(),
         category: formData.category.trim(),
+        passkey: formData.passkey.trim()
       };
-      console.log("Payload to send:", payload);
       const res = await fetch(SCRIPT_URL, {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -244,7 +240,7 @@ export default function AddWord() {
             Passkey
           </label>
           <input
-            type="password"
+            type="text"
             name="passkey"
             value={formData.passkey}
             onChange={handleChange}

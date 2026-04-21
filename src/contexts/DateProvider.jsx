@@ -155,7 +155,7 @@ const DataProvider = ({ children }) => {
   };
 
 
-  // Load Tense List from Google Sheet
+  // Load Tense List 
   const loadTenseData = async () => {
       try {
         setLoading(true);
@@ -181,6 +181,8 @@ const DataProvider = ({ children }) => {
           example_long_active_en: item.example_long_active_en || "",
           example_long_passive_bn: item.example_long_passive_bn || "",
           example_long_passive_en: item.example_long_passive_en || "",
+          question_structure: item.question_structure || "",
+          question_example: item.question_example || "",
         }));
 
         setTenseList(formatted);
