@@ -99,7 +99,7 @@ export default function IdiomsPhrases() {
 
       {/* ===== Cards Grid ===== */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {currentData.map((item, index) => (
+        {currentData?.reverse().map((item, index) => (
           <div
             key={item.id || index}
             className="relative bg-white rounded-2xl border border-gray-200 shadow-sm hover:shadow-lg transition duration-300 p-5"

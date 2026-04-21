@@ -6,7 +6,7 @@ const API_URL = import.meta.env.VITE_COLLECTION_SHEET_WRITE_URL;
 
 const AddPhrase = () => {
 
-    const {idiomsPhrasesList , setIdiomsPhrasesList} = useData
+    const {idiomsPhrasesList , setIdiomsPhrasesList} = useData();
 
   const [form, setForm] = useState({
     phrase: "",
