@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
+import useData from "../hooks/UseData";
 
 const API_URL = import.meta.env.VITE_COLLECTION_SHEET_WRITE_URL;
 
 const AddPhrase = () => {
+
+    const {idiomsPhrasesList , setIdiomsPhrasesList} = useData
 
   const [form, setForm] = useState({
     phrase: "",
@@ -71,6 +74,13 @@ const AddPhrase = () => {
       toast.success(data.message || "Phrase Added Successfully", {
         id: toastId,
       });
+
+      setIdiomsPhrasesList([...idiomsPhrasesList, {
+        phrase: form.phrase,
+        meanings_en: form.meanings_en,
+        meanings_bn: form.meanings_bn,
+        example: form.example,
+    }])
 
 
       setForm({

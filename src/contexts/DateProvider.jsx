@@ -201,7 +201,7 @@ const DataProvider = ({ children }) => {
   }, []);
 
   return (
-    <DataContext.Provider value={{ vocabularyWordList, basicWordList, loading, error, setVocabularyWordList, setBasicWordList, tenseList, idiomsPhrasesList }}>
+    <DataContext.Provider value={{ vocabularyWordList, basicWordList, loading, error, setVocabularyWordList, setBasicWordList, tenseList, idiomsPhrasesList, setIdiomsPhrasesList }}>
       {children}
     </DataContext.Provider>
   );
