@@ -12,7 +12,7 @@ export default function IdiomsPhrases() {
   // ===== FILTERED DATA =====
   const filteredData = useMemo(() => {
     return idiomsPhrasesList.filter((item) =>
-      item.meanings_en
+      item.phrase
         .toLowerCase()
         .includes(searchTerm.toLowerCase())
     );
