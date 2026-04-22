@@ -104,7 +104,7 @@ export default function IdiomsPhrases() {
             key={item.id || index}
             className="relative bg-white rounded-2xl border border-orange-200 shadow-sm hover:shadow-lg transition duration-300 p-5"
           >
-            <span className="absolute top-4 right-4 text-xs bg-orangr-100 text-orange-700 px-3 py-1 rounded-full font-medium">
+            <span className="absolute top-4 right-4 text-xs bg-orange-100 text-orange-700 px-3 py-1 rounded-full font-medium">
               #{item.id || index + 1}
             </span>
 
