@@ -73,20 +73,20 @@ export default function IdiomsPhrases() {
     <div className="bg-gray-50 min-h-screen px-4 md:px-10 py-6">
 
       {/* ===== Banner ===== */}
-      <div className="mb-10 bg-orange-400 rounded-2xl shadow-sm px-6 py-16 text-center">
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-800">
+      <div className="mb-10 bg-orange-600 rounded-2xl shadow-sm px-6 py-16 text-center">
+        <h1 className="text-3xl md:text-4xl font-bold text-white">
           Idioms & Phrases Learning Hub
         </h1>
-        <p className="mt-3 text-gray-600 max-w-2xl mx-auto text-sm md:text-base">
+        <p className="mt-3 text-white max-w-2xl mx-auto text-sm md:text-base">
           Improve your English communication skills by learning commonly used 
           idioms and phrases with clear meanings and real-life examples.
         </p>
 
         {/* ===== SEARCH INPUT ===== */}
-        <div className="mt-6 max-w-md mx-auto">
+        <div className="mt-10 max-w-md mx-auto">
           <input
             type="text"
-            placeholder="Search by English meaning..."
+            placeholder="Search by phrase..."
             value={searchTerm}
             onChange={(e) => {
               setSearchTerm(e.target.value);
