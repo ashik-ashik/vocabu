@@ -18,6 +18,8 @@ const AddPhrase = () => {
 
   const [loading, setLoading] = useState(false);
 
+  const isExistsThePhrase = idiomsPhrasesList.find(ph => ph.phrase === form.phrase)
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -122,8 +124,12 @@ const AddPhrase = () => {
             name="phrase"
             value={form.phrase}
             onChange={handleChange}
-            className="w-full border p-2 rounded-lg"
+            className={`w-full border p-2 rounded-lg" ${isExistsThePhrase?.phrase ? 'focus:outline-red-500 border-red-600 text-red-600 text-sm font-bold : ': form?.phrase?.length >2 && 'focus:outline-green-500 border-green-600 text-green-600 text-sm font-bold'}`}
           />
+          {
+            isExistsThePhrase?.phrase && <p className="text-xs mt-1 text-gray-500">The Phrase 
+            <span className="text-red-600 font-bold">{" "+isExistsThePhrase?.phrase+" "}</span></p>
+          }
         </div>
 
 
