@@ -111,7 +111,7 @@ export default function IdiomsPhrases() {
             <div className="mb-4">
               <h2 className="text-md md:text-lg font-bold text-gray-900 leading-snug tracking-tight">
                 {item.phrase.trim().charAt(0).toUpperCase() +
-                  item.phrase.trim().slice(1)}
+                  item.phrase.trim().slice(1).toLowerCase()}
               </h2>
               <div className="w-[50%] h-[1px] bg-orange-400 mt-1 rounded-full"></div>
             </div>
@@ -121,8 +121,9 @@ export default function IdiomsPhrases() {
                 <p className="text-gray-700 font-medium">
                   Meaning (English)
                 </p>
-                <p className="text-gray-600 mt-1 capitalize text-sm">
-                  {item.meanings_en}
+                <p className="text-gray-600 mt-1 text-sm">
+                  {item.meanings_en?.trim().charAt(0).toUpperCase() +
+                  item.meanings_en.trim().slice(1)}
                 </p>
               </div>
 
