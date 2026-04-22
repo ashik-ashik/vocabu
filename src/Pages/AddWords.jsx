@@ -7,7 +7,7 @@ const SCRIPT_URL = import.meta.env.VITE_COLLECTION_SHEET_WRITE_URL;
 
 export default function AddWord() {
   const [loading, setLoading] = useState(false);
-  const {vocabularyWordList, setVocabularyWordList} = useData();
+  const {vocabularyWordList, setVocabularyWordList, basicWordList} = useData();
 
 
   const [formData, setFormData] = useState({
@@ -21,6 +21,10 @@ export default function AddWord() {
     passkey: "",
     category: "",
   });
+
+  const totalWords = [...basicWordList, ...vocabularyWordList]
+
+  const isExistTheWord = totalWords.find(witem => witem.word === formData.word);
 
    // set page title
     usePageTitle("Add Word | ASH English Learning");
@@ -135,9 +139,16 @@ export default function AddWord() {
             value={formData.word}
             onChange={handleChange}
             required
-            className="w-full border border-gray-500 p-2  rounded"
+            className={`w-full border border-gray-500 p-2  rounded ${isExistTheWord?.id 
+            ? 'border-red-500 focus:border-red-600 focus:ring-1 focus:outline-red-600' 
+            : isExistTheWord?.word !== formData?.word && formData?.word.length > 2 && 'border-green-500 focus:outline-green-400'}`}
             placeholder="Enter vocabulary word"
           />
+          {
+            isExistTheWord?.id && <p className="text-xs text-gray-500 mt-1">The word
+              <span className="font-bold text-red-500">{' '+isExistTheWord?.word+' '}</span> 
+              already exists!</p>
+          }
         </div>
 
         {/* Definition */}
