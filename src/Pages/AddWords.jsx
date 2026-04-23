@@ -7,7 +7,7 @@ const SCRIPT_URL = import.meta.env.VITE_COLLECTION_SHEET_WRITE_URL;
 
 export default function AddWord() {
   const [loading, setLoading] = useState(false);
-  const {vocabularyWordList, setVocabularyWordList, basicWordList} = useData();
+  const {vocabularyWordList, setVocabularyWordList, basicWordList, setBasicWordList} = useData();
 
 
   const [formData, setFormData] = useState({
@@ -96,7 +96,11 @@ export default function AddWord() {
         toast.success("Word added successfully", { id: toastId });
         payload.id = vocabularyWordList.length + 1; 
         payload.inserted_date = `${new Date().getMonth() + 1}/${new Date().getDate()}/${new Date().getFullYear()}`; // assign new ID from server
-        setVocabularyWordList([...vocabularyWordList, payload]);
+        if(payload.category === "advance"){
+          setVocabularyWordList([...vocabularyWordList, payload]);
+        }else{
+          setBasicWordList([...vocabularyWordList, payload]);
+        }
         resetForm();
       } else if (data.status === "exists") {
         toast.error("Word already exists", { id: toastId });
