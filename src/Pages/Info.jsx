@@ -24,7 +24,7 @@ export default function Info() {
         <div className="absolute inset-0 bg-black/70"></div>
 
         {/* 🔥 Developer Info Overlay */}
-        <div className="absolute inset-0 flex items-center justify-center px-4">
+        <div className="absolute inset-0 flex items-end justify-center px-4 pb-10">
           <div className="text-center text-white max-w-xl">
 
             <h1 className="text-3xl md:text-5xl font-bold">
