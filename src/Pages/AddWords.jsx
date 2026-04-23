@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
+import { FaFont, FaBook, FaLanguage, FaKey, FaList } from "react-icons/fa";
 import useData from "../hooks/UseData";
 import usePageTitle from "../hooks/usePageTitle";
 
@@ -127,163 +128,210 @@ export default function AddWord() {
         Fill all fields carefully. Separate synonyms and antonyms using comma.
       </p>
 
-      <form
-        onSubmit={handleSubmit}
-        className="space-y-5 bg-white p-6 rounded-xl shadow"
+
+<form
+  onSubmit={handleSubmit}
+  className="space-y-4 bg-white p-5 rounded-xl shadow max-w-xl mx-auto"
+>
+  {/* Word */}
+  <div>
+    <label className="block font-medium mb-1 text-sm">Word</label>
+
+    <div className="relative">
+      <FaFont className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm" />
+
+      <input
+        type="text"
+        name="word"
+        value={formData.word}
+        onChange={handleChange}
+        required
+        className={`w-full pl-9 pr-3 py-2 text-sm rounded-md border 
+        focus:outline-none focus:ring-1
+        ${
+          isExistTheWord?.id
+            ? "border-red-500 focus:ring-red-500"
+            : isExistTheWord?.word !== formData?.word &&
+              formData?.word.length > 2
+            ? "border-green-500 focus:ring-green-500"
+            : "border-gray-400 focus:ring-blue-400"
+        }`}
+        placeholder="Enter vocabulary word"
+      />
+    </div>
+
+    {isExistTheWord?.id && (
+      <p className="text-xs text-gray-500 mt-1">
+        The word
+        <span className="font-bold text-red-500">
+          {" " + isExistTheWord?.word + " "}
+        </span>
+        already exists!
+      </p>
+    )}
+  </div>
+
+  {/* Definition */}
+  <div>
+    <label className="block font-medium mb-1 text-sm">Definition</label>
+
+    <div className="relative">
+      <FaBook className="absolute left-3 top-3 text-gray-400 text-sm" />
+
+      <textarea
+        name="definition"
+        value={formData.definition}
+        onChange={handleChange}
+        required
+        className="w-full pl-9 pr-3 py-2 text-sm rounded-md border border-gray-400 
+        focus:outline-none focus:ring-1 focus:ring-blue-400"
+        placeholder="Write definition"
+      />
+    </div>
+  </div>
+
+  {/* Bangla */}
+  <div>
+    <label className="block font-medium mb-1 text-sm">
+      Bangla Meaning
+    </label>
+
+    <div className="relative">
+      <FaLanguage className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm" />
+
+      <input
+        type="text"
+        name="bangla"
+        value={formData.bangla}
+        onChange={handleChange}
+        className="w-full pl-9 pr-3 py-2 text-sm rounded-md border border-gray-400 
+        focus:outline-none focus:ring-1 focus:ring-blue-400"
+        placeholder="বাংলা অর্থ"
+      />
+    </div>
+  </div>
+
+  {/* Synonyms */}
+  <div>
+    <label className="block font-medium mb-1 text-sm">Synonyms</label>
+
+    <input
+      type="text"
+      name="synonyms"
+      value={formData.synonyms}
+      onChange={handleChange}
+      className="w-full px-3 py-2 text-sm rounded-md border border-gray-400 
+      focus:outline-none focus:ring-1 focus:ring-blue-400"
+      placeholder="Quick, Fast, Rapid"
+    />
+
+    <p className="text-xs text-gray-400 mt-1">Separate by comma</p>
+  </div>
+
+  {/* Antonyms */}
+  <div>
+    <label className="block font-medium mb-1 text-sm">Antonyms</label>
+
+    <input
+      type="text"
+      name="antonyms"
+      value={formData.antonyms}
+      onChange={handleChange}
+      className="w-full px-3 py-2 text-sm rounded-md border border-gray-400 
+      focus:outline-none focus:ring-1 focus:ring-blue-400"
+      placeholder="Slow, Lazy"
+    />
+  </div>
+
+  {/* Example */}
+  <div>
+    <label className="block font-medium mb-1 text-sm">
+      Example Sentence
+    </label>
+
+    <textarea
+      name="example"
+      value={formData.example}
+      onChange={handleChange}
+      className="w-full px-3 py-2 text-sm rounded-md border border-gray-400 
+      focus:outline-none focus:ring-1 focus:ring-blue-400"
+      placeholder="Example sentence"
+    />
+  </div>
+
+  {/* Other Part of Speech */}
+  <div>
+    <label className="text-sm font-medium">
+      Other part of Speech
+    </label>
+
+    <input
+      name="other_part_speech"
+      value={formData.other_part_speech}
+      onChange={handleChange}
+      className="w-full mt-1 px-3 py-2 text-sm rounded-md border border-gray-400 
+      focus:outline-none focus:ring-1 focus:ring-blue-400"
+      placeholder="noun: large, adjective: big..."
+    />
+
+    <p className="text-xs text-gray-500 mt-1">
+      Format: noun: large, adjective: big...
+    </p>
+  </div>
+
+  {/* Passkey */}
+  <div>
+    <label className="block font-medium mb-1 text-sm">Passkey</label>
+
+    <div className="relative">
+      <FaKey className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm" />
+
+      <input
+        type="text"
+        name="passkey"
+        value={formData.passkey}
+        onChange={handleChange}
+        required
+        className="w-full pl-9 pr-3 py-2 text-sm rounded-md border border-gray-400 
+        focus:outline-none focus:ring-1 focus:ring-blue-400"
+        placeholder="Enter admin passkey"
+      />
+    </div>
+  </div>
+
+  {/* Category */}
+  <div>
+    <label className="block font-medium mb-1 text-sm">
+      Select Category
+    </label>
+
+    <div className="relative">
+      <FaList className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm" />
+
+      <select
+        onChange={handleChange}
+        name="category"
+        value={formData.category}
+        required
+        className="w-full pl-9 pr-3 py-2 text-sm rounded-md border border-gray-400 
+        focus:outline-none focus:ring-1 focus:ring-blue-400"
       >
-        
-        {/* Word */}
-        <div>
-          <label className="block font-medium mb-1 text-sm">
-            Word
-          </label>
-          <input
-            type="text"
-            name="word"
-            value={formData.word}
-            onChange={handleChange}
-            required
-            className={`w-full border border-gray-500 p-2  rounded ${isExistTheWord?.id 
-            ? 'border-red-500 focus:border-red-600 focus:ring-1 focus:outline-red-600' 
-            : isExistTheWord?.word !== formData?.word && formData?.word.length > 2 && 'border-green-500 focus:outline-green-400'}`}
-            placeholder="Enter vocabulary word"
-          />
-          {
-            isExistTheWord?.id && <p className="text-xs text-gray-500 mt-1">The word
-              <span className="font-bold text-red-500">{' '+isExistTheWord?.word+' '}</span> 
-              already exists!</p>
-          }
-        </div>
+        <option value="">Select Category</option>
+        <option value="advance">Advanced Word</option>
+        <option value="basic">Basic Word</option>
+      </select>
+    </div>
+  </div>
 
-        {/* Definition */}
-        <div>
-          <label className="block font-medium mb-1 text-sm">
-            Definition
-          </label>
-          <textarea
-            name="definition"
-            value={formData.definition}
-            onChange={handleChange}
-            required
-            className="w-full border border-gray-500 p-2  rounded"
-            placeholder="Write definition"
-          />
-        </div>
-
-        {/* Bangla */}
-        <div>
-          <label className="block font-medium mb-1 text-sm">
-            Bangla Meaning
-          </label>
-          <input
-            type="text"
-            name="bangla"
-            value={formData.bangla}
-            onChange={handleChange}
-            className="w-full border border-gray-500 p-2  rounded"
-            placeholder="বাংলা অর্থ"
-          />
-        </div>
-
-        {/* Synonyms */}
-        <div>
-          <label className="block font-medium mb-1 text-sm">
-            Synonyms
-          </label>
-          <input
-            type="text"
-            name="synonyms"
-            value={formData.synonyms}
-            onChange={handleChange}
-            className="w-full border border-gray-500 p-2  rounded"
-            placeholder="Example: Quick, Fast, Rapid"
-          />
-          <p className="text-xs text-gray-400 mt-1">
-            Separate by comma
-          </p>
-        </div>
-
-        {/* Antonyms */}
-        <div>
-          <label className="block font-medium mb-1 text-sm">
-            Antonyms
-          </label>
-          <input
-            type="text"
-            name="antonyms"
-            value={formData.antonyms}
-            onChange={handleChange}
-            className="w-full border border-gray-500 p-2  rounded"
-            placeholder="Example: Slow, Lazy"
-          />
-        </div>
-
-        {/* Example */}
-        <div>
-          <label className="block font-medium mb-1 text-sm">
-            Example Sentence
-          </label>
-          <textarea
-            name="example"
-            value={formData.example}
-            onChange={handleChange}
-            className="w-full border border-gray-500 p-2  rounded"
-            placeholder="Example sentence"
-          />
-        </div>
-
-        {/* Other Part of Speech */}
-          <div>
-            <label className="text-sm font-medium">
-              Other part of Speech (Comma separated)
-            </label>
-            <input
-              name="other_part_speech"
-              value={formData.other_part_speech}
-              onChange={handleChange}
-              className="w-full border border-gray-500 p-2  rounded mt-1"
-              placeholder="example: noun: large, adjective: big, verb: huge, etc"
-            />
-            <p className="text-xs text-gray-500 mt-1">
-              Format: noun: large, adjective: big, verb: huge, etc...
-            </p>
-          </div>
-
-        {/* Passkey */}
-        <div>
-          <label className="block font-medium mb-1 text-sm">
-            Passkey
-          </label>
-          <input
-            type="text"
-            name="passkey"
-            value={formData.passkey}
-            onChange={handleChange}
-            required
-            className="w-full border border-gray-500 p-2  rounded"
-            placeholder="Enter admin passkey"
-          />
-        </div>
-        <div className="my-4">
-          <label className="block font-medium mb-1 text-sm">
-            Select the category of the word
-          </label>
-          <select onChange={handleChange} name="category" value={formData.category} className="w-full border border-gray-500 p-2  rounded"
-            required>
-            <option value="">Select Category</option>
-            <option value="advance">Advanced Word</option>
-            <option value="basic">Basic Word</option> 
-          </select>
-        </div>
-
-        <button
-          type="submit"
-          disabled={loading}
-          className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 disabled:opacity-50"
-        >
-          {loading ? "Adding..." : "Add Word"}
-        </button>
-      </form>
+  {/* Button */}
+  <button
+    type="submit"
+    disabled={loading}
+    className="w-full bg-blue-600 text-white py-2 text-sm rounded-md hover:bg-blue-700 disabled:opacity-50"
+  >
+    {loading ? "Adding..." : "Add Word"}
+  </button>
+</form>
 
     </div>
   );

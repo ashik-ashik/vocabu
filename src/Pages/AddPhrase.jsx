@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
+import { FaQuoteLeft, FaLanguage, FaKey, FaBook } from "react-icons/fa";
 import useData from "../hooks/UseData";
 
 const API_URL = import.meta.env.VITE_COLLECTION_SHEET_WRITE_URL;
@@ -115,86 +116,131 @@ const AddPhrase = () => {
         Add New Phrase
       </h2>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
 
-        <div>
-          <label className="block font-medium mb-1">Phrase</label>
-          <input
-            type="text"
-            name="phrase"
-            value={form.phrase}
-            onChange={handleChange}
-            className={`w-full border p-2 rounded-lg" ${isExistsThePhrase?.phrase ? 'focus:outline-red-500 border-red-600 text-red-600 text-sm font-bold : ': form?.phrase?.length >2 && 'focus:outline-green-500 border-green-600 text-green-600 text-sm font-bold'}`}
-          />
-          {
-            isExistsThePhrase?.phrase && <p className="text-xs mt-1 text-gray-500">The Phrase 
-            <span className="text-red-600 font-bold">{" "+isExistsThePhrase?.phrase+" "}</span></p>
-          }
-        </div>
+<form onSubmit={handleSubmit} className="space-y-4 max-w-xl mx-auto">
 
+  {/* Phrase */}
+  <div>
+    <label className="block font-medium mb-1 text-sm">Phrase</label>
 
-        <div>
-          <label className="block font-medium mb-1">
-            English Meaning
-          </label>
-          <textarea
-            name="meanings_en"
-            value={form.meanings_en}
-            onChange={handleChange}
-            className="w-full border p-2 rounded-lg"
-          />
-        </div>
+    <div className="relative">
+      <FaQuoteLeft className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm" />
 
+      <input
+        type="text"
+        name="phrase"
+        value={form.phrase}
+        onChange={handleChange}
+        className={`w-full pl-9 pr-3 py-2 text-sm rounded-md border focus:outline-none focus:ring-1
+        ${
+          isExistsThePhrase?.phrase
+            ? "border-red-500 text-red-600 font-semibold focus:ring-red-500"
+            : form?.phrase?.length > 2
+            ? "border-green-500 text-green-600 font-semibold focus:ring-green-500"
+            : "border-gray-400 focus:ring-blue-400"
+        }`}
+        placeholder="Enter phrase"
+      />
+    </div>
 
-        <div>
-          <label className="block font-medium mb-1">
-            Bangla Meaning
-          </label>
-          <textarea
-            name="meanings_bn"
-            value={form.meanings_bn}
-            onChange={handleChange}
-            className="w-full border p-2 rounded-lg"
-          />
-        </div>
+    {isExistsThePhrase?.phrase && (
+      <p className="text-xs mt-1 text-gray-500">
+        The Phrase
+        <span className="text-red-600 font-bold">
+          {" " + isExistsThePhrase?.phrase + " "}
+        </span>
+        already exists!
+      </p>
+    )}
+  </div>
 
+  {/* English Meaning */}
+  <div>
+    <label className="block font-medium mb-1 text-sm">
+      English Meaning
+    </label>
 
-        <div>
-          <label className="block font-medium mb-1">
-            Example
-          </label>
-          <textarea
-            name="example"
-            value={form.example}
-            onChange={handleChange}
-            className="w-full border p-2 rounded-lg"
-          />
-        </div>
+    <div className="relative">
+      <FaBook className="absolute left-3 top-3 text-gray-400 text-sm" />
 
+      <textarea
+        name="meanings_en"
+        value={form.meanings_en}
+        onChange={handleChange}
+        className="w-full pl-9 pr-3 py-2 text-sm rounded-md border border-gray-400 
+        focus:outline-none focus:ring-1 focus:ring-blue-400"
+        placeholder="Write English meaning"
+      />
+    </div>
+  </div>
 
-        <div>
-          <label className="block font-medium mb-1">
-            Passkey
-          </label>
-          <input
-            type="text"
-            name="passkey"
-            value={form.passkey}
-            onChange={handleChange}
-            className="w-full border p-2 rounded-lg"
-          />
-        </div>
+  {/* Bangla Meaning */}
+  <div>
+    <label className="block font-medium mb-1 text-sm">
+      Bangla Meaning
+    </label>
 
+    <div className="relative">
+      <FaLanguage className="absolute left-3 top-3 text-gray-400 text-sm" />
 
-        <button
-          type="submit"
-          disabled={loading}
-          className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50"
-        >
-          {loading ? "Adding..." : "Add Phrase"}
-        </button>
+      <textarea
+        name="meanings_bn"
+        value={form.meanings_bn}
+        onChange={handleChange}
+        className="w-full pl-9 pr-3 py-2 text-sm rounded-md border border-gray-400 
+        focus:outline-none focus:ring-1 focus:ring-blue-400"
+        placeholder="বাংলা অর্থ লিখুন"
+      />
+    </div>
+  </div>
 
-      </form>
+  {/* Example */}
+  <div>
+    <label className="block font-medium mb-1 text-sm">
+      Example
+    </label>
+
+    <textarea
+      name="example"
+      value={form.example}
+      onChange={handleChange}
+      className="w-full px-3 py-2 text-sm rounded-md border border-gray-400 
+      focus:outline-none focus:ring-1 focus:ring-blue-400"
+      placeholder="Example sentence"
+    />
+  </div>
+
+  {/* Passkey */}
+  <div>
+    <label className="block font-medium mb-1 text-sm">
+      Passkey
+    </label>
+
+    <div className="relative">
+      <FaKey className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm" />
+
+      <input
+        type="text"
+        name="passkey"
+        value={form.passkey}
+        onChange={handleChange}
+        className="w-full pl-9 pr-3 py-2 text-sm rounded-md border border-gray-400 
+        focus:outline-none focus:ring-1 focus:ring-blue-400"
+        placeholder="Enter admin passkey"
+      />
+    </div>
+  </div>
+
+  {/* Button */}
+  <button
+    type="submit"
+    disabled={loading}
+    className="w-full bg-blue-600 text-white py-2 text-sm rounded-md hover:bg-blue-700 disabled:opacity-50"
+  >
+    {loading ? "Adding..." : "Add Phrase"}
+  </button>
+
+</form>
 
     </div>
   );
