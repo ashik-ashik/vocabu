@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { FaQuoteLeft, FaLanguage, FaKey, FaBook } from "react-icons/fa";
+import {  FaCheckCircle, FaExclamationCircle } from "react-icons/fa";
+import { VscNote } from "react-icons/vsc";
+
 import useData from "../hooks/UseData";
 
 const API_URL = import.meta.env.VITE_COLLECTION_SHEET_WRITE_URL;
@@ -119,40 +122,67 @@ const AddPhrase = () => {
 
 <form onSubmit={handleSubmit} className="space-y-4 max-w-xl mx-auto">
 
-  {/* Phrase */}
-  <div>
-    <label className="block font-medium mb-1 text-sm">Phrase</label>
 
-    <div className="relative">
-      <FaQuoteLeft className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm" />
+{/* Phrase */}
+<div>
+  <label className="block font-medium mb-1 text-sm flex items-center gap-2 text-gray-700">
+    <FaQuoteLeft className="text-gray-500 text-xs" />
+    Phrase
+  </label>
 
-      <input
-        type="text"
-        name="phrase"
-        value={form.phrase}
-        onChange={handleChange}
-        className={`w-full pl-9 pr-3 py-2 text-sm rounded-md border focus:outline-none focus:ring-1
-        ${
-          isExistsThePhrase?.phrase
-            ? "border-red-500 text-red-600 font-semibold focus:ring-red-500"
-            : form?.phrase?.length > 2
-            ? "border-green-500 text-green-600 font-semibold focus:ring-green-500"
-            : "border-gray-400 focus:ring-blue-400"
-        }`}
-        placeholder="Enter phrase"
-      />
+  <div className="relative">
+    <FaQuoteLeft className={`absolute left-3 top-1/2 -translate-y-1/2 ${isExistsThePhrase?.phrase
+          ? "text-red-600"
+          : form?.phrase?.length > 2
+          ? "text-green-600"
+          : "text-gray-600"} text-xs`} />
+
+    <input
+      type="text"
+      name="phrase"
+      value={form.phrase}
+      onChange={handleChange}
+      className={`w-full pl-9 pr-9 py-2 text-sm rounded-md border transition-all duration-200
+      focus:outline-none focus:ring-1
+      ${
+        isExistsThePhrase?.phrase
+          ? "border-red-500 focus:ring-red-400 bg-red-50 text-red-700"
+          : form?.phrase?.length > 2
+          ? "border-green-500 focus:ring-green-400 bg-green-50 text-green-700"
+          : "border-gray-300 focus:ring-blue-400"
+      }`}
+      placeholder="Enter phrase"
+    />
+
+    {/* Right-side status icon */}
+    <div className="absolute right-3 top-1/2 -translate-y-1/2">
+      {isExistsThePhrase?.phrase ? (
+        <FaExclamationCircle className="text-red-500 text-sm" />
+      ) : form?.phrase?.length > 2 ? (
+        <FaCheckCircle className="text-green-500 text-sm" />
+      ) : null}
     </div>
-
-    {isExistsThePhrase?.phrase && (
-      <p className="text-xs mt-1 text-gray-500">
-        The Phrase
-        <span className="text-red-600 font-bold">
-          {" " + isExistsThePhrase?.phrase + " "}
-        </span>
-        already exists!
-      </p>
-    )}
   </div>
+
+  {/* Helper / Error Message */}
+  {isExistsThePhrase?.phrase ? (
+    <p className="text-xs mt-1 text-red-600">
+      This phrase{" "}
+      <span className="font-semibold">
+        "{isExistsThePhrase?.phrase}"
+      </span>{" "}
+      already exists in the database.
+    </p>
+  ) : form?.phrase?.length > 2 ? (
+    <p className="text-xs mt-1 text-green-600">
+      Looks good! Phrase is available to use.
+    </p>
+  ) : (
+    <p className="text-xs mt-1 text-gray-400">
+      Enter a meaningful phrase (minimum 3 characters)
+    </p>
+  )}
+</div>
 
   {/* English Meaning */}
   <div>
@@ -199,15 +229,17 @@ const AddPhrase = () => {
     <label className="block font-medium mb-1 text-sm">
       Example
     </label>
-
-    <textarea
-      name="example"
-      value={form.example}
-      onChange={handleChange}
-      className="w-full px-3 py-2 text-sm rounded-md border border-gray-400 
-      focus:outline-none focus:ring-1 focus:ring-blue-400"
-      placeholder="Example sentence"
-    />
+      <div className="relative">
+        <VscNote size={20} className="absolute left-3 top-3  text-gray-400 text-sm" />
+        <textarea
+          name="example"
+          value={form.example}
+          onChange={handleChange}
+          className="w-full pl-9 pr-3 py-2 text-sm rounded-md border border-gray-400 
+        focus:outline-none focus:ring-1 focus:ring-blue-400"
+          placeholder="Example sentence"
+        />
+      </div>
   </div>
 
   {/* Passkey */}

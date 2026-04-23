@@ -15,7 +15,7 @@ export default function Info() {
 
         {/* Background Image */}
         <img
-          src="https://i.postimg.cc/prYV9dWT/ash.png"
+          src="https://i.postimg.cc/jdtHTH11/ash-dev.jpg"
           alt="Developer"
           className="w-full h-full object-cover"
         />
@@ -45,7 +45,7 @@ export default function Info() {
                 React
               </span>
               <span className="px-3 py-1 text-xs bg-indigo-500/20 border border-indigo-400 rounded-full">
-                Firebase
+                JXS
               </span>
               <span className="px-3 py-1 text-xs bg-purple-500/20 border border-purple-400 rounded-full">
                 Google Sheets API
@@ -58,10 +58,10 @@ export default function Info() {
             {/* Contact */}
             <div className="mt-4 text-sm text-gray-300 space-y-1">
               <p className="flex justify-center items-center gap-2">
-                <BiEnvelope /> ashikali0204@gmail.com
+                <BiEnvelope size={20} /> ashikali0204@gmail.com
               </p>
               <p className="flex justify-center items-center gap-2">
-                <MapIcon size={18} /> Bangladesh
+                <MapIcon size={20} /> Bangladesh
               </p>
             </div>
 

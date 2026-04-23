@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { FaFont, FaBook, FaLanguage, FaKey, FaList } from "react-icons/fa";
+import {  FaCheckCircle, FaExclamationCircle, FaQuoteLeft } from "react-icons/fa";
+
+import { HiMiniLink, HiLinkSlash } from "react-icons/hi2";
+import { VscNote } from "react-icons/vsc";
+
+
 import useData from "../hooks/UseData";
 import usePageTitle from "../hooks/usePageTitle";
 
@@ -131,42 +137,65 @@ export default function AddWord() {
 
 <form
   onSubmit={handleSubmit}
-  className="space-y-4 bg-white p-5 rounded-xl shadow max-w-xl mx-auto"
+  className="space-y-4 bg-white p-5 rounded-xl shadow max-w-3xl mx-auto"
 >
   {/* Word */}
   <div>
-    <label className="block font-medium mb-1 text-sm">Word</label>
-
+    <label className="block font-medium mb-1 text-sm flex items-center gap-2 text-gray-700">
+      <FaQuoteLeft className="text-gray-500 text-xs" />
+      Word
+    </label>
+  
     <div className="relative">
-      <FaFont className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm" />
-
+      <FaQuoteLeft className={`absolute left-3 top-1/2 -translate-y-1/2 ${isExistTheWord?.word
+            ? "text-red-600"
+            : formData?.word?.length > 2
+            ? "text-green-600"
+            : "text-gray-600"} text-xs`} />
+  
       <input
         type="text"
         name="word"
         value={formData.word}
         onChange={handleChange}
-        required
-        className={`w-full pl-9 pr-3 py-2 text-sm rounded-md border 
+        className={`w-full pl-9 pr-9 py-2 text-sm rounded-md border transition-all duration-200
         focus:outline-none focus:ring-1
         ${
-          isExistTheWord?.id
-            ? "border-red-500 focus:ring-red-500"
-            : isExistTheWord?.word !== formData?.word &&
-              formData?.word.length > 2
-            ? "border-green-500 focus:ring-green-500"
-            : "border-gray-400 focus:ring-blue-400"
+          isExistTheWord?.word
+            ? "border-red-500 focus:ring-red-400 bg-red-50 text-red-700"
+            : formData?.word?.length > 2
+            ? "border-green-500 focus:ring-green-400 bg-green-50 text-green-700"
+            : "border-gray-300 focus:ring-blue-400"
         }`}
-        placeholder="Enter vocabulary word"
+        placeholder="Enter word"
       />
+  
+      {/* Right-side status icon */}
+      <div className="absolute right-3 top-1/2 -translate-y-1/2">
+        {isExistTheWord?.word ? (
+          <FaExclamationCircle className="text-red-500 text-sm" />
+        ) : formData?.word?.length > 2 ? (
+          <FaCheckCircle className="text-green-500 text-sm" />
+        ) : null}
+      </div>
     </div>
-
-    {isExistTheWord?.id && (
-      <p className="text-xs text-gray-500 mt-1">
-        The word
-        <span className="font-bold text-red-500">
-          {" " + isExistTheWord?.word + " "}
-        </span>
-        already exists!
+  
+    {/* Helper / Error Message */}
+    {isExistTheWord?.word ? (
+      <p className="text-xs mt-1 text-red-600">
+        This word{" "}
+        <span className="font-semibold">
+          "{isExistTheWord?.word}"
+        </span>{" "}
+        already exists in the database.
+      </p>
+    ) : formData?.word?.length > 2 ? (
+      <p className="text-xs mt-1 text-green-600">
+        Looks good! Phrase is available to use.
+      </p>
+    ) : (
+      <p className="text-xs mt-1 text-gray-400">
+        Enter a meaningful phrase (minimum 3 characters)
       </p>
     )}
   </div>
@@ -212,35 +241,42 @@ export default function AddWord() {
   </div>
 
   {/* Synonyms */}
-  <div>
-    <label className="block font-medium mb-1 text-sm">Synonyms</label>
+<div>
+  <label className="block font-medium mb-1 text-sm flex items-center gap-2">
+    Synonyms
+  </label>
+    <div className="relative">
+      <HiMiniLink className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm" />
+    
+      <input
+        type="text"
+        name="synonyms"
+        value={formData.synonyms}
+        onChange={handleChange}
+        className="w-full pl-9 pr-3 py-2 text-sm rounded-md border border-gray-400 
+        focus:outline-none focus:ring-1 focus:ring-blue-400"
+        placeholder="Quick, Fast, Rapid"
+      />
+    </div>
 
-    <input
-      type="text"
-      name="synonyms"
-      value={formData.synonyms}
-      onChange={handleChange}
-      className="w-full px-3 py-2 text-sm rounded-md border border-gray-400 
-      focus:outline-none focus:ring-1 focus:ring-blue-400"
-      placeholder="Quick, Fast, Rapid"
-    />
-
-    <p className="text-xs text-gray-400 mt-1">Separate by comma</p>
-  </div>
+  <p className="text-xs text-gray-400 mt-1">Separate by comma</p>
+</div>
 
   {/* Antonyms */}
   <div>
     <label className="block font-medium mb-1 text-sm">Antonyms</label>
-
-    <input
-      type="text"
-      name="antonyms"
-      value={formData.antonyms}
-      onChange={handleChange}
-      className="w-full px-3 py-2 text-sm rounded-md border border-gray-400 
-      focus:outline-none focus:ring-1 focus:ring-blue-400"
-      placeholder="Slow, Lazy"
-    />
+      <div className="relative">
+        <HiLinkSlash className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm" />
+        <input
+          type="text"
+          name="antonyms"
+          value={formData.antonyms}
+          onChange={handleChange}
+          className="w-full pl-9 pr-3 py-2 text-sm rounded-md border border-gray-400 
+            focus:outline-none focus:ring-1 focus:ring-blue-400"
+          placeholder="Slow, Lazy"
+        />
+      </div>
   </div>
 
   {/* Example */}
@@ -248,15 +284,17 @@ export default function AddWord() {
     <label className="block font-medium mb-1 text-sm">
       Example Sentence
     </label>
-
-    <textarea
-      name="example"
-      value={formData.example}
-      onChange={handleChange}
-      className="w-full px-3 py-2 text-sm rounded-md border border-gray-400 
-      focus:outline-none focus:ring-1 focus:ring-blue-400"
-      placeholder="Example sentence"
-    />
+    <div className="relative">
+          <VscNote size={20} className="absolute left-3 top-3  text-gray-400 text-sm" />
+        <textarea
+          name="example"
+          value={formData.example}
+          onChange={handleChange}
+          className="w-full pl-9 pr-3 py-2 text-sm rounded-md border border-gray-400 
+        focus:outline-none focus:ring-1 focus:ring-blue-400"
+          placeholder="Example sentence"
+        />
+    </div>
   </div>
 
   {/* Other Part of Speech */}

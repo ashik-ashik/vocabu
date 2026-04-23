@@ -31,16 +31,16 @@ export default function DashboardLayout() {
         <span className="flex items-center gap-x-2"><Plus size={18} />
         Add Phrase</span>
       </NavLink>
+      <NavLink to="/dashboard/edit-word" className={menuClass}>
+        <span className="flex items-center gap-x-2"><Edit size={18} />
+        Edit Word</span>
+      </NavLink>
 
       <NavLink to="/dashboard/delete-word" className={menuClass}>
        <span className="flex items-center gap-x-2"><Delete size={18} />
         Delete</span>
       </NavLink>
 
-      <NavLink to="/dashboard/edit-word" className={menuClass}>
-        <span className="flex items-center gap-x-2"><Edit size={18} />
-        Edit Word</span>
-      </NavLink>
 
       <NavLink to="/dashboard/settings" className={menuClass}>
         ⚙️ Settings
