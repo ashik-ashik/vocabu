@@ -167,7 +167,7 @@ export default function AddWord() {
             ? "border-green-500 focus:ring-green-400 bg-green-50 text-green-700"
             : "border-gray-300 focus:ring-blue-400"
         }`}
-        placeholder="Enter word"
+        placeholder="Enter Word"
       />
   
       {/* Right-side status icon */}
@@ -183,7 +183,7 @@ export default function AddWord() {
     {/* Helper / Error Message */}
     {isExistTheWord?.word ? (
       <p className="text-xs mt-1 text-red-600">
-        This word{" "}
+        This Word{" "}
         <span className="font-semibold">
           "{isExistTheWord?.word}"
         </span>{" "}
@@ -191,11 +191,11 @@ export default function AddWord() {
       </p>
     ) : formData?.word?.length > 2 ? (
       <p className="text-xs mt-1 text-green-600">
-        Looks good! Phrase is available to use.
+        Looks good! Word is available to use.
       </p>
     ) : (
       <p className="text-xs mt-1 text-gray-400">
-        Enter a meaningful phrase (minimum 3 characters)
+        Enter a meaningful Word (minimum 3 characters)
       </p>
     )}
   </div>
