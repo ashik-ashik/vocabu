@@ -5,7 +5,7 @@ import useAuth from "../hooks/useAuth";
 
 
 
-const PrivateRoute = ({ children }) => {
+const PrivateRoute = ({ children, role }) => {
   const { user, loading, userRole } = useAuth();
   const location = useLocation();
 
@@ -16,20 +16,15 @@ const PrivateRoute = ({ children }) => {
 
   // If user not logged in → redirect login
   if (!user) {
-    return (
-      <Navigate
-        to="/login"
-        state={{ from: location }}
-        replace
-      />
-    );
+    return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
   // If logged in but not admin → redirect home
-
-  if (userRole !== "admin") {
+// Admin-only route
+  if (role === "admin" && userRole !== "admin") {
     return <Navigate to="/" replace />;
   }
+  
 
   // Allow access
   return children;

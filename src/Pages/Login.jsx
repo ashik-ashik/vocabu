@@ -1,8 +1,10 @@
 import React from "react";
 import useAuth from "../hooks/useAuth";
+import usePageTitle from "../hooks/usePageTitle";
 
 const Login = () => {
-  const { user, googleLogin, logout, usersList, userRole  } = useAuth();
+  const { user, googleLogin, logout, userRole  } = useAuth();
+  usePageTitle("Login | ASH English Learning | Learn Words, Meanings & Synonyms");
 
   const handleLogin = async () => {
     try {
@@ -11,7 +13,6 @@ const Login = () => {
       console.log(error.message);
     }
   };
-  console.log(userRole, usersList);
 
   return (
     <div className="min-h-screen flex justify-center items-center bg-gray-50 px-4">

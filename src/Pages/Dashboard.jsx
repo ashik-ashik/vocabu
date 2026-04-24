@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
-import { Delete, Edit, InfoIcon, Plus } from "lucide-react";
+import { Delete, Edit, InfoIcon, Plus, UserCog } from "lucide-react";
 import usePageTitle from "../hooks/usePageTitle";
 
 
@@ -39,6 +39,10 @@ export default function DashboardLayout() {
       <NavLink to="/dashboard/delete-word" className={menuClass}>
        <span className="flex items-center gap-x-2"><Delete size={18} />
         Delete</span>
+      </NavLink>
+      <NavLink to="/dashboard/role" className={menuClass}>
+       <span className="flex items-center gap-x-2"><UserCog size={18} />
+        Update Role</span>
       </NavLink>
 
 

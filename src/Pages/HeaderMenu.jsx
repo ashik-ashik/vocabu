@@ -30,7 +30,10 @@ export default function HeaderMenu() {
         {/* DESKTOP MENU */}
         <div className="hidden md:flex items-center text-sm gap-1">
           <NavLink to="/" className={linkClass}>
-            Vocabulary
+            Home
+          </NavLink>
+          <NavLink to="/advance-words" className={linkClass}>
+            Advance Words
           </NavLink>
           <NavLink to="/basic-words" className={linkClass}>
             Basic Words
@@ -73,7 +76,14 @@ export default function HeaderMenu() {
             className={linkClass}
             onClick={() => setOpen(false)}
           >
-            Vocabulary
+            Home
+          </NavLink>
+          <NavLink
+            to="/advance-words"
+            className={linkClass}
+            onClick={() => setOpen(false)}
+          >
+            Advance Words
           </NavLink>
           <NavLink to="/basic-words" className={linkClass}>
             Basic Words

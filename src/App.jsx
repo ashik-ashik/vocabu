@@ -17,6 +17,8 @@ import IdiomsPhrases from './Pages/IdiomsPhrases'
 import AddPhrase from './Pages/AddPhrase'
 import Login from './Pages/Login'
 import PrivateRoute from './Pages/PrivateRoute'
+import Home from './Pages/Home'
+import UpdateUserRole from './Pages/UpdateUserRole'
 
 function App() {
 
@@ -26,13 +28,14 @@ function App() {
           <Toaster position="bottom-right" />
           <HeaderMenu />
         <Routes>
-          <Route path="/" element={<Vocabulary />} />
-          <Route path="/tense" element={<TenseComponent />} />
-          <Route path="/basic-words" element={<BasicWords />} />
-          <Route path="/phrases" element={<IdiomsPhrases />} />
+          <Route path="/" element={<Home/>} />
+          <Route path="/advance-words" element={<PrivateRoute><Vocabulary /></PrivateRoute>} />
+          <Route path="/basic-words" element={<PrivateRoute><BasicWords /></PrivateRoute>} />
+          <Route path="/tense" element={<PrivateRoute><TenseComponent /></PrivateRoute>} />
+          <Route path="/phrases" element={<PrivateRoute><IdiomsPhrases /></PrivateRoute>} />
           <Route path="/login" element={<Login />} />
           {/* Dashboard Layout */}
-        <Route path="/dashboard" element={<PrivateRoute>
+        <Route path="/dashboard" element={<PrivateRoute role="admin">
             <DashboardLayout />
           </PrivateRoute>}>
           
@@ -44,6 +47,7 @@ function App() {
           <Route path="add-phrase" element={<AddPhrase />} />
           <Route path="delete-word" element={<DeleteWord />} />
           <Route path="edit-word" element={<EditWord />} />
+          <Route path="role" element={<UpdateUserRole />} />
           <Route path="settings" element={<Settings />} />
           <Route path="info" element={<Info />} />
           </Route>
