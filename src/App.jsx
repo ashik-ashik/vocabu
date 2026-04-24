@@ -16,6 +16,7 @@ import BasicWords from './Pages/BasicWords'
 import IdiomsPhrases from './Pages/IdiomsPhrases'
 import AddPhrase from './Pages/AddPhrase'
 import Login from './Pages/Login'
+import PrivateRoute from './Pages/PrivateRoute'
 
 function App() {
 
@@ -31,7 +32,9 @@ function App() {
           <Route path="/phrases" element={<IdiomsPhrases />} />
           <Route path="/login" element={<Login />} />
           {/* Dashboard Layout */}
-        <Route path="/dashboard" element={<DashboardLayout />}>
+        <Route path="/dashboard" element={<PrivateRoute>
+            <DashboardLayout />
+          </PrivateRoute>}>
           
           {/* default page */}
           <Route index element={<Overview />} />

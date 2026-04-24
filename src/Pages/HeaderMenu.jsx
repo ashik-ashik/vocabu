@@ -1,9 +1,12 @@
-import { LogInIcon } from "lucide-react";
+import { LogInIcon, UserCheck } from "lucide-react";
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 
 export default function HeaderMenu() {
   const [open, setOpen] = useState(false);
+
+  const {user, userRole} = useAuth();
 
   const linkClass = ({ isActive}) =>
     `px-4 py-2 rounded-md text-xs font-medium transition ${
@@ -39,12 +42,18 @@ export default function HeaderMenu() {
             Tense
           </NavLink>
 
-          <NavLink to="/dashboard" className={linkClass}>
+          {userRole === "admin" && <NavLink to="/dashboard" className={linkClass}>
             Dashboard
-          </NavLink>
+          </NavLink>}
+          {
+            user?.email ?
+          <NavLink to="/login" className={linkClass}>
+            <UserCheck size={16} />
+          </NavLink> :
           <NavLink to="/login" className={linkClass}>
             <LogInIcon size={16} />
           </NavLink>
+          }
         </div>
 
         {/* MOBILE MENU BUTTON */}

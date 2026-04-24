@@ -8,7 +8,6 @@ const SCRIPT_URL = import.meta.env.VITE_COLLECTION_SHEET_WRITE_URL;
 export default function DeleteWord() {
   const [id, setId] = useState("");
   const [loading, setLoading] = useState(false);
-  const [passkey, setPasskey] = useState("");
   const [category, setCategory] = useState("");
 
   const [showModal, setShowModal] = useState(false);
@@ -40,7 +39,6 @@ export default function DeleteWord() {
           action: "delete",
           id: id,
           category: category,
-          passkey: passkey
         }),
       });
 
@@ -50,7 +48,6 @@ export default function DeleteWord() {
         toast.success("Word deleted successfully", { id: toastId });
         setVocabularyWordList(vocabularyWordList.filter(w => w.id !== id));
         setId("");
-        setPasskey("");
       } else {
         toast.error(data.message || "Delete failed", { id: toastId });
       }
@@ -95,16 +92,7 @@ export default function DeleteWord() {
             </select>
           </div>
 
-        <div>
-          <label className="block font-medium mb-1">Passkey</label>
-          <input
-            type="text"
-            value={passkey}
-            onChange={(e) => setPasskey(e.target.value)}
-            className="w-full border p-2 rounded"
-            placeholder="Enter admin passkey"
-          />
-        </div>
+  
 
         <button
           onClick={handleDelete}

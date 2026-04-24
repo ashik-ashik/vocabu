@@ -2,7 +2,7 @@ import React from "react";
 import useAuth from "../hooks/useAuth";
 
 const Login = () => {
-  const { user, googleLogin, logout } = useAuth();
+  const { user, googleLogin, logout, usersList, userRole  } = useAuth();
 
   const handleLogin = async () => {
     try {
@@ -11,6 +11,7 @@ const Login = () => {
       console.log(error.message);
     }
   };
+  console.log(userRole, usersList);
 
   return (
     <div className="min-h-screen flex justify-center items-center bg-gray-50 px-4">
@@ -37,10 +38,13 @@ const Login = () => {
               <h2 className="text-xl font-semibold text-gray-800 mt-4">
                 {user?.displayName || "User Name"}
               </h2>
-
+              <p className="text-sm text-gray-500 capitalize">
+                {userRole}
+              </p>
               <p className="text-sm text-gray-500">
                 {user?.email || "user@gmail.com"}
               </p>
+
             </div>
 
             {/* Logout Button */}

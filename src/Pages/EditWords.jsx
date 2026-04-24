@@ -22,7 +22,6 @@ export default function EditWord() {
     example: "",
     other_part_speech: "",
     category: "",
-    passkey: ''
   });
 
    // set page title
@@ -52,7 +51,6 @@ export default function EditWord() {
       example: found.example || "",
       other_part_speech: found?.other_part_speech || "",
       category: category || "",
-      passkey: form.passkey
     });
 
     toast.success("Loaded Word data!");
@@ -92,7 +90,6 @@ export default function EditWord() {
         example: form.example,
         other_part_speech: form.other_part_speech,
         category: form.category,
-        passkey: form.passkey,
 
 
         // ✅ KEEP ARRAY FORMAT SAFE
@@ -124,7 +121,6 @@ export default function EditWord() {
       example: "",
       other_part_speech: "",
       category: "",
-      passkey: ""
     });
       } else {
         toast.error(data.message || "Update failed", { id: toastId });
@@ -327,19 +323,7 @@ export default function EditWord() {
         />
       </div>
 
-      {/* Passkey */}
-      <div>
-        <label className="text-xs font-medium text-gray-600">Passkey</label>
-        <input
-          type="text"
-          name="passkey"
-          value={form.passkey}
-          onChange={handleChange}
-          placeholder="Enter Passkey"
-          className="w-full mt-1 px-3 py-1.5 text-sm border border-gray-300 rounded-md
-                     focus:outline-none focus:ring-0 focus:border-gray-400"
-        />
-      </div>
+      
 
       {/* Button */}
       <button

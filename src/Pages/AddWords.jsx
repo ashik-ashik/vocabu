@@ -25,7 +25,6 @@ export default function AddWord() {
     antonyms: "",
     example: "",
     other_part_speech: "",
-    passkey: "",
     category: "",
   });
 
@@ -53,7 +52,6 @@ export default function AddWord() {
       antonyms: "",
       example: "",
       other_part_speech: "",
-      passkey: "",
       category: "",
     });
   };
@@ -89,7 +87,6 @@ export default function AddWord() {
         example: formData.example.trim(),
         other_part_speech: formData.other_part_speech.trim(),
         category: formData.category.trim(),
-        passkey: formData.passkey.trim()
       };
       const res = await fetch(SCRIPT_URL, {
         method: "POST",
@@ -317,25 +314,7 @@ export default function AddWord() {
     </p>
   </div>
 
-  {/* Passkey */}
-  <div>
-    <label className="block font-medium mb-1 text-sm">Passkey</label>
-
-    <div className="relative">
-      <FaKey className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm" />
-
-      <input
-        type="text"
-        name="passkey"
-        value={formData.passkey}
-        onChange={handleChange}
-        required
-        className="w-full pl-9 pr-3 py-2 text-sm rounded-md border border-gray-400 
-        focus:outline-none focus:ring-1 focus:ring-blue-400"
-        placeholder="Enter admin passkey"
-      />
-    </div>
-  </div>
+  
 
   {/* Category */}
   <div>

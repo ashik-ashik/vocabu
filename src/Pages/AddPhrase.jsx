@@ -20,7 +20,6 @@ const AddPhrase = () => {
     meanings_en: "",
     meanings_bn: "",
     example: "",
-    passkey: "",
   });
 
   const [loading, setLoading] = useState(false);
@@ -60,7 +59,6 @@ const AddPhrase = () => {
       params.append("meanings_en", form.meanings_en.trim());
       params.append("meanings_bn", form.meanings_bn.trim());
       params.append("example", form.example.trim());
-      params.append("passkey", form.passkey.trim());
 
 
       const res = await fetch(API_URL, {
@@ -97,7 +95,6 @@ const AddPhrase = () => {
         meanings_en: "",
         meanings_bn: "",
         example: "",
-        passkey: "",
       });
 
 
@@ -245,26 +242,6 @@ const AddPhrase = () => {
       </div>
   </div>
 
-  {/* Passkey */}
-  <div>
-    <label className="block font-medium mb-1 text-sm">
-      Passkey
-    </label>
-
-    <div className="relative">
-      <FaKey className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm" />
-
-      <input
-        type="text"
-        name="passkey"
-        value={form.passkey}
-        onChange={handleChange}
-        className="w-full pl-9 pr-3 py-2 text-sm rounded-md border border-gray-400 
-        focus:outline-none focus:ring-1 focus:ring-blue-400"
-        placeholder="Enter admin passkey"
-      />
-    </div>
-  </div>
 
   {/* Button */}
   <button
