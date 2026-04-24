@@ -98,12 +98,13 @@ export default function AddWord() {
 
       if (data.status === "success") {
         toast.success("Word added successfully", { id: toastId });
-        payload.id = vocabularyWordList.length + 1; 
         payload.inserted_date = `${new Date().getMonth() + 1}/${new Date().getDate()}/${new Date().getFullYear()}`; // assign new ID from server
         if(payload.category === "advance"){
+          payload.id = vocabularyWordList.length + 1; 
           setVocabularyWordList([...vocabularyWordList, payload]);
         }else{
-          setBasicWordList([...vocabularyWordList, payload]);
+          payload.id = basicWordList.length + 1; 
+          setBasicWordList([...basicWordList, payload]);
         }
         resetForm();
       } else if (data.status === "exists") {

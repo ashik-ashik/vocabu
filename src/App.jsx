@@ -19,8 +19,16 @@ import Login from './Pages/Login'
 import PrivateRoute from './Pages/PrivateRoute'
 import Home from './Pages/Home'
 import UpdateUserRole from './Pages/UpdateUserRole'
+import useAuth from './hooks/useAuth'
+import { DotLoader } from './Pages/DoLoader'
 
 function App() {
+  const {userIsLoading} = useAuth();
+  if(userIsLoading){
+    return <>
+      <DotLoader />
+    </>
+  }
 
   return (
     <>

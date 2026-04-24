@@ -28,9 +28,10 @@ export default function TenseComponent() {
   }
 
   return (
+    <>
     <div className="bg-gradient-to-br from-blue-50 via-white to-indigo-50 min-h-screen py-10">
       {/* Page Header */}
-      <header className="max-w-5xl mx-auto text-center mb-10 px-4">
+      <div className="max-w-5xl mx-auto text-center mb-10 px-4">
         <h1 className="text-3xl md:text-4xl font-extrabold text-blue-700 mb-3">
           English Tense Learning Guide
         </h1>
@@ -39,7 +40,7 @@ export default function TenseComponent() {
           practical examples in both English and Bangla. This guide helps you
           understand how sentences are formed and used in real-life contexts.
         </p>
-      </header>
+      </div>
 
       {/* Content */}
       <section className="max-w-6xl mx-auto px-4 md:px-6 space-y-8">
@@ -182,5 +183,6 @@ export default function TenseComponent() {
         ))}
       </section>
     </div>
+    </>
   );
 }

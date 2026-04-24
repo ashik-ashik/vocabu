@@ -3,7 +3,7 @@ import useAuth from "../hooks/useAuth";
 import usePageTitle from "../hooks/usePageTitle";
 
 const Login = () => {
-  const { user, googleLogin, logout, userRole  } = useAuth();
+  const { user, googleLogin, logout, userRole, usersList } = useAuth();
   usePageTitle("Login | ASH English Learning | Learn Words, Meanings & Synonyms");
 
   const handleLogin = async () => {
@@ -14,6 +14,8 @@ const Login = () => {
     }
   };
 
+  const thisUser = usersList.find(u=> u.email === user.email);
+  
   return (
     <div className="min-h-screen flex justify-center items-center bg-gray-50 px-4">
       <div className="bg-white shadow-lg rounded-2xl p-8 w-full max-w-md text-center">
@@ -36,13 +38,16 @@ const Login = () => {
                 className="w-24 h-24 rounded-full border-4 border-blue-100 shadow-md object-cover"
               />
 
-              <h2 className="text-xl font-semibold text-gray-800 mt-4">
+              <h2 className="text-xl font-semibold text-gray-800 my-4">
                 {user?.displayName || "User Name"}
               </h2>
               <p className="text-sm text-gray-500 capitalize">
                 {userRole}
               </p>
-              <p className="text-sm text-gray-500">
+              <p className="text-xs  text-gray-500 capitalize">
+                {thisUser?.lastLoginAt?.split(",")[0]}
+              </p>
+              <p className="text-sm text-gray-500 mt-2">
                 {user?.email || "user@gmail.com"}
               </p>
 

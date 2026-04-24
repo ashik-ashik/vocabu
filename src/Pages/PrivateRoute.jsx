@@ -6,11 +6,11 @@ import useAuth from "../hooks/useAuth";
 
 
 const PrivateRoute = ({ children, role }) => {
-  const { user, loading, userRole } = useAuth();
+  const { user, userIsLoading, userRole } = useAuth();
   const location = useLocation();
 
   // Show loading while checking auth
-  if (loading) {
+  if (userIsLoading) {
     return <div className="min-h-full w-full flex items-center justify-center ">Loading...</div>;
   }
 

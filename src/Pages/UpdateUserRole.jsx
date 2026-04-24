@@ -13,53 +13,61 @@ const UpdateUserRole = () => {
   const API_URL = import.meta.env.VITE_COLLECTION_SHEET_WRITE_URL;
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    if (!email || !role) {
-      return toast.error("Email and role are required!");
+  if (!email || !role) {
+    return toast.error("Email and role are required!");
+  }
+
+  setRolePostLoading(true);
+  const toastId = toast.loading("Updating user role...");
+
+  try {
+    const params = new URLSearchParams();
+    params.append("action", "userRole");
+    params.append("email", email);
+    params.append("role", role);
+
+    const res = await fetch(API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: params,
+    });
+
+    const text = await res.text();
+    let data;
+
+    try {
+      data = JSON.parse(text);
+    } catch (err) {
+      throw new Error("Invalid server response"+ err.message);
     }
 
-    setRolePostLoading(true);
-    const toastId = toast.loading("Updating user role...");
-    try {
-
-      const params = new URLSearchParams();
-      params.append("action", "userRole");
-      params.append("email", email);
-      params.append("role", role);
-
-      const res = await fetch(API_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: params,
-      });
-
-      const text = await res.text();
-
-      let data = JSON.parse(text);
-      console.log(JSON.parse(text))
-      setEmail("");
-      setRole("viewer");
-    
-
-    if (!res.ok) {
+    if (!res.ok || data?.status === "error") {
       throw new Error(data?.message || "Request failed");
     }
 
-    
+    // ✅ SUCCESS
+    setEmail("");
+    setRole("viewer");
+
+    toast.success(data?.message || "User role updated successfully!", {
+      id: toastId,
+    });
+
   } catch (error) {
     console.error("Update role error:", error);
 
-    toast.error(
-      error.message || "Something went wrong!",
-      { id: toastId }
-    );
+    toast.error(error.message || "Something went wrong!", {
+      id: toastId,
+    });
+
   } finally {
     setRolePostLoading(false);
   }
-  };
+};
 
   const emails = usersList?.reverse().map(ulst => ulst.email);
 

@@ -58,7 +58,7 @@ export default function BasicWords() {
 // ==============================================================
   // Pagination logic
 // ==============================================================
-const ITEMS_PER_PAGE = 50;
+const ITEMS_PER_PAGE = 40;
 
 // pagination slice
 const paginatedWords = useMemo(() => {

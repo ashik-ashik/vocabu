@@ -16,7 +16,7 @@ const LoadUsersURL = import.meta.env.VITE_USER_SHEET_READ_URL;
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [userIsLoading, setUserIsLoading] = useState(true);
   const [usersList, setUsersList] = useState([]);
 
 
@@ -121,54 +121,56 @@ const AuthProvider = ({ children }) => {
     
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      setLoading(false);
     });
 
 
      const loadUsers = async () => {
-  try {
-    const res = await fetch(LoadUsersURL);
-    const data = await res.text();
+      setUserIsLoading(true)
+      try {
+        const res = await fetch(LoadUsersURL);
+        const data = await res.text();
+        
+        
+        if (!data) {
+          console.log("No data found");
+          setUsersList([]);
+          return;
+        }
+
+        // Split lines
+        const lines = data.trim().split("\n");
+
+        // First line = headers
+        const headers = lines[0]
+          .split(",")
+          .map((header) => header.trim());
+
+        // Remaining lines = user rows
+        const users = lines.slice(1).map((line) => {
+          const values = line
+            .split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/) // handles commas inside quotes
+            .map((value) =>
+              value.trim().replace(/^"|"$/g, "")
+            );
+
+          const userObj = {};
+
+          headers.forEach((header, index) => {
+            userObj[header] = values[index] || "";
+          });
+
+          return userObj;
+        });
 
 
-    if (!data) {
-      console.log("No data found");
-      setUsersList([]);
-      return;
-    }
-
-    // Split lines
-    const lines = data.trim().split("\n");
-
-    // First line = headers
-    const headers = lines[0]
-      .split(",")
-      .map((header) => header.trim());
-
-    // Remaining lines = user rows
-    const users = lines.slice(1).map((line) => {
-      const values = line
-        .split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/) // handles commas inside quotes
-        .map((value) =>
-          value.trim().replace(/^"|"$/g, "")
-        );
-
-      const userObj = {};
-
-      headers.forEach((header, index) => {
-        userObj[header] = values[index] || "";
-      });
-
-      return userObj;
-    });
-
-
-    setUsersList(users);
-  } catch (error) {
-    console.log("Load Users Error:", error.message);
-    setUsersList([]);
-  }
-};
+        setUsersList(users);
+        
+      } catch (error) {
+        console.log("Load Users Error:", error.message);
+        setUsersList([]);
+      }
+      setUserIsLoading(false);
+    };
     
     loadUsers();
     return () => unsubscribe();
@@ -177,7 +179,7 @@ const AuthProvider = ({ children }) => {
   const authInfo = {
     user,
     usersList,
-    loading,
+    userIsLoading,
     googleLogin,
     logout,
     userRole
