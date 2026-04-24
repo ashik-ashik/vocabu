@@ -1,8 +1,10 @@
 import React, { useState, useMemo } from "react";
 import useData from "../hooks/UseData";
+import usePageTitle from "../hooks/usePageTitle";
 
 export default function IdiomsPhrases() {
   const { idiomsPhrasesList, loading, error } = useData();
+  usePageTitle("Learn Advance Phrases | ASH English Learning | Learn Words, Meanings & Synonyms");
 
   // ===== NEW STATE =====
   const [searchTerm, setSearchTerm] = useState("");

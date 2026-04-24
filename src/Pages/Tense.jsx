@@ -1,8 +1,11 @@
 import React from "react";
 import useData from "../hooks/UseData";
+import usePageTitle from "../hooks/usePageTitle";
 
 export default function TenseComponent() {
   const { tenseList, loading } = useData();
+    usePageTitle("Learn Tense | ASH English Learning | Learn Words, Meanings & Synonyms");
+  
 
   if (loading) {
     return (

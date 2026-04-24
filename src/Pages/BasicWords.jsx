@@ -11,7 +11,7 @@ export default function BasicWords() {
   const { basicWordList = [], loading, error } = useData();
 
   // set page title
-  usePageTitle("ASH English Learning | Learn Words, Meanings & Synonyms");
+  usePageTitle("Basic Words | ASH English Learning | Learn Words, Meanings & Synonyms");
 
   // =========================
   // SAFE SEARCH FILTER

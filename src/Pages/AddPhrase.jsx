@@ -5,12 +5,15 @@ import {  FaCheckCircle, FaExclamationCircle } from "react-icons/fa";
 import { VscNote } from "react-icons/vsc";
 
 import useData from "../hooks/UseData";
+import usePageTitle from "../hooks/usePageTitle";
 
 const API_URL = import.meta.env.VITE_COLLECTION_SHEET_WRITE_URL;
 
 const AddPhrase = () => {
 
     const {idiomsPhrasesList , setIdiomsPhrasesList} = useData();
+      usePageTitle("Add New Phrase | ASH English Learning | Learn Words, Meanings & Synonyms");
+
 
   const [form, setForm] = useState({
     phrase: "",

@@ -15,6 +15,7 @@ import TenseComponent from './Pages/Tense'
 import BasicWords from './Pages/BasicWords'
 import IdiomsPhrases from './Pages/IdiomsPhrases'
 import AddPhrase from './Pages/AddPhrase'
+import Login from './Pages/Login'
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
           <Route path="/tense" element={<TenseComponent />} />
           <Route path="/basic-words" element={<BasicWords />} />
           <Route path="/phrases" element={<IdiomsPhrases />} />
+          <Route path="/login" element={<Login />} />
           {/* Dashboard Layout */}
         <Route path="/dashboard" element={<DashboardLayout />}>
           

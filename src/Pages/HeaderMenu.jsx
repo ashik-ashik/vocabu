@@ -1,3 +1,4 @@
+import { LogInIcon } from "lucide-react";
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 
@@ -41,6 +42,9 @@ export default function HeaderMenu() {
           <NavLink to="/dashboard" className={linkClass}>
             Dashboard
           </NavLink>
+          <NavLink to="/login" className={linkClass}>
+            <LogInIcon size={16} />
+          </NavLink>
         </div>
 
         {/* MOBILE MENU BUTTON */}
@@ -78,6 +82,13 @@ export default function HeaderMenu() {
             onClick={() => setOpen(false)}
           >
             Dashboard
+          </NavLink>
+          <NavLink
+            to="/login"
+            className={linkClass}
+            onClick={() => setOpen(false)}
+          >
+            Login
           </NavLink>
         </div>
       )}
