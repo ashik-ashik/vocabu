@@ -32,6 +32,7 @@ export default function HeaderMenu() {
           <NavLink to="/" className={linkClass}>
             Home
           </NavLink>
+          {userRole && <>
           <NavLink to="/advance-words" className={linkClass}>
             Advance Words
           </NavLink>
@@ -44,6 +45,8 @@ export default function HeaderMenu() {
           <NavLink to="/tense" className={linkClass}>
             Tense
           </NavLink>
+          </>
+          }
 
           {userRole === "admin" && <NavLink to="/dashboard" className={linkClass}>
             Dashboard
@@ -70,8 +73,8 @@ export default function HeaderMenu() {
 
       {/* MOBILE MENU */}
       {open && (
-        <div className="md:hidden px-4 pb-4 space-y-2">
-          <NavLink
+        <div className="md:hidden px-4 pb-4 space-y-2 flex flex-col">
+            <NavLink
             to="/"
             className={linkClass}
             onClick={() => setOpen(false)}
@@ -102,13 +105,14 @@ export default function HeaderMenu() {
           >
             Dashboard
           </NavLink>
-          <NavLink
-            to="/login"
-            className={linkClass}
-            onClick={() => setOpen(false)}
-          >
-            Login
+          {user?.email ?
+          <NavLink to="/login" className={linkClass}>
+            <UserCheck size={16} />
+          </NavLink> :
+          <NavLink to="/login" className={linkClass}>
+            <LogInIcon size={16} />
           </NavLink>
+          }
         </div>
       )}
     </nav>

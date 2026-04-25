@@ -1,8 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FaBookOpen, FaSearch, FaLock, FaGlobe } from "react-icons/fa";
+import useAuth from "../hooks/useAuth";
+import usePageTitle from "../hooks/usePageTitle";
 
 const Home = () => {
+  usePageTitle("Welcome! ASH English Learning World");
+  const {user}= useAuth();
   return (
     <div className="min-h-screen bg-[#f8fafc] text-gray-800">
 
@@ -25,12 +29,15 @@ const Home = () => {
               Explore Words
             </Link>
 
+            {
+              !user?.email &&
             <Link
               to="/login"
               className="border border-white px-6 py-3 rounded-lg hover:bg-white hover:text-blue-600 transition"
             >
               Login to Start
             </Link>
+            }
           </div>
         </div>
       </section>
@@ -98,6 +105,8 @@ const Home = () => {
       </section>
 
       {/* CTA SECTION */}
+      {
+        !user?.email &&
       <section className="bg-white py-14 text-center border-t">
         <h2 className="text-3xl font-bold mb-3">🚀 Start Learning Today</h2>
         <p className="text-gray-600 mb-6">
@@ -111,6 +120,7 @@ const Home = () => {
           Login with Google
         </Link>
       </section>
+      }
 
     </div>
   );

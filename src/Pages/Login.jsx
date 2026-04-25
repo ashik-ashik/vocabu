@@ -14,7 +14,7 @@ const Login = () => {
     }
   };
 
-  const thisUser = usersList.find(u=> u.email === user.email);
+  const thisUser = usersList.find(u=> u?.email === user?.email);
   
   return (
     <div className="min-h-screen flex justify-center items-center bg-gray-50 px-4">

@@ -21,16 +21,31 @@ const AddPhrase = () => {
     meanings_bn: "",
     example: "",
   });
-
+  const [isExistsThePhrase, setIsExistsThePhrase] = useState();
   const [loading, setLoading] = useState(false);
 
-  const isExistsThePhrase = idiomsPhrasesList.find(ph => ph.phrase === form.phrase)
+  
+  
+const handleChange = (e) => {
+  const { name, value } = e.target;
 
+  // check instantly while typing/pasting phrase
+  if (name === "phrase") {
+    const normalizedValue = value?.toLowerCase()?.trim();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm({ ...form, [name]: value });
-  };
+    const foundPhrase = idiomsPhrasesList.find(
+      (ph) =>
+        ph.phrase?.toLowerCase()?.trim() === normalizedValue
+    );
+
+    setIsExistsThePhrase(foundPhrase || null);
+  }
+
+  setForm({
+    ...form,
+    [name]: value,
+  });
+};
 
 
   const handleSubmit = async (e) => {
@@ -246,7 +261,7 @@ const AddPhrase = () => {
   {/* Button */}
   <button
     type="submit"
-    disabled={loading}
+    disabled={loading || isExistsThePhrase}
     className="w-full bg-blue-600 text-white py-2 text-sm rounded-md hover:bg-blue-700 disabled:opacity-50"
   >
     {loading ? "Adding..." : "Add Phrase"}

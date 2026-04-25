@@ -27,21 +27,34 @@ export default function AddWord() {
     other_part_speech: "",
     category: "",
   });
+  const [isExistTheWord, setIsExistTheWord]=useState();
 
   const totalWords = [...basicWordList, ...vocabularyWordList]
 
-  const isExistTheWord = totalWords.find(witem => witem.word === formData.word);
-
-   // set page title
-    usePageTitle("Add Word | ASH English Learning");
-
+  
+  // set page title
+  usePageTitle("Add Word | ASH English Learning");
+  
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
+  const { name, value } = e.target;
+
+  // check using current input value (not old formData.word)
+  if (name === "word") {
+    const normalizedValue = value?.toLowerCase()?.trim();
+
+    const foundWord = totalWords.find(
+      (witem) =>
+        witem.word?.toLowerCase()?.trim() === normalizedValue
+    );
+
+    setIsExistTheWord(foundWord || null);
+  }
+
+  setFormData({
+    ...formData,
+    [name]: value,
+  });
+};
 
   const resetForm = () => {
     setFormData({
@@ -344,7 +357,7 @@ export default function AddWord() {
   {/* Button */}
   <button
     type="submit"
-    disabled={loading}
+    disabled={loading || isExistTheWord}
     className="w-full bg-blue-600 text-white py-2 text-sm rounded-md hover:bg-blue-700 disabled:opacity-50"
   >
     {loading ? "Adding..." : "Add Word"}
