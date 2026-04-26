@@ -155,7 +155,10 @@ export default function IdiomsPhrases() {
         
         {/* Prev */}
         <button
-          onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
+          onClick={() => {
+            setCurrentPage((p) => Math.max(p - 1, 1));
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }}
           className="px-3 py-1 border rounded-md hover:bg-gray-100"
         >
             &laquo;
@@ -167,7 +170,10 @@ export default function IdiomsPhrases() {
           ) : (
             <button
               key={i}
-              onClick={() => setCurrentPage(page)}
+              onClick={() => {
+                setCurrentPage(page);
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
               className={`px-3 py-1 border rounded-md ${
                 currentPage === page
                   ? "bg-orange-500 text-white"
@@ -181,8 +187,10 @@ export default function IdiomsPhrases() {
 
         {/* Next */}
         <button
-          onClick={() =>
-            setCurrentPage((p) => Math.min(p + 1, totalPages))
+          onClick={() =>{
+            setCurrentPage((p) => Math.min(p + 1, totalPages));
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }
           }
           className="px-3 py-1 border rounded-md hover:bg-gray-100"
         >

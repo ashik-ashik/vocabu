@@ -43,10 +43,9 @@ const Home = () => {
       </section>
 
       {/* FEATURES */}
-      <section className="max-w-6xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-4 gap-6">
+      <section className="max-w-6xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-6">
         <Feature icon={<FaBookOpen />} title="Vocabulary Learning" desc="Rich English words with meanings" />
         <Feature icon={<FaSearch />} title="Smart Search" desc="Find words, synonyms easily" />
-        <Feature icon={<FaLock />} title="Admin Control" desc="Secure dashboard access" />
         <Feature icon={<FaGlobe />} title="Bangla Support" desc="Easy Bangla meanings included" />
       </section>
 

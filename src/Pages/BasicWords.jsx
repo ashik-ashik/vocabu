@@ -248,7 +248,7 @@ const pagination = getPagination(currentPage, totalPages);
                 .filter((v) => v.lang.includes("en"))
                 .map((voice, i) => (
                     <option key={voice.name} value={i} className="text-black">
-                    {voice.name}
+                    {voice.name?.split('-')[0]}
                     </option>
                 ))}
             </select>
@@ -300,7 +300,10 @@ const pagination = getPagination(currentPage, totalPages);
 
           {/* Prev */}
           <button
-            onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
+            onClick={() => {
+              setCurrentPage((p) => Math.max(p - 1, 1));
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
             disabled={currentPage === 1}
             className="px-3 py-1 text-xs rounded bg-gray-100 disabled:opacity-40"
           >
@@ -311,7 +314,10 @@ const pagination = getPagination(currentPage, totalPages);
           {pagination.map((item, index) => (
             <button
               key={index}
-              onClick={() => typeof item === "number" && setCurrentPage(item)}
+              onClick={() => {
+                typeof item === "number" && setCurrentPage(item);
+                window.scrollTo({ top: 0, behavior: "smooth" });
+                }}
               className={`px-3 py-1 text-xs rounded ${
                 currentPage === item
                   ? "bg-blue-500 text-white"
@@ -325,7 +331,10 @@ const pagination = getPagination(currentPage, totalPages);
 
           {/* Next */}
           <button
-            onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
+            onClick={() => {
+              setCurrentPage((p) => Math.min(p + 1, totalPages));
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
             disabled={currentPage === totalPages}
             className="px-3 py-1 text-xs rounded bg-gray-100 disabled:opacity-40"
           >

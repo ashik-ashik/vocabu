@@ -21,6 +21,7 @@ import Home from './Pages/Home'
 import UpdateUserRole from './Pages/UpdateUserRole'
 import useAuth from './hooks/useAuth'
 import { DotLoader } from './Pages/DoLoader'
+import VocabularyCollection from './Pages/VocabularyCollection'
 
 function App() {
   const {userIsLoading} = useAuth();
@@ -37,6 +38,7 @@ function App() {
           <HeaderMenu />
         <Routes>
           <Route path="/" element={<Home/>} />
+          <Route path="/vocabulary" element={<VocabularyCollection/>} />
           <Route path="/advance-words" element={<PrivateRoute><Vocabulary /></PrivateRoute>} />
           <Route path="/basic-words" element={<PrivateRoute><BasicWords /></PrivateRoute>} />
           <Route path="/tense" element={<PrivateRoute><TenseComponent /></PrivateRoute>} />
