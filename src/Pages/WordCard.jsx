@@ -1,4 +1,5 @@
 import React from "react";
+import { Volume2 } from "lucide-react";
 
 export default function WordCard({ item,  speakWord }) {
   return (
@@ -11,13 +12,13 @@ export default function WordCard({ item,  speakWord }) {
       </span>
 
       {/* WORD */}
-      <h2 className="text-xl title-font tracking-wide font-bold text-blue-600 capitalize">
+      <h2 className="text-xl title-font tracking-wide font-bold text-blue-600 capitalize flex gap-x-2 items-center">
         {item.word}{" "}
         <span
           onClick={() => speakWord(item.word)}
           className="cursor-pointer text-gray-400 hover:text-blue-500 transition-colors duration-200 text-sm"
         >
-          🔊
+          <Volume2 size={16} className="text-orange-400"/>
         </span>
       </h2>
 
@@ -47,21 +48,26 @@ export default function WordCard({ item,  speakWord }) {
         )}
       </div>
 
-      <hr className="my-2" />
 
       {/* CONTENT */}
-      <p className="text-gray-700 text-sm italic">
-        <span className="font-semibold">Definition:</span>{" "}
-        <span className="normal-case body-font">{item.definition}</span>
-      </p>
+      <div className="border-l-4 border-black bg-gray-100 rounded-xl p-4 pl-4 shadow-sm">
+        <p className="text-gray-700 text-sm italic">
+          <span className="font-semibold">Definition:</span>{" "}
+          <span className="normal-case body-font">
+            {item.definition}
+          </span>
+        </p>
 
-      <p className="text-gray-700 mt-1 text-sm">
-        <span className="font-semibold">Bangla:</span>{" "}
-        <span className="text-xs body-font">{item.bangla}</span>
-      </p>
+        <p className="text-gray-700 mt-2 text-sm">
+          <span className="font-semibold">Bangla:</span>{" "}
+          <span className="text-xs body-font">
+            {item.bangla}
+          </span>
+        </p>
+      </div>
 
       {/* SYNONYMS */}
-      <div className="mt-2 border-t pt-2 border-gray-200 border-b pb-4">
+      <div className="mt-2 pt-2 border-b pb-4">
         <span className="text-sm font-semibold text-gray-700 title-font tracking-wide">
           Synonyms:
         </span>
