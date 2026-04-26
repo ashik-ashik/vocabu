@@ -93,9 +93,10 @@ const handleChange = (e) => {
       }
 
 
-      toast.success(data.message || "Phrase Added Successfully", {
+      toast.success(data.message || form.phrase +" Added", {
         id: toastId,
       });
+      window.scrollTo({ top: 0, behavior: "smooth" });
 
       setIdiomsPhrasesList([...idiomsPhrasesList, {
         phrase: form.phrase,

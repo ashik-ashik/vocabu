@@ -110,7 +110,8 @@ export default function AddWord() {
       const data = await res.json();
 
       if (data.status === "success") {
-        toast.success("Word added successfully", { id: toastId });
+        toast.success(formData.word.trim() + " added successfully", { id: toastId });
+        window.scrollTo({ top: 10, behavior: "smooth" });
         payload.inserted_date = `${new Date().getMonth() + 1}/${new Date().getDate()}/${new Date().getFullYear()}`; // assign new ID from server
         if(payload.category === "advance"){
           payload.id = vocabularyWordList.length + 1; 
