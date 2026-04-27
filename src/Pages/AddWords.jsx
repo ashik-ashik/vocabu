@@ -44,7 +44,7 @@ export default function AddWord() {
 
     const foundWord = totalWords.find(
       (witem) =>
-        witem.word?.toLowerCase()?.trim() === normalizedValue
+        witem.word?.split(":")[0]?.toLowerCase()?.trim() === normalizedValue?.split(":")[0]?.trim()
     );
 
     setIsExistTheWord(foundWord || null);
@@ -149,7 +149,7 @@ export default function AddWord() {
 
 <form
   onSubmit={handleSubmit}
-  className="space-y-4 bg-white p-5 rounded-xl shadow max-w-3xl mx-auto"
+  className="space-y-4 bg-white p-5 rounded-xl shadow max-w-5xl mx-auto"
 >
   {/* Word */}
   <div>
