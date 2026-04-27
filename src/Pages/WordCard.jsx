@@ -14,19 +14,21 @@ export default function WordCard({ item, speakWord }) {
 
       {/* TOP — word + meta */}
       <div className="px-5 pt-5 pb-4 border-b border-[#1e2330]">
-        <div className="flex items-center justify-between mb-2">
-          <h2
-            className="text-xl flex items-center gap-3 font-medium text-slate-200 capitalize body-font"
-            
-          >
-            {item.word}
-            <button
-            onClick={() => speakWord(item.word)}
-            className="text-gray-400 hover:text-gray-300 transition"
-          >
-            <Volume2 size={16} />
-          </button>
-          </h2>
+        <div className="flex items-start justify-between mb-2">
+          <div className=" flex items-start gap-3 ">
+            <h2
+              className="text-xl grid gird-col-1 gap-0 font-medium text-slate-200 capitalize body-font"
+              
+            >
+              {item.word?.split(":")[0]} <span className="text-sm text-blue-500">{item.word?.split(":")[1]}</span>
+            </h2>
+              <button
+              onClick={() => speakWord(item.word)}
+              className="text-gray-400 hover:text-gray-300 transition mt-2"
+            >
+              <Volume2 size={16} />
+            </button>
+          </div>
           <span className="text-[10.5px] text-gray-400 bg-[#0a0c10] border border-[#1e2330] rounded-full px-2.5 py-1 italic">
             id: {item.id}
           </span>
@@ -54,7 +56,8 @@ export default function WordCard({ item, speakWord }) {
             className="text-[14.5px] text-slate-200 leading-[1.75] italic"
             style={{ fontFamily: "'Lora', Georgia, serif" }}
           >
-            {item.definition}
+            {item.definition?.trim().charAt(0).toUpperCase() +
+                  item.definition.trim().slice(1)}
           </p>
           {item.bangla && (
             <div className="flex items-baseline gap-2 mt-3 pt-3 border-t border-[#1e2330]">
