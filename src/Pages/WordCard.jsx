@@ -51,14 +51,14 @@ export default function WordCard({ item, speakWord }) {
             Definition
           </p>
           <p
-            className="text-[14.5px] text-slate-300 leading-[1.75] italic"
+            className="text-[14.5px] text-slate-200 leading-[1.75] italic"
             style={{ fontFamily: "'Lora', Georgia, serif" }}
           >
             {item.definition}
           </p>
           {item.bangla && (
             <div className="flex items-baseline gap-2 mt-3 pt-3 border-t border-[#1e2330]">
-              <span className="text-[10.5px] font-medium tracking-widest uppercase text-slate-500 flex-shrink-0">
+              <span className="text-[10.5px] font-medium tracking-widest uppercase text-slate-300 flex-shrink-0">
                 Bangla
               </span>
               <span className="text-[13px] text-slate-400 leading-relaxed">{item.bangla}</span>
@@ -131,7 +131,7 @@ export default function WordCard({ item, speakWord }) {
             </span>
           </div>
           <p
-            className="text-[14px] text-slate-400 leading-[1.75] italic before:content-['\201C'] before:text-[#334155] after:content-['\201D'] after:text-[#334155]"
+            className="text-[14px] text-slate-200 leading-[1.75] italic before:content-['\201C'] before:text-[#334155] after:content-['\201D'] after:text-[#334155]"
             style={{ fontFamily: "'Lora', Georgia, serif" }}
           >
             {item.example}
