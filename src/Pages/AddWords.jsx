@@ -203,93 +203,99 @@ export default function AddWord() {
       </p>
     ) : formData?.word?.length > 2 ? (
       <p className="text-xs mt-1 text-green-600">
-        Looks good! Word is available to use.
+        Word is a new one to add!
       </p>
     ) : (
       <p className="text-xs mt-1 text-gray-400">
-        Enter a meaningful Word (minimum 3 characters)
+        Enter a meaningful Word!
       </p>
     )}
   </div>
 
-  {/* Definition */}
-  <div>
-    <label className="block font-medium mb-1 text-sm">Definition</label>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {/* Definition */}
+      <div>
+        <label className="block font-medium mb-1 text-sm">Definition</label>
 
-    <div className="relative">
-      <FaBook className="absolute left-3 top-3 text-gray-400 text-sm" />
+        <div className="relative">
+          <FaBook className="absolute left-3 top-3 text-gray-400 text-sm" />
 
-      <textarea
-        name="definition"
-        value={formData.definition}
-        onChange={handleChange}
-        required
-        className="w-full pl-9 pr-3 py-2 text-sm rounded-md border border-gray-400 
-        focus:outline-none focus:ring-1 focus:ring-blue-400"
-        placeholder="Write definition"
-      />
-    </div>
-  </div>
-
-  {/* Bangla */}
-  <div>
-    <label className="block font-medium mb-1 text-sm">
-      Bangla Meaning
-    </label>
-
-    <div className="relative">
-      <FaLanguage className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm" />
-
-      <input
-        type="text"
-        name="bangla"
-        value={formData.bangla}
-        onChange={handleChange}
-        className="w-full pl-9 pr-3 py-2 text-sm rounded-md border border-gray-400 
-        focus:outline-none focus:ring-1 focus:ring-blue-400"
-        placeholder="বাংলা অর্থ"
-      />
-    </div>
-  </div>
-
-  {/* Synonyms */}
-<div>
-  <label className="block font-medium mb-1 text-sm flex items-center gap-2">
-    Synonyms
-  </label>
-    <div className="relative">
-      <HiMiniLink className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm" />
-    
-      <input
-        type="text"
-        name="synonyms"
-        value={formData.synonyms}
-        onChange={handleChange}
-        className="w-full pl-9 pr-3 py-2 text-sm rounded-md border border-gray-400 
-        focus:outline-none focus:ring-1 focus:ring-blue-400"
-        placeholder="Quick, Fast, Rapid"
-      />
-    </div>
-
-  <p className="text-xs text-gray-400 mt-1">Separate by comma</p>
-</div>
-
-  {/* Antonyms */}
-  <div>
-    <label className="block font-medium mb-1 text-sm">Antonyms</label>
-      <div className="relative">
-        <HiLinkSlash className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm" />
-        <input
-          type="text"
-          name="antonyms"
-          value={formData.antonyms}
-          onChange={handleChange}
-          className="w-full pl-9 pr-3 py-2 text-sm rounded-md border border-gray-400 
+          <textarea
+            name="definition"
+            value={formData.definition}
+            onChange={handleChange}
+            required
+            className="w-full pl-9 pr-3 py-2 text-sm rounded-md border border-gray-400 
             focus:outline-none focus:ring-1 focus:ring-blue-400"
-          placeholder="Slow, Lazy"
-        />
+            placeholder="Write definition"
+          />
+        </div>
       </div>
-  </div>
+
+      {/* Bangla */}
+      <div>
+        <label className="block font-medium mb-1 text-sm">
+          Bangla Meaning
+        </label>
+
+        <div className="relative">
+          <FaLanguage className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm" />
+
+          <input
+            type="text"
+            name="bangla"
+            value={formData.bangla}
+            onChange={handleChange}
+            className="w-full pl-9 pr-3 py-2 text-sm rounded-md border border-gray-400 
+            focus:outline-none focus:ring-1 focus:ring-blue-400"
+            placeholder="বাংলা অর্থ"
+          />
+        </div>
+      </div>
+    </div>
+
+
+
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {/* Synonyms */}
+      <div>
+        <label className="block font-medium mb-1 text-sm flex items-center gap-2">
+          Synonyms
+        </label>
+          <div className="relative">
+            <HiMiniLink className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm" />
+          
+            <input
+              type="text"
+              name="synonyms"
+              value={formData.synonyms}
+              onChange={handleChange}
+              className="w-full pl-9 pr-3 py-2 text-sm rounded-md border border-gray-400 
+              focus:outline-none focus:ring-1 focus:ring-blue-400"
+              placeholder="Quick, Fast, Rapid"
+            />
+          </div>
+
+        <p className="text-xs text-gray-400 mt-1">Separate by comma</p>
+      </div>
+
+      {/* Antonyms */}
+      <div>
+        <label className="block font-medium mb-1 text-sm">Antonyms</label>
+          <div className="relative">
+            <HiLinkSlash className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm" />
+            <input
+              type="text"
+              name="antonyms"
+              value={formData.antonyms}
+              onChange={handleChange}
+              className="w-full pl-9 pr-3 py-2 text-sm rounded-md border border-gray-400 
+                focus:outline-none focus:ring-1 focus:ring-blue-400"
+              placeholder="Slow, Lazy"
+            />
+          </div>
+      </div>
+    </div>
 
   {/* Example */}
   <div>
@@ -309,49 +315,51 @@ export default function AddWord() {
     </div>
   </div>
 
-  {/* Other Part of Speech */}
-  <div>
-    <label className="text-sm font-medium">
-      Other part of Speech
-    </label>
 
-    <input
-      name="other_part_speech"
-      value={formData.other_part_speech}
-      onChange={handleChange}
-      className="w-full mt-1 px-3 py-2 text-sm rounded-md border border-gray-400 
-      focus:outline-none focus:ring-1 focus:ring-blue-400"
-      placeholder="noun: large, adjective: big..."
-    />
 
-    <p className="text-xs text-gray-500 mt-1">
-      Format: noun: large, adjective: big...
-    </p>
-  </div>
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    {/* Other Part of Speech */}
+    <div>
+      <label className="text-sm font-medium">
+        Other part of Speech
+      </label>
 
-  
-
-  {/* Category */}
-  <div>
-    <label className="block font-medium mb-1 text-sm">
-      Select Category
-    </label>
-
-    <div className="relative">
-      <FaList className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm" />
-
-      <select
+      <input
+        name="other_part_speech"
+        value={formData.other_part_speech}
         onChange={handleChange}
-        name="category"
-        value={formData.category}
-        required
-        className="w-full pl-9 pr-3 py-2 text-sm rounded-md border border-gray-400 
+        className="w-full mt-1 px-3 py-2 text-sm rounded-md border border-gray-400 
         focus:outline-none focus:ring-1 focus:ring-blue-400"
-      >
-        <option value="">Select Category</option>
-        <option value="advance">Advanced Word</option>
-        <option value="basic">Basic Word</option>
-      </select>
+        placeholder="noun: large, adjective: big..."
+      />
+
+      <p className="text-xs text-gray-500 mt-1">
+        Format: noun: large, adjective: big...
+      </p>
+    </div>     
+
+    {/* Category */}
+    <div>
+      <label className="block font-medium mb-1 text-sm">
+        Select Category
+      </label>
+
+      <div className="relative">
+        <FaList className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm" />
+
+        <select
+          onChange={handleChange}
+          name="category"
+          value={formData.category}
+          required
+          className="w-full pl-9 pr-3 py-2 text-sm rounded-md border border-gray-400 
+          focus:outline-none focus:ring-1 focus:ring-blue-400"
+        >
+          <option value="">Select Category</option>
+          <option value="advance">Advanced Word</option>
+          <option value="basic">Basic Word</option>
+        </select>
+      </div>
     </div>
   </div>
 

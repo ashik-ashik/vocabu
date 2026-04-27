@@ -20,24 +20,24 @@ export default function WordCard({ item, speakWord }) {
               className="text-xl grid gird-col-1 gap-0 font-medium text-slate-200 capitalize body-font"
               
             >
-              {item.word?.split(":")[0]} <span className="text-sm text-blue-500">{item.word?.split(":")[1]}</span>
+              {item?.word?.split(":")[0]?.trim()} <span className="text-sm text-blue-500">{item?.word?.split(":")[1]?.trim()}</span>
             </h2>
               <button
-              onClick={() => speakWord(item.word)}
+              onClick={() => speakWord(item?.word)}
               className="text-gray-400 hover:text-gray-300 transition mt-2"
             >
               <Volume2 size={16} />
             </button>
           </div>
           <span className="text-[10.5px] text-gray-400 bg-[#0a0c10] border border-[#1e2330] rounded-full px-2.5 py-1 italic">
-            id: {item.id}
+            id: {item?.id}
           </span>
         </div>
 
         <div className="flex items-center justify-between flex-wrap gap-2">
           <div className="flex items-center gap-2 flex-wrap">
             <span className="text-[11px] text-gray-300">
-              Added: {item.inserted_date || item.date}
+              Added: {item?.inserted_date || item?.date}
             </span>
           </div>
           
@@ -80,9 +80,9 @@ export default function WordCard({ item, speakWord }) {
                 <button
                   key={i}
                   onClick={() => speakWord(val)}
-                  className="text-[11.5px] px-2.5 py-1 bg-[#0a0c10] border border-[#1e2330] hover:border-[#3b4258] rounded-lg text-slate-500 hover:text-slate-400 transition-colors"
+                  className="text-[11.5px] px-2.5 py-1 bg-[#0a0c10] capitalize border border-[#1e2330] hover:border-[#3b4258] rounded-lg text-slate-500 hover:text-slate-400 transition-colors"
                 >
-                  <span className="text-[10.5px] text-slate-600">{key}: </span>{val}
+                  <span className="text-[10.5px] text-slate-600  ">{key}: </span>{val}
                 </button>
               ))}
             </div>
