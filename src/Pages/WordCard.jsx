@@ -1,121 +1,144 @@
 import React from "react";
 import { Volume2 } from "lucide-react";
 
-export default function WordCard({ item,  speakWord }) {
+export default function WordCard({ item, speakWord }) {
+  const otherForms = item.other_part_speech
+    ? item.other_part_speech.split(",").map((p) => {
+        const [key, val] = p.trim().split(":");
+        return { key: key?.trim(), val: val?.trim() };
+      })
+    : [];
+
   return (
-    <div className="bg-white rounded-xl shadow-md hover:shadow-xl transition p-5 border border-gray-100 relative">
-      
-      {/* ID */}
-      <span className="absolute top-1 right-1 text-[10px] text-gray-400 bg-gray-100 px-2 py-1 rounded-full">
-        <span className="italic">id: </span>
-        {item.id}
-      </span>
+    <div className="bg-[#13161e] border border-[#1e2330] rounded-2xl overflow-hidden" style={{ fontFamily: "'Inter', sans-serif" }}>
 
-      {/* WORD */}
-      <h2 className="text-xl title-font tracking-wide font-bold text-blue-600 capitalize flex gap-x-2 items-center">
-        {item.word}{" "}
-        <span
-          onClick={() => speakWord(item.word)}
-          className="cursor-pointer text-gray-400 hover:text-blue-500 transition-colors duration-200 text-sm"
-        >
-          <Volume2 size={16} className="text-orange-400"/>
-        </span>
-      </h2>
+      {/* TOP — word + meta */}
+      <div className="px-5 pt-5 pb-4 border-b border-[#1e2330]">
+        <div className="flex items-center justify-between mb-2">
+          <h2
+            className="text-xl flex items-center gap-3 font-medium text-slate-200 capitalize body-font"
+            
+          >
+            {item.word}
+            <button
+            onClick={() => speakWord(item.word)}
+            className="text-gray-400 hover:text-gray-300 transition"
+          >
+            <Volume2 size={16} />
+          </button>
+          </h2>
+          <span className="text-[10.5px] text-gray-400 bg-[#0a0c10] border border-[#1e2330] rounded-full px-2.5 py-1 italic">
+            id: {item.id}
+          </span>
+        </div>
 
-      <p className="text-xs text-gray-400 mb-2">
-        Added: {item.inserted_date || item.date}
-      </p>
-      
-      <div className="text-xs text-gray-400 mb-2 flex flex-wrap gap-2">
-        {item.other_part_speech ? (
-          item.other_part_speech.split(",").map((part, index) => {
-            const cleaned = part.trim().split(":");
-
-            return (
-              <span
-                key={index}
-                className="px-2 py-1 bg-gray-100 rounded-md text-gray-600 capitalize"
-              >
-                {cleaned[0]?.trim() + ": " }
-                <span className="cursor-pointer" onClick={() => speakWord(cleaned[1]?.trim())}>
-                  {cleaned[1]?.trim()}
-                </span>
-              </span>
-            );
-          })
-        ) : (
-          <span>N/A</span>
-        )}
+        <div className="flex items-center justify-between flex-wrap gap-2">
+          <div className="flex items-center gap-2 flex-wrap">
+            <span className="text-[11px] text-gray-300">
+              Added: {item.inserted_date || item.date}
+            </span>
+          </div>
+          
+        </div>
       </div>
 
+      {/* BODY */}
+      <div className="px-5 py-4 flex flex-col gap-3.5">
 
-      {/* CONTENT */}
-      <div className="border-l-4 border-black bg-gray-100 rounded-xl p-4 pl-4 shadow-sm">
-        <p className="text-gray-700 text-sm italic">
-          <span className="font-semibold">Definition:</span>{" "}
-          <span className="normal-case body-font">
+        {/* Definition block */}
+        <div className="bg-[#0a0c10] border border-[#1e2330] border-l-[3px] border-l-blue-600 rounded-r-xl px-4 py-3.5">
+          <p className="text-[10.5px] font-medium tracking-widest uppercase text-blue-500 mb-1.5">
+            Definition
+          </p>
+          <p
+            className="text-[14.5px] text-slate-300 leading-[1.75] italic"
+            style={{ fontFamily: "'Lora', Georgia, serif" }}
+          >
             {item.definition}
-          </span>
-        </p>
-
-        <p className="text-gray-700 mt-2 text-sm">
-          <span className="font-semibold">Bangla:</span>{" "}
-          <span className="text-xs body-font">
-            {item.bangla}
-          </span>
-        </p>
-      </div>
-
-      {/* SYNONYMS */}
-      <div className="mt-2 pt-2 border-b pb-4">
-        <span className="text-sm font-semibold text-gray-700 title-font tracking-wide">
-          Synonyms:
-        </span>
-
-        <div className="flex flex-wrap gap-2 mt-2">
-          {item.synonyms?.map((syn) => (
-            <button
-              key={syn}
-              onClick={() => speakWord(syn)}
-              className="group relative px-2.5 py-1 text-xs bg-blue-50 text-blue-700 border border-blue-100 rounded-full capitalize hover:bg-blue-600 hover:text-white transition-all duration-200 active:scale-95 flex items-center gap-1"
-            >
-              <span>{syn}</span>
-              <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-[10px]">
-                🔊
+          </p>
+          {item.bangla && (
+            <div className="flex items-baseline gap-2 mt-3 pt-3 border-t border-[#1e2330]">
+              <span className="text-[10.5px] font-medium tracking-widest uppercase text-slate-500 flex-shrink-0">
+                Bangla
               </span>
-            </button>
-          ))}
+              <span className="text-[13px] text-slate-400 leading-relaxed">{item.bangla}</span>
+            </div>
+          )}
         </div>
-      </div>
 
-      {/* ANTONYMS */}
-      <div className="mt-2">
-        <span className="text-sm font-semibold text-gray-700 title-font tracking-wide">
-          Antonyms:
-        </span>
+        {/* Other word forms */}
+        {otherForms.length > 0 && (
+          <div>
+            <p className="text-[10.5px] font-medium tracking-widest uppercase text-slate-500 mb-2">
+              Other forms
+            </p>
+            <div className="flex flex-wrap gap-1.5">
+              {otherForms.map(({ key, val }, i) => (
+                <button
+                  key={i}
+                  onClick={() => speakWord(val)}
+                  className="text-[11.5px] px-2.5 py-1 bg-[#0a0c10] border border-[#1e2330] hover:border-[#3b4258] rounded-lg text-slate-500 hover:text-slate-400 transition-colors"
+                >
+                  <span className="text-[10.5px] text-slate-600">{key}: </span>{val}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
 
-        <div className="flex flex-wrap gap-2 mt-2">
-          {item.antonyms?.map((ant) => (
-            <button
-              key={ant}
-              onClick={() => speakWord(ant)}
-              className="group relative px-2.5 py-1 text-xs bg-red-50 text-red-500 border border-red-100 rounded-full capitalize hover:bg-red-600 hover:text-white transition-all duration-200 active:scale-95 flex items-center gap-1"
-            >
-              <span>{ant}</span>
-              <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-[10px]">
-                🔊
-              </span>
-            </button>
-          ))}
+        {/* Synonyms + Antonyms */}
+        <div className="grid grid-cols-1 gap-3">
+          <div className="bg-[#0a0c10] border border-[#1e2330] rounded-xl px-3.5 py-3">
+            <p className="text-[10.5px] font-medium tracking-widest uppercase text-emerald-600 mb-2">
+              Synonyms
+            </p>
+            <div className="flex flex-wrap gap-1.5">
+              {item.synonyms?.map((syn) => (
+                <button
+                  key={syn}
+                  onClick={() => speakWord(syn)}
+                  className="text-[11.5px] px-2.5 py-1 rounded-full bg-[#0c1f17] border border-[#0f3a23] text-emerald-400 hover:text-emerald-300 hover:bg-[#0f2a1f] capitalize transition-colors"
+                >
+                  {syn}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div className="bg-[#0a0c10] border border-[#1e2330] rounded-xl px-3.5 py-3">
+            <p className="text-[10.5px] font-medium tracking-widest uppercase text-red-700 mb-2">
+              Antonyms
+            </p>
+            <div className="flex flex-wrap gap-1.5">
+              {item.antonyms?.map((ant) => (
+                <button
+                  key={ant}
+                  onClick={() => speakWord(ant)}
+                  className="text-[11.5px] px-2.5 py-1 rounded-full bg-[#1f0c0c] border border-[#3a1515] text-red-400 hover:text-red-300 hover:bg-[#2a1010] capitalize transition-colors"
+                >
+                  {ant}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
+
+        {/* Example */}
+        <div className="bg-[#0a0c10] border border-[#1e2330] rounded-xl px-4 py-3.5">
+          <div className="flex items-center gap-1.5 mb-2">
+            <span className="w-1.5 h-1.5 bg-amber-500 rounded-full flex-shrink-0" />
+            <span className="text-[10.5px] font-medium tracking-widest uppercase text-slate-500">
+              Example sentence
+            </span>
+          </div>
+          <p
+            className="text-[14px] text-slate-400 leading-[1.75] italic before:content-['\201C'] before:text-[#334155] after:content-['\201D'] after:text-[#334155]"
+            style={{ fontFamily: "'Lora', Georgia, serif" }}
+          >
+            {item.example}
+          </p>
+        </div>
+
       </div>
-
-      <hr className="my-3" />
-
-      {/* EXAMPLE */}
-      <p className="text-gray-600 italic text-xs">
-        💡 "{item.example}"
-      </p>
     </div>
   );
 }

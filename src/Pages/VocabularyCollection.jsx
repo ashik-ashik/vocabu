@@ -97,9 +97,10 @@ export default function VocabularyCollection() {
   }, [searchTerm, totalWords]);
 
    const visibleWords =
-  userRole === "viewer"
-    ? filteredWords.slice(0, 10)
-    : filteredWords;
+  userRole === "admin" 
+    ? filteredWords
+    : userRole === "moderator" ? filteredWords :
+    userRole === "viewer" ? filteredWords.slice(0, 10) : filteredWords.slice(0, 6);
 
   // Pagination
   const totalPages = Math.ceil(visibleWords.length / wordsPerPage);
@@ -124,24 +125,24 @@ export default function VocabularyCollection() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-black">
       {/* Hero Section */}
-      <section className="bg-white border-b">
+      <section className="bg-black border-b">
         <div className="max-w-7xl mx-auto px-4 py-10">
           <div className="grid lg:grid-cols-2 gap-8 items-center">
             {/* Left Content */}
             <div>
-              <div className="inline-flex items-center gap-2 bg-green-50 text-green-700 px-4 py-2 rounded-full text-sm font-medium mb-4">
+              <div className="inline-flex items-center gap-2 bg-gray-800 shadow text-green-500 px-4 py-2 rounded-full text-sm font-medium mb-4">
                 <Sparkles size={18} />
                 Smart Vocabulary Learning
               </div>
 
-              <h1 className="text-4xl md:text-5xl font-bold text-gray-800 leading-tight">
+              <h1 className="text-4xl md:text-5xl font-bold text-gray-300 leading-tight">
                 Learn Words with
-                <span className="text-green-600"> Meaning, Sound</span> & Usage
+                <span className="text-green-500"> Meaning, Sound</span> & Usage
               </h1>
 
-              <p className="text-gray-600 mt-4 text-lg leading-relaxed">
+              <p className="text-gray-300 mt-4 text-lg leading-relaxed">
                 Search vocabulary by word, synonym, or antonym and improve your
                 English communication professionally.
               </p>
@@ -156,23 +157,23 @@ export default function VocabularyCollection() {
                   Hear Pronunciation
                 </button>
 
-                <div className="bg-white border border-gray-200 rounded-xl px-4 py-3 shadow-sm flex items-center gap-3">
+                <div className="bg-gray-700 border border-gray-600 rounded-xl px-4 py-3 shadow-sm flex items-center gap-3">
                   <Languages size={20} className="text-green-600" />
 
                   <div className="flex flex-col">
-                    <span className="text-xs text-gray-500 font-medium">
+                    <span className="text-xs text-gray-300 font-medium">
                       Change Voice
                     </span>
 
                     <select
-                        className="text-gray-900 text-sm outline-none cursor-pointer w-[250px]"
+                        className="text-gray-100 bg-gray-700 text-sm outline-none cursor-pointer w-[250px]"
                         value={selectedVoiceIndex}
                         onChange={(e) => setSelectedVoiceIndex(Number(e.target.value))}
                     >
                         {voices
                         .filter((v) => v.lang.includes("en"))
                         .map((voice, i) => (
-                            <option key={voice.name} value={i} className="text-black">
+                            <option key={voice.name} value={i} className="text-white">
                             {voice?.name?.split(" ")[1]}
                             </option>
                         ))}
@@ -183,20 +184,20 @@ export default function VocabularyCollection() {
             </div>
 
             {/* Right Stats */}
-            <div className="bg-gray-100 rounded-2xl p-6 shadow-sm border">
+            <div className="bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-700">
               <div className="grid grid-cols-2 gap-4">
-                <div className="bg-white rounded-xl p-5 text-center shadow-sm">
+                <div className="bg-gray-900 rounded-xl p-5 text-center shadow-sm">
                   <BookOpen className="mx-auto text-green-600 mb-2" />
-                  <h3 className="text-2xl font-bold text-gray-800">
+                  <h3 className="text-2xl font-bold text-gray-400">
                     {totalWords.length}
                   </h3>
-                  <p className="text-gray-500 text-sm">Total Words</p>
+                  <p className="text-gray-200 text-sm">Total Words</p>
                 </div>
 
-                <div className="bg-white rounded-xl p-5 text-center shadow-sm">
+                <div className="bg-gray-900 rounded-xl p-5 text-center shadow-sm">
                   <Volume2 className="mx-auto text-green-600 mb-2" />
-                  <h3 className="text-2xl font-bold text-gray-800">Speech</h3>
-                  <p className="text-gray-500 text-sm">Pronunciation</p>
+                  <h3 className="text-2xl font-bold text-gray-400">Speech</h3>
+                  <p className="text-gray-200 text-sm">Pronunciation</p>
                 </div>
               </div>
             </div>
@@ -205,7 +206,7 @@ export default function VocabularyCollection() {
           {/* Search Box */}
           <div className="mt-10">
             <div className="max-w-2xl mx-auto">
-              <div className="bg-white border border-gray-200 shadow-md rounded-2xl px-3 py-2">
+              <div className=" border border-gray-800 shadow-md rounded-2xl">
                 <div className="relative flex items-center">
                   <Search
                     className="absolute left-4 text-green-600"
@@ -220,7 +221,7 @@ export default function VocabularyCollection() {
                       setSearchTerm(e.target.value);
                       setCurrentPage(1);
                     }}
-                    className="w-full pl-11 pr-24 py-3 rounded-xl bg-gray-50 border border-transparent focus:border-green-500 focus:ring-2 focus:ring-green-100 outline-none text-gray-700 text-sm"
+                    className="w-full pl-11 pr-24 py-3 rounded-xl bg-gray-900 border border-transparent focus:border-green-500 focus:ring-2 focus:ring-green-100 outline-none text-gray-300 text-sm"
                   />
 
                   {searchTerm && (
@@ -249,7 +250,7 @@ export default function VocabularyCollection() {
       <section className="max-w-7xl mx-auto px-4 py-10">
         {currentWords.length > 0 ? (
           <>
-            <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
               {currentWords.map((item, index) => (
                 <WordCard
                   key={item.word + index}

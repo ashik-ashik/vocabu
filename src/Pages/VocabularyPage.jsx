@@ -168,7 +168,7 @@ const pagination = getPagination(currentPage, totalPages);
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-black">
 
       {/* HERO HEADER */}
     <header className="bg-gradient-to-br from-blue-800 via-blue-700 to-indigo-800 text-white shadow-lg">
@@ -259,10 +259,10 @@ const pagination = getPagination(currentPage, totalPages);
 
       {/* HERO */}
       <section className="max-w-6xl mx-auto px-4 py-8 text-center">
-        <h2 className="text-2xl md:text-3xl font-bold text-gray-800">
+        <h2 className="text-2xl md:text-3xl font-bold text-gray-300">
           Learn Words, Meanings & Improve Vocabulary in Advance
         </h2>
-        <p className="text-gray-600 mt-2">
+        <p className="text-gray-300 mt-2">
           Search, explore and learn English vocabulary with Bangla meaning, synonyms and examples.
         </p>
       </section>

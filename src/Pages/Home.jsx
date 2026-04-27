@@ -1,190 +1,145 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FaBookOpen, FaSearch, FaLock, FaGlobe } from "react-icons/fa";
 import useAuth from "../hooks/useAuth";
 import usePageTitle from "../hooks/usePageTitle";
 
 const Home = () => {
-  usePageTitle("Welcome! ASH English Learning World");
-  const {user}= useAuth();
+  usePageTitle("ASH English Learning — Build Your Vocabulary");
+  const { user } = useAuth();
+
   return (
-    <div className="min-h-screen bg-[#f8fafc] text-gray-800">
+    <div className="min-h-screen bg-[#0f1117] text-slate-400">
 
-      {/* HERO SECTION */}
-      <section className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-16 px-6">
-        <div className="max-w-5xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            📘 Build Your Vocabulary Smarter Every Day
-          </h1>
+     
 
-          <p className="text-lg text-white/90 mb-6">
-            Learn English words, phrases, synonyms, antonyms and real-life examples in a simple and interactive way.
-          </p>
-
-          <div className="flex flex-col md:flex-row gap-4 justify-center">
-            <Link
-              to="/vocabulary"
-              className="bg-white text-blue-600 font-semibold px-6 py-3 rounded-lg shadow hover:scale-105 transition"
-            >
-              Explore Words
+      {/* HERO */}
+      <section className="max-w-6xl mx-auto px-7 pt-14 pb-12 text-center">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#0c1a2e] border border-[#1a3a5c] rounded-full text-[11.5px] text-blue-400 mb-5">
+          <span className="w-1.5 h-1.5 bg-blue-500 rounded-full" />
+          English vocabulary platform
+        </div>
+        <h1 className="text-[32px] font-medium text-slate-100 leading-tight tracking-tight mb-3.5">
+          Build your vocabulary<br />
+          <span className="text-blue-400">smarter every day</span>
+        </h1>
+        <p className="text-[14px] text-slate-500 leading-relaxed max-w-[440px] mx-auto mb-7">
+          Learn English words, phrases, synonyms, antonyms and real-life examples — with Bangla support built in.
+        </p>
+        <div className="flex items-center justify-center gap-2.5 flex-wrap">
+          <Link to="/vocabulary" className="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-[13.5px] font-medium rounded-xl transition-colors">
+            Explore words
+          </Link>
+          {!user?.email && (
+            <Link to="/login" className="px-6 py-2.5 border border-[#2a2f3e] hover:bg-[#1a1d27] text-slate-400 text-[13.5px] rounded-xl transition-colors">
+              Sign in to start
             </Link>
-
-            {
-              !user?.email &&
-            <Link
-              to="/login"
-              className="border border-white px-6 py-3 rounded-lg hover:bg-white hover:text-blue-600 transition"
-            >
-              Login to Start
-            </Link>
-            }
-          </div>
+          )}
         </div>
       </section>
+
+      
 
       {/* FEATURES */}
-      <section className="max-w-6xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Feature icon={<FaBookOpen />} title="Vocabulary Learning" desc="Rich English words with meanings" />
-        <Feature icon={<FaSearch />} title="Smart Search" desc="Find words, synonyms easily" />
-        <Feature icon={<FaGlobe />} title="Bangla Support" desc="Easy Bangla meanings included" />
-      </section>
-
-      {/* WORD PREVIEW SECTION */}
-      <section className="max-w-6xl mx-auto px-6 pb-12">
-        <h2 className="text-2xl font-bold mb-6 text-center">📚 Sample Vocabulary Words</h2>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-          <WordCard
-            word="Resilient"
-            type="Adjective"
-            definition="Able to recover quickly from difficulties"
-            bangla="সহনশীল / দ্রুত পুনরুদ্ধারক্ষম"
-            synonyms="Strong, Tough, Flexible"
-            antonyms="Weak, Fragile"
-            example="She is very resilient in tough situations."
-          />
-
-          <WordCard
-            word="Abundant"
-            type="Adjective"
-            definition="Existing in large quantities"
-            bangla="প্রচুর"
-            synonyms="Plenty, Ample, Overflowing"
-            antonyms="Scarce, Limited"
-            example="Food was abundant at the party."
-          />
+      <section className="max-w-6xl mx-auto px-7 py-11">
+        <p className="text-[11px] font-medium tracking-widest text-blue-500 uppercase mb-2">Features</p>
+        <h2 className="text-[20px] font-medium text-slate-100 tracking-tight mb-1.5">Everything you need to learn</h2>
+        <p className="text-[13px] text-slate-500 mb-6">A complete vocabulary toolkit in one place</p>
+        <div className="grid grid-cols-3 gap-3">
+          {[
+            { title: "Vocabulary learning", desc: "Rich English words with meanings, examples and Bangla translations" },
+            { title: "Smart search", desc: "Find words, synonyms and antonyms instantly with fast lookup" },
+            { title: "Bangla support", desc: "Every word includes an easy Bangla meaning for fast comprehension" },
+          ].map((f) => (
+            <div key={f.title} className="bg-[#13161e] border border-[#1e2330] rounded-xl p-4">
+              <div className="w-8 h-8 bg-[#0c1a2e] border border-[#1a3a5c] rounded-lg flex items-center justify-center mb-3">
+                <svg className="w-3.5 h-3.5" viewBox="0 0 15 15" fill="none">
+                  <rect x="2" y="2" width="11" height="11" rx="2" stroke="#60a5fa" strokeWidth="1.2"/>
+                  <path d="M5 7h5M5 9.5h3" stroke="#60a5fa" strokeWidth="1.2" strokeLinecap="round"/>
+                </svg>
+              </div>
+              <p className="text-[13px] font-medium text-slate-200 mb-1">{f.title}</p>
+              <p className="text-[12px] text-slate-500 leading-relaxed">{f.desc}</p>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* PHRASE SECTION */}
-      <section className="max-w-6xl mx-auto px-6 pb-12">
-        <h2 className="text-2xl font-bold mb-6 text-center">💬 Popular English Phrases</h2>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-
-          <PhraseCard
-            title="Catch-22"
-            meaning="A difficult situation with no escape"
-            bangla="জটিল সমস্যা যেখানে কোনো সমাধান নেই"
-          />
-
-          <PhraseCard
-            title="Break the ice"
-            meaning="Start a conversation in a social situation"
-            bangla="আলাপ শুরু করা / সংকোচ ভাঙা"
-          />
-
-          <PhraseCard
-            title="Beat one’s brains out"
-            meaning="Work extremely hard to solve something"
-            bangla="অত্যন্ত পরিশ্রম করে সমাধান করা"
-          />
+      {/* WORD CARDS */}
+      <section className="max-w-6xl mx-auto px-7 pb-11">
+        <p className="text-[11px] font-medium tracking-widest text-blue-500 uppercase mb-2">Vocabulary</p>
+        <h2 className="text-[20px] font-medium text-slate-100 tracking-tight mb-1.5">Sample words</h2>
+        <p className="text-[13px] text-slate-500 mb-6">A taste of what's inside the dictionary</p>
+        <div className="grid grid-cols-2 gap-3">
+          <WordCard word="Resilient" type="Adjective" definition="Able to recover quickly from difficulties" bangla="সহনশীল / দ্রুত পুনরুদ্ধারক্ষম" synonyms={["Strong","Tough","Flexible"]} antonyms={["Weak","Fragile"]} example="She is very resilient in tough situations." />
+          <WordCard word="Abundant" type="Adjective" definition="Existing in large quantities; more than enough" bangla="প্রচুর" synonyms={["Plenty","Ample","Overflowing"]} antonyms={["Scarce","Limited"]} example="Food was abundant at the party." />
         </div>
       </section>
 
-      {/* CTA SECTION */}
-      {
-        !user?.email &&
-      <section className="bg-white py-14 text-center border-t">
-        <h2 className="text-3xl font-bold mb-3">🚀 Start Learning Today</h2>
-        <p className="text-gray-600 mb-6">
-          Join now and unlock full vocabulary access with personalized learning.
-        </p>
-
-        <Link
-          to="/login"
-          className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
-        >
-          Login with Google
-        </Link>
+      {/* PHRASES */}
+      <section className="max-w-6xl mx-auto px-7 pb-11">
+        <p className="text-[11px] font-medium tracking-widest text-blue-500 uppercase mb-2">Phrases</p>
+        <h2 className="text-[20px] font-medium text-slate-100 tracking-tight mb-1.5">Popular English phrases</h2>
+        <p className="text-[13px] text-slate-500 mb-6">Idioms and expressions used in everyday conversation</p>
+        <div className="grid grid-cols-3 gap-3">
+          <PhraseCard title="Catch-22" meaning="A difficult situation with no escape" bangla="জটিল সমস্যা যেখানে কোনো সমাধান নেই" />
+          <PhraseCard title="Break the ice" meaning="Start a conversation in a social situation" bangla="আলাপ শুরু করা / সংকোচ ভাঙা" />
+          <PhraseCard title="Beat one's brains out" meaning="Work extremely hard to solve something" bangla="অত্যন্ত পরিশ্রম করে সমাধান করা" />
+        </div>
       </section>
-      }
 
+      {/* CTA */}
+      {!user?.email && (
+        <section className="bg-[#0a0c10] border-t border-[#1e2330] py-11 text-center px-7">
+          <h2 className="text-[22px] font-medium text-slate-100 tracking-tight mb-2">Start learning today</h2>
+          <p className="text-[13px] text-slate-500 mb-6">Sign in to unlock full vocabulary access and personalized learning.</p>
+          <Link to="/login" className="inline-block px-8 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-[13.5px] font-medium rounded-xl transition-colors">
+            Sign in with Google
+          </Link>
+        </section>
+      )}
+
+      {/* FOOTER */}
+      <footer className="flex items-center justify-between px-7 py-5 border-t border-[#1e2330]">
+        <div className="flex items-center gap-2">
+          <div className="w-6 h-6 bg-blue-600 rounded-md flex items-center justify-center">
+            <svg viewBox="0 0 14 14" fill="none" className="w-3 h-3">
+              <path d="M2 11L7 3L12 11" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M4 8.5H10" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
+            </svg>
+          </div>
+          <span className="text-[12.5px] text-slate-600">ASH English Learning</span>
+        </div>
+        <span className="text-[11.5px] text-[#1e293b]">© 2025 ASH English Learning</span>
+      </footer>
     </div>
   );
 };
 
-/* ================= COMPONENTS ================= */
-
-const Feature = ({ icon, title, desc }) => (
-  <div className="bg-white p-5 rounded-xl shadow hover:shadow-md transition text-center">
-    <div className="text-2xl text-blue-600 mb-2 flex justify-center">{icon}</div>
-    <h3 className="font-semibold">{title}</h3>
-    <p className="text-sm text-gray-500">{desc}</p>
-  </div>
-);
-
-const WordCard = ({
-  word,
-  type,
-  definition,
-  bangla,
-  synonyms,
-  antonyms,
-  example,
-}) => (
-  <div className="bg-white p-5 rounded-xl shadow border hover:shadow-lg transition">
-    <h3 className="text-xl font-bold text-blue-600 flex items-center justify-between">
-      {word}
-      <span className="text-xs bg-gray-100 px-2 py-1 rounded">{type}</span>
-    </h3>
-
-    <p className="mt-2 text-sm text-gray-700">
-      <strong>Definition:</strong> {definition}
-    </p>
-
-    <p className="text-sm text-gray-700">
-      <strong>Bangla:</strong> {bangla}
-    </p>
-
-    <hr className="my-3 border-dashed" />
-
-    <p className="text-sm">
-      <strong>Synonyms:</strong> {synonyms}
-    </p>
-
-    <p className="text-sm">
-      <strong>Antonyms:</strong> {antonyms}
-    </p>
-
-    <p className="text-sm mt-2 italic text-gray-600">
-      💡 {example}
-    </p>
+const WordCard = ({ word, type, definition, bangla, synonyms, antonyms, example }) => (
+  <div className="bg-[#13161e] border border-[#1e2330] rounded-xl p-4">
+    <div className="flex items-center justify-between mb-3">
+      <span className="text-[17px] font-medium text-blue-400 tracking-tight">{word}</span>
+      <span className="text-[10.5px] px-2 py-0.5 bg-[#0c1a2e] border border-[#1a3a5c] rounded-full text-blue-400">{type}</span>
+    </div>
+    <p className="text-[12.5px] text-slate-400 leading-relaxed mb-1.5">{definition}</p>
+    <p className="text-[12px] text-slate-500 mb-3">{bangla}</p>
+    <div className="h-px bg-[#1e2330] mb-3" />
+    <div className="flex flex-wrap gap-1.5 mb-1.5">
+      {synonyms.map(s => <span key={s} className="text-[11px] px-2 py-0.5 rounded-full bg-[#0c1f17] border border-[#0f3a23] text-emerald-400">{s}</span>)}
+    </div>
+    <div className="flex flex-wrap gap-1.5 mb-3">
+      {antonyms.map(a => <span key={a} className="text-[11px] px-2 py-0.5 rounded-full bg-[#1f0c0c] border border-[#3a1515] text-red-400">{a}</span>)}
+    </div>
+    <p className="text-[11.5px] text-slate-500 italic leading-relaxed border-l-2 border-[#1e2330] pl-2">{example}</p>
   </div>
 );
 
 const PhraseCard = ({ title, meaning, bangla }) => (
-  <div className="bg-white p-5 rounded-xl shadow border hover:shadow-lg transition">
-    <h3 className="text-lg font-bold text-orange-500">{title}</h3>
-
-    <p className="mt-2 text-sm">
-      <strong>Meaning:</strong> {meaning}
-    </p>
-
-    <p className="text-sm text-gray-600 mt-1">
-      <strong>Bangla:</strong> {bangla}
-    </p>
+  <div className="bg-[#13161e] border border-[#1e2330] rounded-xl p-4">
+    <div className="w-0.5 h-7 bg-amber-500 mb-2.5" style={{borderRadius:0}} />
+    <p className="text-[13.5px] font-medium text-amber-400 mb-1.5">{title}</p>
+    <p className="text-[12px] text-slate-400 leading-relaxed mb-1.5">{meaning}</p>
+    <p className="text-[11.5px] text-slate-500">{bangla}</p>
   </div>
 );
 

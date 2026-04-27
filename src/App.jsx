@@ -22,6 +22,7 @@ import UpdateUserRole from './Pages/UpdateUserRole'
 import useAuth from './hooks/useAuth'
 import { DotLoader } from './Pages/DoLoader'
 import VocabularyCollection from './Pages/VocabularyCollection'
+import AdminRoute from './Pages/AdminRoute'
 
 function App() {
   const {userIsLoading} = useAuth();
@@ -45,9 +46,9 @@ function App() {
           <Route path="/phrases" element={<PrivateRoute><IdiomsPhrases /></PrivateRoute>} />
           <Route path="/login" element={<Login />} />
           {/* Dashboard Layout */}
-        <Route path="/dashboard" element={<PrivateRoute role="admin">
+        <Route path="/dashboard" element={<AdminRoute role="admin">
             <DashboardLayout />
-          </PrivateRoute>}>
+          </AdminRoute>}>
           
           {/* default page */}
           <Route index element={<Overview />} />

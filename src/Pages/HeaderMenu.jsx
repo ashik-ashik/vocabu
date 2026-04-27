@@ -32,7 +32,7 @@ export default function HeaderMenu() {
           <NavLink to="/" className={linkClass}>
             Home
           </NavLink>
-          {userRole && <>
+          {userRole === "moderator" && <>
           <NavLink to="/advance-words" className={linkClass}>
             Advance Words
           </NavLink>
@@ -48,9 +48,24 @@ export default function HeaderMenu() {
           </>
           }
 
-          {userRole === "admin" && <NavLink to="/dashboard" className={linkClass}>
+          {userRole === "admin" && <>
+            <NavLink to="/advance-words" className={linkClass}>
+            Advance Words
+          </NavLink>
+          <NavLink to="/basic-words" className={linkClass}>
+            Basic Words
+          </NavLink>
+          <NavLink to="/phrases" className={linkClass}>
+            Phrases
+          </NavLink>
+          <NavLink to="/tense" className={linkClass}>
+            Tense
+          </NavLink>
+          <NavLink to="/dashboard" className={linkClass}>
             Dashboard
-          </NavLink>}
+          </NavLink>
+          </>
+          }
           {
             user?.email ?
           <NavLink to="/login" className={linkClass}>
@@ -81,6 +96,7 @@ export default function HeaderMenu() {
           >
             Home
           </NavLink>
+          {userRole === "moderator" || userRole === 'admin' && <>
           <NavLink
             to="/advance-words"
             className={linkClass}
@@ -97,14 +113,18 @@ export default function HeaderMenu() {
           <NavLink to="/tense" className={linkClass}>
             Tense
           </NavLink>
-
-          <NavLink
-            to="/dashboard"
-            className={linkClass}
-            onClick={() => setOpen(false)}
-          >
-            Dashboard
-          </NavLink>
+            </>}
+            {
+              userRole === 'admin' && <>
+              <NavLink
+                to="/dashboard"
+                className={linkClass}
+                onClick={() => setOpen(false)}
+              >
+                Dashboard
+              </NavLink>
+              </>
+            }
           {user?.email ?
           <NavLink to="/login" className={linkClass}>
             <UserCheck size={16} />
