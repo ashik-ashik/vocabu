@@ -23,7 +23,7 @@ export default function WordCard({ item, speakWord }) {
               {item?.word?.split(":")[0]?.trim()} <span className="text-sm text-blue-500">{item?.word?.split(":")[1]?.trim()}</span>
             </h2>
               <button
-              onClick={() => speakWord(item?.word)}
+              onClick={() => speakWord(item?.word?.split(":")[0])}
               className="text-gray-400 hover:text-gray-300 transition mt-2"
             >
               <Volume2 size={16} />
