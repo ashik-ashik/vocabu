@@ -1,11 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Links } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import usePageTitle from "../hooks/usePageTitle";
+import { BookOpen, Sparkles } from "lucide-react";
 
 const Home = () => {
   usePageTitle("ASH English Learning — Build Your Vocabulary");
-  const { user } = useAuth();
+  const { user, userRole } = useAuth();
 
   return (
     <div className="min-h-screen bg-[#0f1117] text-slate-400">
@@ -86,6 +87,109 @@ const Home = () => {
           <PhraseCard title="Beat one's brains out" meaning="Work extremely hard to solve something" bangla="অত্যন্ত পরিশ্রম করে সমাধান করা" />
         </div>
       </section>
+
+
+      {/* Pricing Card */}
+      {/* Pricing Section */}
+        <section className="bg-black border-t border-gray-800">
+          <div className="max-w-7xl mx-auto px-4 py-16">
+
+            {/* Header */}
+            <div className="text-center mb-12">
+              <div className="inline-flex items-center gap-2 bg-gray-800 text-green-500 px-4 py-2 rounded-full text-sm font-medium mb-4">
+                <Sparkles size={16} />
+                Limited Time Offer
+              </div>
+              <h2 className="text-4xl font-bold text-gray-300">
+                Simple, <span className="text-green-500">Affordable</span> Pricing
+              </h2>
+              <p className="text-gray-400 mt-3 text-lg">
+                Unlock your full vocabulary potential — no hidden fees.
+              </p>
+            </div>
+
+            {/* Single Pricing Card */}
+            <div className="max-w-sm mx-auto relative">
+
+              {/* Popular Banner */}
+              <div className="bg-green-600 text-white text-sm font-bold text-center py-2 rounded-t-2xl tracking-wide">
+                🔥 Most Popular — 40% Off
+              </div>
+
+              {/* 40% OFF Ribbon */}
+              <div className="absolute top-12 -right-3 z-10 overflow-hidden">
+                <div className="bg-red-500 text-white text-xs font-bold px-6 py-1 rotate-45 translate-x-4 translate-y-1 shadow-md">
+                  40% OFF
+                </div>
+              </div>
+
+              {/* Card */}
+              <div className="bg-gray-900 border-2 border-green-600 rounded-b-2xl p-8 shadow-xl">
+
+                {/* Icon + Plan Name */}
+                <div className="bg-green-950 w-12 h-12 rounded-xl flex items-center justify-center mb-4">
+                  <BookOpen size={22} className="text-green-500" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-200">Premium Plan</h3>
+                <p className="text-gray-500 text-sm mt-1 mb-5">
+                  Full access to all vocabulary words, pronunciation & more.
+                </p>
+
+                {/* Pricing */}
+                <div className="flex items-end gap-2 mb-1">
+                  <span className="text-gray-500 line-through text-lg font-medium">৳250</span>
+                  <span className="text-green-400 text-5xl font-extrabold leading-none">150</span>
+                  <span className="text-green-400 text-xl font-bold mb-1">৳</span>
+                </div>
+                <p className="text-gray-500 text-sm mb-3">one time pay</p>
+
+                {/* Savings Chip */}
+                <div className="inline-block bg-green-950 border border-green-800 text-green-400 text-xs font-semibold px-3 py-1 rounded-full mb-6">
+                  ✦ You save ৳100 (40% discount)
+                </div>
+
+                <hr className="border-gray-700 mb-6" />
+
+                {/* Features */}
+                <ul className="space-y-3 mb-8">
+                  {[
+                    "Unlimited vocabulary words",
+                    "Native pronunciation (all voices)",
+                    "Synonym & antonym search",
+                    "Priority support",
+                    "New words added weekly",
+                  ].map((feature) => (
+                    <li key={feature} className="flex items-center gap-3 text-sm text-gray-300">
+                      <span className="w-5 h-5 bg-green-950 rounded-full flex items-center justify-center flex-shrink-0">
+                        <svg className="w-3 h-3 stroke-green-500" fill="none" viewBox="0 0 24 24" strokeWidth={3}>
+                          <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                      </span>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+
+                {/* CTA Button — routes to /pricing if logged in, else /login */}
+                
+                <Link to={userRole ? "/pricing" : "/login"}
+                  className="block w-full bg-green-600 hover:bg-green-700 text-white text-center font-bold py-4 rounded-xl transition text-base"
+                >
+                  {userRole ? "Get Premium — ৳150/mo" : "Login to Get Premium"}
+                </Link>
+
+                {/* Guarantee */}
+                <p className="text-center text-xs text-gray-600 mt-4 flex items-center justify-center gap-1">
+                  <svg className="w-3.5 h-3.5 stroke-gray-600" fill="none" viewBox="0 0 24 24" strokeWidth={2}>
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                  </svg>
+                  30-day money-back guarantee
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+      {/* Pricing Card */}
 
       {/* CTA */}
       {!user?.email && (

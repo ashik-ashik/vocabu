@@ -23,6 +23,7 @@ import useAuth from './hooks/useAuth'
 import { DotLoader } from './Pages/DoLoader'
 import VocabularyCollection from './Pages/VocabularyCollection'
 import AdminRoute from './Pages/AdminRoute'
+import PricingPage from './Pages/PricingPage'
 
 function App() {
   const {userIsLoading} = useAuth();
@@ -62,6 +63,7 @@ function App() {
           <Route path="settings" element={<Settings />} />
           <Route path="info" element={<Info />} />
           </Route>
+          <Route path="pricing" element={<PricingPage />} />
         </Routes>
       </BrowserRouter>
     </>

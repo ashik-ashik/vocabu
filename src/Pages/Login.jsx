@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useAuth from "../hooks/useAuth";
 import usePageTitle from "../hooks/usePageTitle";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Login = () => {
   const { user, googleLogin, logout, userRole, usersList } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
   usePageTitle("Login | ASH English Learning");
+
+  // Redirect back to the page the user came from, or home as fallback
+  const from = location.state?.from?.pathname || "/";
+
+  useEffect(() => {
+    if (user) navigate(from, { replace: true });
+  }, [user, navigate, from]);
 
   const handleLogin = async () => {
     try { await googleLogin(); }
