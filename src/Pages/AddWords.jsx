@@ -114,10 +114,10 @@ export default function AddWord() {
         window.scrollTo({ top: 10, behavior: "smooth" });
         payload.inserted_date = `${new Date().getMonth() + 1}/${new Date().getDate()}/${new Date().getFullYear()}`; // assign new ID from server
         if(payload.category === "advance"){
-          payload.id = vocabularyWordList.length + 1; 
+          payload.id = `A-${vocabularyWordList.length + 1}`; 
           setVocabularyWordList([...vocabularyWordList, payload]);
         }else{
-          payload.id = basicWordList.length + 1; 
+          payload.id = `B-${vocabularyWordList.length + 1}`; 
           setBasicWordList([...basicWordList, payload]);
         }
         resetForm();
