@@ -73,6 +73,8 @@ const DataProvider = ({ children }) => {
     };
  
   useEffect(() => {
+    
+
 
 
       // Load vocabulary words from Google Sheet
@@ -229,9 +231,11 @@ const DataProvider = ({ children }) => {
   loadTenseData();
   loadIdiomsPhrases();
   }, [user]);
+// console.log(vocabularyWordList, basicWordList)
 
+const groupVerbs = [];
   return (
-    <DataContext.Provider value={{payments, vocabularyWordList, basicWordList, loading, error, setVocabularyWordList, setBasicWordList, tenseList, idiomsPhrasesList, setIdiomsPhrasesList }}>
+    <DataContext.Provider value={{groupVerbs, payments, setPayments, vocabularyWordList, basicWordList, loading, error, setVocabularyWordList, setBasicWordList, tenseList, idiomsPhrasesList, setIdiomsPhrasesList }}>
       {children}
     </DataContext.Provider>
   );

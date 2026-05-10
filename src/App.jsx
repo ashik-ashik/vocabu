@@ -1,4 +1,3 @@
-
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.css'
 import Vocabulary from './Pages/VocabularyPage'
@@ -24,37 +23,32 @@ import { DotLoader } from './Pages/DoLoader'
 import VocabularyCollection from './Pages/VocabularyCollection'
 import AdminRoute from './Pages/AdminRoute'
 import PricingPage from './Pages/PricingPage'
+import PaidUserDashboard from './Pages/UserDashboard'
+import useData from './hooks/UseData'
 
-function App() {
-  const {userIsLoading} = useAuth();
-  if(userIsLoading){
-    return <>
-      <DotLoader />
-    </>
+// Separate component so hooks run INSIDE BrowserRouter context
+function AppRoutes() {
+  const { userIsLoading } = useAuth();
+  const { loading } = useData();
+
+  if (loading || userIsLoading) {
+    return <DotLoader />;
   }
 
   return (
     <>
-      <BrowserRouter>
-          <Toaster position="bottom-right" />
-          <HeaderMenu />
-        <Routes>
-          <Route path="/" element={<Home/>} />
-          <Route path="/vocabulary" element={<VocabularyCollection/>} />
-          <Route path="/advance-words" element={<PrivateRoute><Vocabulary /></PrivateRoute>} />
-          <Route path="/basic-words" element={<PrivateRoute><BasicWords /></PrivateRoute>} />
-          <Route path="/tense" element={<PrivateRoute><TenseComponent /></PrivateRoute>} />
-          <Route path="/phrases" element={<PrivateRoute><IdiomsPhrases /></PrivateRoute>} />
-          <Route path="/login" element={<Login />} />
-          {/* Dashboard Layout */}
-        <Route path="/dashboard" element={<AdminRoute role="admin">
-            <DashboardLayout />
-          </AdminRoute>}>
-          
-          {/* default page */}
+      <HeaderMenu />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/vocabulary" element={<VocabularyCollection />} />
+        <Route path="/advance-words" element={<PrivateRoute><Vocabulary /></PrivateRoute>} />
+        <Route path="/basic-words" element={<PrivateRoute><BasicWords /></PrivateRoute>} />
+        <Route path="/tense" element={<PrivateRoute><TenseComponent /></PrivateRoute>} />
+        <Route path="/phrases" element={<PrivateRoute><IdiomsPhrases /></PrivateRoute>} />
+        <Route path="/login" element={<Login />} />
+        {/* Dashboard Layout */}
+        <Route path="/dashboard" element={<AdminRoute role="admin"><DashboardLayout /></AdminRoute>}>
           <Route index element={<Overview />} />
-
-          {/* other pages */}
           <Route path="add-word" element={<AddWord />} />
           <Route path="add-phrase" element={<AddPhrase />} />
           <Route path="delete-word" element={<DeleteWord />} />
@@ -62,12 +56,21 @@ function App() {
           <Route path="role" element={<UpdateUserRole />} />
           <Route path="settings" element={<Settings />} />
           <Route path="info" element={<Info />} />
-          </Route>
-          <Route path="pricing" element={<PricingPage />} />
-        </Routes>
-      </BrowserRouter>
+        </Route>
+        <Route path="pricing" element={<PricingPage />} />
+        <Route path="dashboards" element={<PrivateRoute><PaidUserDashboard /></PrivateRoute>} />
+      </Routes>
     </>
-  )
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Toaster position="bottom-right" />
+      <AppRoutes />
+    </BrowserRouter>
+  );
 }
 
 export default App

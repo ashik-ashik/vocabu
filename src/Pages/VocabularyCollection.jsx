@@ -14,7 +14,7 @@ import useAuth from "../hooks/useAuth";
 import { Link } from "react-router-dom";
 
 export default function VocabularyCollection() {
-  const { basicWordList, vocabularyWordList } = useData();
+  const { basicWordList, vocabularyWordList, payments } = useData();
   const {userRole} = useAuth();
 
   const [searchTerm, setSearchTerm] = useState("");
@@ -100,7 +100,7 @@ export default function VocabularyCollection() {
    const visibleWords =
   userRole === "admin" 
     ? filteredWords
-    : userRole === "moderator" ? filteredWords :
+    : userRole === "moderator" ? filteredWords : payments?.Status === "activated" ? filteredWords:
     userRole === "viewer" ? filteredWords.slice(0, 10) : filteredWords.slice(0, 6);
 
   // Pagination
@@ -266,7 +266,7 @@ export default function VocabularyCollection() {
             {/* prizing */}
             {/* Pricing Section */}
             {
-              userRole !== "admin" &&
+              userRole !== "admin" && payments?.Status !== "activated" &&
             <section className="bg-black border-t border-gray-800">
               <div className="max-w-7xl mx-auto px-4 py-16">
 

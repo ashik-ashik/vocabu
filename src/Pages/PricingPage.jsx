@@ -4,12 +4,14 @@ import useData from "../hooks/UseData";
 // import useAuth from "../hooks/useAuth";
 import { Link } from "react-router-dom";
 import { DotLoader } from "./DoLoader";
+import usePageTitle from "../hooks/usePageTitle";
+import useAuth from "../hooks/useAuth";
 
 const PAYMENT_METHODS = [
   {
     id: "bkash",
     name: "bKash",
-    number: "01XXXXXXXXX",
+    number: "01884142484",
     color: "#E2136E",
     bg: "#fdf0f6",
     border: "#f9b8d8",
@@ -20,7 +22,7 @@ const PAYMENT_METHODS = [
   {
     id: "nagad",
     name: "Nagad",
-    number: "01XXXXXXXXX",
+    number: "01884142484",
     color: "#F7931E",
     bg: "#fff8f0",
     border: "#fdd9a8",
@@ -31,7 +33,7 @@ const PAYMENT_METHODS = [
   {
     id: "rocket",
     name: "Rocket",
-    number: "01XXXXXXXXX",
+    number: "01884142484",
     color: "#8B2FC9",
     bg: "#f8f0fd",
     border: "#ddb8f5",
@@ -42,7 +44,13 @@ const PAYMENT_METHODS = [
 ];
 
 const FEATURES = [
+  { icon: <BookOpen size={16} />, text: "100% job oriented contents" },
   { icon: <BookOpen size={16} />, text: "Unlimited vocabulary words" },
+  { icon: <BookOpen size={16} />, text: "Unlimited phrases and idoms" },
+  { icon: <BookOpen size={16} />, text: "Unlimited group verbs meaning" },
+  { icon: <BookOpen size={16} />, text: "Different parts of speech of the word" },
+  { icon: <BookOpen size={16} />, text: "Word definition" },
+  { icon: <BookOpen size={16} />, text: "Practical example using words/ phrase/ idoms" },
   { icon: <Volume2 size={16} />, text: "Native pronunciation (all voices)" },
   { icon: <Zap size={16} />, text: "Synonym & antonym search" },
   { icon: <Star size={16} />, text: "New words added weekly" },
@@ -59,7 +67,8 @@ export default function PricingPage() {
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState({});
   const {payments, loading} = useData();
-//   const {user} = useAuth();
+  const {user} = useAuth();
+  usePageTitle("Pricing ASH Vocab")
 
   const [form, setForm] = useState({
     name: "",
@@ -82,7 +91,6 @@ export default function PricingPage() {
     const e = {};
     if (step === 2) {
       if (!form.name.trim()) e.name = "Name is required";
-      if (!form.email.trim() || !/\S+@\S+\.\S+/.test(form.email)) e.email = "Valid email required";
       if (!form.phone.trim() || form.phone.length < 11) e.phone = "Valid phone number required";
     }
     if (step === 3) {
@@ -108,8 +116,9 @@ export default function PricingPage() {
     setLoading(true);
     try {
       const params = new URLSearchParams();
+      params.append("action", "paymentDetails");
       params.append("name", form.name);
-      params.append("email", form.email);
+      params.append("email", user.email);
       params.append("phone", form.phone);
       params.append("paymentMethod", method?.name || "");
       params.append("transactionId", form.transactionId);
@@ -119,6 +128,9 @@ export default function PricingPage() {
 
       await fetch(import.meta.env.VITE_PRIZING_DETAILS_POST_API, {
         method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
         body: params,
       });
 
@@ -406,14 +418,6 @@ export default function PricingPage() {
                   error={errors.name}
                 />
                 <Field
-                  label="Email Address"
-                  type="email"
-                  placeholder="you@example.com"
-                  value={form.email}
-                  onChange={(v) => handleChange("email", v)}
-                  error={errors.email}
-                />
-                <Field
                   label="Phone Number"
                   type="tel"
                   placeholder="01XXXXXXXXX"
@@ -491,7 +495,7 @@ export default function PricingPage() {
               <div className="bg-gray-900 border border-gray-800 rounded-2xl p-5 space-y-3 mb-6">
                 <SummarySection title="Personal Info">
                   <Row label="Name" value={form.name} />
-                  <Row label="Email" value={form.email} />
+                  <Row label="Email" value={user.email} />
                   <Row label="Phone" value={form.phone} />
                 </SummarySection>
                 <hr className="border-gray-800" />
