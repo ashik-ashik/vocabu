@@ -117,7 +117,7 @@ export default function AddWord() {
           payload.id = `A-${vocabularyWordList.length + 1}`; 
           setVocabularyWordList([...vocabularyWordList, payload]);
         }else{
-          payload.id = `B-${vocabularyWordList.length + 1}`; 
+          payload.id = `B-${basicWordList.length + 1}`; 
           setBasicWordList([...basicWordList, payload]);
         }
         resetForm();
