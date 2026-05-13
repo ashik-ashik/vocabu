@@ -21,14 +21,14 @@ export default function IdiomsPhrases() {
 
   const userEmail = payments?.Email;
 
-  // stored read phrases
+  // stored read phrases — reading from "Read Phrase" (no trailing s)
   const readPhrases = payments?.["Read Phrase"]
     ? String(payments["Read Phrase"])
         .split(",")
         .map((id) => id.trim())
     : [];
 
-  // ===== NEW STATE =====
+  // ===== STATE =====
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [syncingId, setSyncingId] = useState(null);
@@ -64,13 +64,22 @@ export default function IdiomsPhrases() {
     try {
       await markPhraseAsRead(userEmail, phraseId);
 
-      // update local data instantly
-      const updatedReadPhrases = [...readPhrases, String(phraseId)];
+      // ✅ FIX 1: Use functional update to avoid stale closure
+      // ✅ FIX 2: Write to "Read Phrase" (same key the reader uses — no trailing s)
+      setPayments((prev) => {
+        const existing = prev?.["Read Phrase"]
+          ? String(prev["Read Phrase"])
+              .split(",")
+              .map((id) => id.trim())
+          : [];
 
-      setPayments((prev) => ({
-        ...prev,
-        "Read Phrases": updatedReadPhrases.join(","),
-      }));
+        const updated = [...existing, String(phraseId)];
+
+        return {
+          ...prev,
+          "Read Phrase": updated.join(","),
+        };
+      });
     } catch (err) {
       console.error(err);
     } finally {
@@ -274,7 +283,7 @@ export default function IdiomsPhrases() {
               {/* EXAMPLE */}
               <div className="bg-gray-50 p-3 rounded-md">
                 <p className="text-sm text-gray-700 italic leading-relaxed">
-                  💡 “{item.example}”
+                  💡 "{item.example}"
                 </p>
               </div>
             </div>
